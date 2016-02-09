@@ -7,7 +7,7 @@ import { addKitten, deleteKitten } from '../actions/kittens';
 const Kittens = ({ sheet, kittens, addKitten, deleteKitten }) =>
   <div className={sheet.classes.kittens}>
     {!!kittens.length &&
-      <h1>Howdy lookey here!!!, there are kittens in this basket:</h1>
+      <h1>Howdy lookerino here!!!, there are kittens in this basket:</h1>
     }
     {!!kittens.length &&
       <div className={sheet.classes.basket}>
