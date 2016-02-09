@@ -43,7 +43,7 @@ const Kittens = ({ sheet, kittens, addKitten, deleteKitten }) =>
          title='Creative Commons BY 3.0'>
         CC BY 3.0
       </a>
-    </div><h1> HELLLO</h1>
+    </div>
   </div>;
 
 const STYLES = {
