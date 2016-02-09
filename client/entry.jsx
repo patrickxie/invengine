@@ -30,6 +30,7 @@ const store = createStoreWithMiddleware(reducers);
 
 ReactDOM.render(
   <Provider store={store}>
+    <h1>HELLOOOOOV</h1>
     <Index />
   </Provider>,
   document.getElementById('root')
