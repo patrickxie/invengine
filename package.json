@@ -1,7 +1,7 @@
 {
-  "name": "flask-react-boilerplate",
+  "name": "invengine",
   "version": "0.1.0",
-  "description": "Flask React Boilerplate",
+  "description": "new view of growth channel for apps",
   "scripts": {
     "gunicorn": "gunicorn $GUNICORN_PARAMS --chdir server entry:app",
     "start": "webpack-dev-server",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexkuz/flask-react-boilerplate.git"
+    "url": "https://github.com/patrickxie/invengine.git"
   },
   "engines": {
     "node": "0.10",
@@ -20,14 +20,16 @@
   "keywords": [
     "react",
     "webpack",
-    "boilerplate",
+    "growth",
     "production",
-    "hot",
+    "invite",
     "reload",
     "flask",
-    "postgres"
+    "postgres",
+    "share page",
+    "growth channel"
   ],
-  "author": "Alexander Kuznetsov",
+  "author": "Patrick Xie",
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "6.3.14",
