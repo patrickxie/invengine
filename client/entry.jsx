@@ -34,3 +34,17 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+// import Paper from 'material-ui/lib/paper';
+
+// const style = {
+//   height: 100,
+//   width: 100,
+//   margin: 20,
+//   textAlign: 'center',
+//   display: 'inline-block',
+// };
+// ReactDOM.render(
+//   <Paper style={style}>Hello Vorld</Paper>,
+//   document.getElementById('root')
+// );
+

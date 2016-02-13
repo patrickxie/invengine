@@ -7,7 +7,7 @@ import { addKitten, deleteKitten } from '../actions/kittens';
 const Kittens = ({ sheet, kittens, addKitten, deleteKitten }) =>
   <div className={sheet.classes.kittens}>
     {!!kittens.length &&
-      <h1>Howdy lookerino here!!!, there are kittens in this basket:</h1>
+      <h1>Howdy lookerino here, there are kittens in this basket:</h1>
     }
     {!!kittens.length &&
       <div className={sheet.classes.basket}>
@@ -24,26 +24,6 @@ const Kittens = ({ sheet, kittens, addKitten, deleteKitten }) =>
     <a className={sheet.classes.button} onClick={addKitten}>
       Put another kitten into basket
     </a>
-    <div className={sheet.classes.credits}>
-      {'Icons made by '}
-      <a className={sheet.classes.link}
-         href='http://www.flaticon.com/authors/freepik'
-         title='Freepik'>
-        Freepik
-      </a>
-      {' from '}
-      <a className={sheet.classes.link}
-         href='http://www.flaticon.com'
-         title='Flaticon'>
-        www.flaticon.com
-      </a>
-      {' is licensed by '}
-      <a className={sheet.classes.link}
-         href='http://creativecommons.org/licenses/by/3.0/'
-         title='Creative Commons BY 3.0'>
-        CC BY 3.0
-      </a>
-    </div>
   </div>;
 
 const STYLES = {
