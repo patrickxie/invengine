@@ -4,27 +4,42 @@ import useSheet from 'react-jss';
 import { connect } from 'react-redux';
 import { addKitten, deleteKitten } from '../actions/kittens';
 
+
 const Kittens = ({ sheet, kittens, addKitten, deleteKitten }) =>
   <div className={sheet.classes.kittens}>
-    {!!kittens.length &&
       <h1>Howdy lookerino here, there are kittens in this basket:</h1>
-    }
-    {!!kittens.length &&
       <div className={sheet.classes.basket}>
-        {kittens.map(kitten => (
-          <Kitten key={`kitten-${kitten.id}`}
-                  kitten={kitten}
-                  onDeleteKitten={deleteKitten} />
-        ))}
       </div>
-    }
-    {!kittens.length &&
       <h1>This backet has no kittens in it :(</h1>
-    }
     <a className={sheet.classes.button} onClick={addKitten}>
       Put another kitten into basket
     </a>
   </div>;
+
+//this shit should work if it's not the default indexroute, but instead something
+//you switch to
+
+// const Kittens = ({ sheet, kittens, addKitten, deleteKitten }) =>
+//   <div className={sheet.classes.kittens}>
+//     {!!kittens.length &&
+//       <h1>Howdy lookerino here, there are kittens in this basket:</h1>
+//     }
+//     {!!kittens.length &&
+//       <div className={sheet.classes.basket}>
+//         {kittens.map(kitten => (
+//           <Kitten key={`kitten-${kitten.id}`}
+//                   kitten={kitten}
+//                   onDeleteKitten={deleteKitten} />
+//         ))}
+//       </div>
+//     }
+//     {!kittens.length &&
+//       <h1>This backet has no kittens in it :(</h1>
+//     }
+//     <a className={sheet.classes.button} onClick={addKitten}>
+//       Put another kitten into basket
+//     </a>
+//   </div>;
 
 const STYLES = {
   credits: {
