@@ -8,6 +8,7 @@
     "test-jest": "NODE_ENV=test BABEL_JEST_STAGE=0 jest",
     "test": "mocha --compilers js:babel-core/register --recursive ",
     "dist": "NODE_ENV=production webpack -p",
+    "postinstall": "npm run dist",
     "push": "git commit -m 'GO!'&&git push -u origin dev-br"
   },
   "repository": {
