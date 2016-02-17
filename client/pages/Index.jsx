@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
 import { requestKittens } from '../actions/kittens';
-import Logo from '../svg/InvengineLogo';
 
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
@@ -14,6 +13,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 import Colors from 'material-ui/lib/styles/colors';
 import Paper from 'material-ui/lib/paper';
 
+import Logo from '../svg/InvengineLogo.svg';
 // console.log('ayyyyy', pic);
 
 export default class Index extends Component {
