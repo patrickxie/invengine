@@ -1,6 +1,10 @@
 var assert = require('assert');
 var expect = require('chai').expect;
 import Index from '../client/pages/Foo';
+import AppBar from 'material-ui/lib/app-bar';
+import IconButton from 'material-ui/lib/icon-button';
+import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
+import FlatButton from 'material-ui/lib/flat-button';
 
 describe('Array', function() {
   describe('#indexOf()', function () {
@@ -19,6 +23,13 @@ describe('Test 2:', function() {
   });
 });
 
+describe('Test 3:', function() {
+  describe('ui test', function () {
+    it('should be imported as a function', function () {
+      assert.equal(typeof(AppBar), typeof(s=>s));
+    });
+  });
+});
 //check the state to make sure there is routing & kittens with the combine reducer
 // describe('Test 3:', function() {
 //   describe('Combine Reducer Test:', function () {

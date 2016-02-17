@@ -22,7 +22,7 @@ import { syncHistory } from 'react-router-redux';
 
 
 import Kittens from './components/Kittens';
-import {Foo, Bar, Index} from './pages/export';
+import {Foo, Bar, Auth, Index} from './pages/export';
 
 
 jss.use(jssVendorPrefixer());
@@ -90,7 +90,7 @@ ReactDOM.render(
     <div>
       <Router history={browserHistory}>
         <Route path="/" component={Index}>
-          <IndexRoute component={Bar}/>
+          <IndexRoute component={Auth}/>
           <Route path="foo" component={Foo}/>
           <Route path="kittens" component={Kittens}/>
         </Route>
