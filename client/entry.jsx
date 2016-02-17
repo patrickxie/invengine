@@ -3,7 +3,6 @@ import 'babel-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Index from './pages/Index';
 import jss from 'jss';
 import jssVendorPrefixer from 'jss-vendor-prefixer';
 import jssPx from 'jss-px';
@@ -16,21 +15,87 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
 
+
+import {compose} from 'redux';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { syncHistory } from 'react-router-redux';
+
+
+import Kittens from './components/Kittens';
+import {Foo, Bar, Auth, Index} from './pages/export';
+
+
 jss.use(jssVendorPrefixer());
 jss.use(jssPx());
 jss.use(jssNested());
 jss.use(jssCamelCase());
 
+// const history = browserHistory();
+const middleware = syncHistory(browserHistory);
+
+//original
+// const history = createHistory();
+// const middleware = syncHistory(history);
+
+//original
+// const createStoreWithMiddleware = applyMiddleware(
+//   thunk,
+//   promise,
+//   createLogger()
+// )(createStore);
+// const store = createStoreWithMiddleware(reducers);
+
+
+
 const createStoreWithMiddleware = applyMiddleware(
   thunk,
   promise,
-  createLogger()
+  createLogger(),
+  middleware
 )(createStore);
 const store = createStoreWithMiddleware(reducers);
+middleware.listenForReplays(store);
+
+// const finalCreateStore = compose(
+//   applyMiddleware(middleware),
+//   DevTools.instrument()
+// )(createStore)
+// const store = finalCreateStore(reducer)
+// middleware.listenForReplays(store)
+
+
+
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <Index />
+//   </Provider>,
+//   document.getElementById('root')
+// );
+// import Paper from 'material-ui/lib/paper';
+
+// const style = {
+//   height: 100,
+//   width: 100,
+//   margin: 20,
+//   textAlign: 'center',
+//   display: 'inline-block',
+// };
+// ReactDOM.render(
+//   <Paper style={style}>Hello Vorld</Paper>,
+//   document.getElementById('root')
+// );
 
 ReactDOM.render(
   <Provider store={store}>
-    <Index />
+    <div>
+      <Router history={browserHistory}>
+        <Route path="/" component={Index}>
+          <IndexRoute component={Auth}/>
+          <Route path="foo" component={Foo}/>
+          <Route path="kittens" component={Kittens}/>
+        </Route>
+      </Router>
+    </div>
   </Provider>,
   document.getElementById('root')
-);
+)

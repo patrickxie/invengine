@@ -1,6 +1,8 @@
 import * as actionTypes from '../actionTypes/kittens';
 import { get, post, del } from '../utils/api';
 
+// import { routeActions } from 'react-router-redux';
+
 export function addKitten() {
   return async dispatch => {
     dispatch({
@@ -65,3 +67,8 @@ export function deleteKitten(kittenId) {
     }
   }
 }
+
+// export function switchFoo() {
+//   console.log('BING');
+//   return dispatch => dispatch(routeActions.push('/foo'));
+// }

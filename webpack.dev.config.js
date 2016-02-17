@@ -40,6 +40,7 @@ config = update(config, {
       new webpack.HotModuleReplacementPlugin(),
       new HtmlWebpackPlugin({
         inject: true,
+        title: 'Invengine',
         filename: 'dev/index.html',
         template: 'client/views/index.tpl'
       }),

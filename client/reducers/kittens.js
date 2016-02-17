@@ -24,3 +24,20 @@ export default function kittens(state = DEFAULT_STATE, action) {
     [actionTypes.DELETE_KITTEN_SUCCESS]: deleteKitten
   }[action.type] || (s => s))(state, action);
 }
+
+// export default function kittens(state = DEFAULT_STATE, action) {
+//   console.log('火锅', (s => s));
+//   let obj = {
+//     [actionTypes.ADD_KITTEN_SUCCESS]: addKitten,
+//     [actionTypes.REQUEST_KITTENS_SUCCESS]: requestKittens,
+//     [actionTypes.DELETE_KITTEN_SUCCESS]: deleteKitten
+//   }[action.type];
+//   let result =  obj || (s => s);
+//   let resultL = obj;
+//   let resultR = (s => s);
+//   console.log('L:', resultL);
+//   console.log('R:', resultR);
+//   console.log('dafuq is this:', result);
+//   console.log('end');
+//   return ( obj || (s => s))(state, action);
+// }

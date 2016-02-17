@@ -90,3 +90,7 @@ venv/
 server/static/scripts/
 server/templates/
 dev/
+
+invengine.sublime-workspace
+ioeProject.sublime-project
+ioeProject.sublime-workspace
