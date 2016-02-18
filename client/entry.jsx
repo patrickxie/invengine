@@ -22,7 +22,7 @@ import { syncHistory } from 'react-router-redux';
 
 
 import Kittens from './components/Kittens';
-import {Foo, Bar, Auth, Index} from './pages/export';
+import {Foo, Bar, Auth, Index, Invite, Display} from './pages/export';
 
 
 jss.use(jssVendorPrefixer());
@@ -91,8 +91,8 @@ ReactDOM.render(
       <Router history={browserHistory}>
         <Route path="/" component={Index}>
           <IndexRoute component={Auth}/>
-          <Route path="foo" component={Foo}/>
-          <Route path="kittens" component={Kittens}/>
+          <Route path="invite" component={Invite}/>
+          <Route path="home" component={Display}/>
         </Route>
       </Router>
     </div>

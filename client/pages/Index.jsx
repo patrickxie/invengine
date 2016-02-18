@@ -44,13 +44,16 @@ export default class Index extends Component {
                         </IconButton>}
         iconElementRight={<span>
             <span style={STYLES.barButton}>
-              <FlatButton style={STYLES.barButtonTxt} label= 'Home' />
+              <FlatButton style={STYLES.barButtonTxt} label= 'Home'
+              onClick={() => browserHistory.push('/home')} />
             </span>
             <span style={STYLES.barButton}>
-              <FlatButton style={STYLES.barButtonTxt} label= 'Import' />
+              <FlatButton style={STYLES.barButtonTxt} label= 'Import'
+              onClick={() => browserHistory.push('/')} />
             </span>
             <span style={STYLES.barButton}>
-              <FlatButton style={STYLES.barButtonTxt} label= 'Invite' />
+              <FlatButton style={STYLES.barButtonTxt} label= 'Invite'
+              onClick={() => browserHistory.push('/invite')} />
             </span></span>}
         />
         {this.props.children}
@@ -130,7 +133,7 @@ const STYLES = {
     backgroundColor: Colors.grey20,
   },
   barButton: {
-    paddingRight:30
+    flexBasis:'10%'
   },
   barButtonTxt: {
     color: Colors.indigoA200,
