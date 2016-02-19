@@ -3,7 +3,6 @@ import useSheet from 'react-jss';
 import { connect } from 'react-redux';
 import { requestKittens } from '../actions/kittens';
 
-import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
 
 import AppBar from 'material-ui/lib/app-bar';

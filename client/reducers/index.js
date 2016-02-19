@@ -4,7 +4,7 @@ import kittens from './kittens';
 import { routeReducer } from 'react-router-redux'
 
 const reducers = combineReducers({
-  cats:kittens,
+  kittens,
   routing: routeReducer
 });
 

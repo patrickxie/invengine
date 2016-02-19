@@ -1,50 +1,39 @@
 var assert = require('assert');
 var expect = require('chai').expect;
-import Index from '../client/pages/Foo';
-import AppBar from 'material-ui/lib/app-bar';
-import AbsoluteGrid from 'react-absolute-grid';
-import ReactTestUtils from 'react-addons-test-utils';
+// import Index from '../client/pages/Foo';
+// import AppBar from 'material-ui/lib/app-bar';
+// import AbsoluteGrid from 'react-absolute-grid';
+// import ReactTestUtils from 'react-addons-test-utils';
 
-describe('Array', function() {
-  describe('#indexOf()', function () {
-    it('should return -1 when the value is not present', function () {
+
+describe('API Test', function() {
+  describe('returns sample data', function () {
+    it('should return data from Import page & server', function () {
       assert.equal(-1, [1,2,3].indexOf(5));
       assert.equal(-1, [1,2,3].indexOf(0));
     });
   });
 });
 
-describe('Test 2:', function() {
-  describe('import test', function () {
-    it('should be imported as a function', function () {
-      assert.equal(typeof(Index), typeof(s=>s));
+describe('contacts_data action Test', function() {
+  describe('returns sample data', function () {
+    it('should return data from Import page & server', function () {
+      assert.equal(typeof(Data), 'array');
     });
   });
 });
 
-describe('Test 3:', function() {
-  describe('ui test', function () {
-    it('should be imported as a function', function () {
-      assert.equal(typeof(AppBar), typeof(s=>s));
+
+describe('contacts_data reducer Test', function() {
+  describe('returns sample data', function () {
+    it('should return data from Import page & server', function () {
+      assert.equal(-1, [1,2,3].indexOf(5));
+      assert.equal(-1, [1,2,3].indexOf(0));
     });
   });
 });
 
-describe('Test 4:', function() {
-  describe('ReactTestUtils test', function () {
-    it('isElement should equal to boolean ', function () {
-      assert.equal(typeof(ReactTestUtils.isElement()), 'boolean');
-    });
-  });
-});
 
-describe('Test 5:', function() {
-  describe('AbsoluteGrid test', function () {
-    it('should be imported as a function', function () {
-      assert.equal(typeof(AbsoluteGrid), 'function');
-    });
-  });
-});
 
 //check the state to make sure there is routing & kittens with the combine reducer
 // describe('Test 3:', function() {

@@ -89,7 +89,7 @@ const MenuExampleSimple = () => (
       labelPosition="before"
       primary={true}
       icon={<ActionAndroid />}
-      onClick={()=>browserHistory.push('/foo')}
+      onClick={()=>browserHistory.push('/home')}
     />
 
 </Paper>

@@ -90,6 +90,7 @@
     "jsx-loader": "0.13.2",
     "mkdirp": "0.5.1",
     "mocha": "2.4.5",
+    "react-addons-test-utils": "0.14.7",
     "react-transform-hmr": "1.0.1",
     "string-replace-webpack-plugin": "0.0.3",
     "webpack-dev-server": "1.14.1"
