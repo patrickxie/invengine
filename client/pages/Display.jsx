@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, forceUpdate } from 'react';
 
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
-import { requestKittens } from '../actions/kittens';
+import { requestAPIData } from '../actions/contacts_data';
 
 import { browserHistory } from 'react-router';
 
@@ -10,17 +10,73 @@ import DisplayItem from '../components/DisplayItem.jsx';
 import AbsoluteGrid from 'react-absolute-grid';
 
 import Colors from 'material-ui/lib/styles/colors';
+import * as _ from 'lodash';
+
+
+// Create a Redux store holding the state of your app.
+// Its API is { subscribe, dispatch, getState }.
 
 
 export default class Display extends Component {
-  // constructor(props){
-  //   super(props);
-  //   // const { children} = this.props;
-  //   // console.log(this.props.push);
-  // }
+  constructor(props){
+    super(props);
+    // const { dirtyd } = this.props;
+    // const { value, moveD, requestKittens } = this.props;
+            // console.log('requestKittens is :: ', this.props.requestKittens);
+    // this.props.dirtyd = data;
+    // console.log(data);
+    // this.state = { counter: store.getState()};
+    // console.log('state is:  ', this.state);
+    // console.log('value & increaseActionclick', value, moveD);
+    // this.render = this.render.bind(this);
+    // console.log('this.render', this.render);
+    // console.log('children prop aka dragmanager prop:', this.props.children);
+    // console.log('moveD', this.moveD);
+
+    // console.log('func', this.func);
+
+
+  }
 
   componentDidMount() {
-    // this.props.requestKittens();
+    this.props.requestAPIData();
+  }
+
+  sendtwoaction(){
+    console.log('att');
+    this.props.moveD();
+    console.log('att2');
+  }
+
+
+// onMove={newMove}
+// newMove(source, target){
+//     dispatch
+//     moveXXX(source, target)
+// }
+  moveXXX (source, target){
+        console.log('src&tar: ', source, target);
+        // console.log('requestKittens is : ', this.props.requestKittens);
+        source = _.find(data, {key: parseInt(source, 10)});
+        target = _.find(data, {key: parseInt(target, 10)});
+
+        var targetSort = target.sort;
+
+        //CAREFUL, For maximum performance we must maintain the array's order, but change sort
+        data.forEach(function(item){
+          //Decrement sorts between positions when target is greater
+          if(target.sort > source.sort && (item.sort <= target.sort && item.sort > source.sort)){
+            item.sort --;
+          //Incremenet sorts between positions when source is greator
+          }else if(item.sort >= target.sort && item.sort < source.sort){
+            item.sort ++;
+          }
+        });
+
+        source.sort = targetSort;
+        console.log('dam this kitten', store.getState());
+        return this.props.requestKittens.bind(this);
+        // this.props.requestKittens;
   }
 
   // handleClick(){
@@ -29,15 +85,124 @@ export default class Display extends Component {
   //   () => routeActions.push('/foo')
   // }
 
+  //true false onMove hack
+
   render () {
-    console.log('data of type: ', typeof(data), 'is', data);
-    return <AbsoluteGrid 
-        items={data} displayObject={<DisplayItem/>}/>
+const { data, changeSort } = this.props;
+    // console.log('value::::::::::::::::: ', this.props.value);
+    // console.log('data of type: ', typeof(data), 'is', data);
+    // console.log('thischidlren', this.props.children)
+    return <AbsoluteGrid
+        items={data} displayObject={<DisplayItem/>}
+                               dragEnabled={true}
+                               responsive={true}
+                               verticalMargin={42}
+                               itemWidth={200}
+                               itemHeight={200}>
+         </AbsoluteGrid>
   }
 }
 
+//        onMove={this.moveXXX}
+
+//Map Redux state to component props
+// function mapStateToProps (state) {
+//   return {
+//     value: state.count
+//   }
+// }
+
+// Map Redux actions to component props
+// function mapDispatchToProps (dispatch) {
+//   return {
+//     moveD: () => dispatch(increaseAction)
+//     // moveD: () => bindActionCreators(increaseAction, dispatch)
+//   }
+// }
+
+// function requestKittens() {
+//     console.log('wtttff');
+//   return dispatch => { dispatch(increaseAction)};
+// }
+
+// function onMoveAction (source, target){
+//         console.log('src&tar: ', source, target);
+//         source = _.find(data, {key: parseInt(source, 10)});
+//         target = _.find(data, {key: parseInt(target, 10)});
+
+//         var targetSort = target.sort;
+
+//         //CAREFUL, For maximum performance we must maintain the array's order, but change sort
+//         data.forEach(function(item){
+//           //Decrement sorts between positions when target is greater
+//           if(target.sort > source.sort && (item.sort <= target.sort && item.sort > source.sort)){
+//             item.sort --;
+//           //Incremenet sorts between positions when source is greator
+//           }else if(item.sort >= target.sort && item.sort < source.sort){
+//             item.sort ++;
+//           }
+//         });
+
+//         source.sort = targetSort;
+//         return increaseAction;
+//   }
+
+
+
+
+// Connected Component
+export default connect(
+  state => ({ data: state.data }),
+  { requestAPIData }
+)(
+  useSheet(Display, STYLES)
+);
+
+
+
+
+// onMove={this.onMoveDebounced.bind(this, this.props)}
+
+  // onMoveDebounced(){
+  //   console.log('called')
+  // //check if onMove then will sampleItems still be there or is it not
+  //   var onMove = function(source, target){
+  //       console.log('source & data are: ', source, target);
+  //       source = _.find(data, {key: parseInt(source, 10)});
+  //       target = _.find(data, {key: parseInt(target, 10)});
+
+  //       var targetSort = target.sort;
+
+  //       //CAREFUL, For maximum performance we must maintain the array's order, but change sort
+  //       data.forEach(function(item){
+  //         //Decrement sorts between positions when target is greater
+  //         if(target.sort > source.sort && (item.sort <= target.sort && item.sort > source.sort)){
+  //           item.sort --;
+  //         //Incremenet sorts between positions when source is greator
+  //         }else if(item.sort >= target.sort && item.sort < source.sort){
+  //           item.sort ++;
+  //         }
+  //       });
+
+  //       source.sort = targetSort;
+  //       console.log('render');
+  //       this.render();
+  //       console.log('after render');
+  //        console.log('children prop aka dragmanager prop:', this.props.children);
+  //   };
+
+  //   onMove();
+
+  //   // return _.debounce(onMove, 80);
+  // }
+
 
 const STYLES = {
+  test:{
+    width:300,
+    height:300,
+    backgroundColor: 'pink'
+  },
   title: {
     cursor: 'pointer',
     color: Colors.indigo500
@@ -98,188 +263,7 @@ const STYLES = {
   }
 };
 
-var data = [
-  {
-    "key": 1,
-    "individual_id": 121,
-    "first_name": "Louis",
-    "last_name": "Duncan",
-    "picture": [
-      {
-        "large": "http://api.randomuser.me/portraits/women/1.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/1.jpg"
-      },
-      {
-        "large": "http://api.randomuser.me/portraits/women/2.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/2.jpg"
-      }
-    ],
-    "inviteProbability": 0.87,
-    "sort":1
-  },
-  {
-    "key": 2,
-    "individual_id": 322,
-    "first_name": "Wanda",
-    "last_name": "Austin",
-    "picture": [
-      {
-        "large": "http://api.randomuser.me/portraits/women/3.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/3.jpg"
-      },
-      {
-        "large": "http://api.randomuser.me/portraits/women/4.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/4.jpg"
-      }
-    ],
-    "inviteProbability": 0.2,
-    "sort":2
-  },
-  {
-    "key": 3,
-    "individual_id": 453,
-    "first_name": "Janice",
-    "last_name": "Chapman",
-    "picture": [
-      {
-        "large": "http://api.randomuser.me/portraits/women/5.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/5.jpg"
-      },
-      {
-        "large": "http://api.randomuser.me/portraits/women/6.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/6.jpg"
-      }
-    ],
-    "inviteProbability": 0.66,
-    "sort":3
-  },
-  {
-    "key": 4,
-    "individual_id": 124,
-    "first_name": "Andrea",
-    "last_name": "Bennett",
-    "picture": [
-      {
-        "large": "http://api.randomuser.me/portraits/women/7.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/7.jpg"
-      },
-      {
-        "large": "http://api.randomuser.me/portraits/women/8.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/8.jpg"
-      }
-    ],
-    "inviteProbability": 0.83,
-    "sort":4
-  },
-  {
-    "key": 5,
-    "individual_id": 35,
-    "first_name": "Justin",
-    "last_name": "Flores",
-    "picture": [
-      {
-        "large": "http://api.randomuser.me/portraits/women/9.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/9.jpg"
-      },
-      {
-        "large": "http://api.randomuser.me/portraits/women/14.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/14.jpg"
-      }
-    ],
-    "inviteProbability": 0.96,
-    "sort":5
-  },
-  {
-    "key": 6,
-    "individual_id": 6,
-    "first_name": "Alan",
-    "last_name": "Webb",
-    "picture": [
-      {
-        "large": "http://api.randomuser.me/portraits/women/15.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/15.jpg"
-      },
-      {
-        "large": "http://api.randomuser.me/portraits/women/21.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/21.jpg"
-      }
-    ],
-    "inviteProbability": 0.33,
-    "sort":6
-  },
-  {
-    "key": 7,
-    "individual_id": 7212,
-    "first_name": "Teresa",
-    "last_name": "Parker",
-    "picture": [
-      {
-        "large": "http://api.randomuser.me/portraits/women/22.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/22.jpg"
-      },
-      {
-        "large": "http://api.randomuser.me/portraits/women/23.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/23.jpg"
-      }
-    ],
-    "inviteProbability": 0.32,
-    "sort":7
-  },
-  {
-    "key": 8,
-    "individual_id": 4238,
-    "first_name": "Donna",
-    "last_name": "Medina",
-    "picture": [
-      {
-        "large": "http://api.randomuser.me/portraits/women/24.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/24.jpg"
-      },
-      {
-        "large": "http://api.randomuser.me/portraits/women/25.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/25.jpg"
-      }
-    ],
-    "inviteProbability": 0.6,
-    "sort":8
-  },
-  {
-    "key": 9,
-    "individual_id": 3239,
-    "first_name": "Juan",
-    "last_name": "Robinson",
-    "picture": [
-      {
-        "large": "http://api.randomuser.me/portraits/women/26.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/26.jpg"
-      },
-      {
-        "large": "http://api.randomuser.me/portraits/women/27.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/27.jpg"
-      }
-    ],
-    "inviteProbability": 0.55,
-    "sort":9
-  },
-  {
-    "key": 10,
-    "individual_id": 1310,
-    "first_name": "Jacqueline",
-    "last_name": "Kelley",
-    "picture": [
-      {
-        "large": "http://api.randomuser.me/portraits/women/28.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/28.jpg"
-      },
-      {
-        "large": "http://api.randomuser.me/portraits/women/29.jpg",
-        "medium": "http://api.randomuser.me/portraits/med/women/29.jpg"
-      }
-    ],
-    "inviteProbability": 0.46,
-    "sort":10
-  }
-]
+
 
 
 
@@ -297,3 +281,25 @@ var data = [
 // )(
 //   useSheet(Kittens, STYLES)
 // );
+
+
+
+// import { createStore, bindActionCreators } from 'redux'
+// import { Provider } from 'react-redux'
+
+// function counter (state = {count: 0}, action) {
+//   let count = state.count
+//   switch (action.type) {
+//     case 'increase':
+//       return {count: count + 1}
+//     default:
+//       return state
+//   }
+// }
+
+// let store = createStore(counter)
+// const increaseAction = {type: 'increase'}
+
+// store.subscribe(() =>
+//   console.log('store:',store.getState())
+// )

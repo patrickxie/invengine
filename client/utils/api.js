@@ -5,15 +5,20 @@ import 'whatwg-fetch';
 async function request({ url, data, params = {} }) {
   try {
     const response = await fetch(url, {
-      credentials: 'include',
+      credentials: 'omit',
+      // credentials: 'include'    //added by patrick to handle cors
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        // 'Access-Control-Allow-Origin': '*', //added by patrick to handle cors
+        // 'Access-Control-Allow-Credentials': true //added by patrick to handle cors
       },
       body: data ? ((data instanceof FormData) ? data : JSON.stringify(data)) : undefined,
       ...params
     })
     const contentType = response.headers.get('content-type');
+    console.log('body is ', response.body);
+    console.log('response code is', response.status);
 
     if (response.status < 200 || response.status >= 400) {
       const error = Error('API Error');
