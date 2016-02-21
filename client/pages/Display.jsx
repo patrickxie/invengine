@@ -42,7 +42,7 @@ export default class Display extends Component {
     this.props.requestAPIData();
   }
 
-  sendtwoaction(){
+  sendtwoaction() {
     console.log('att');
     this.props.moveD();
     console.log('att2');
@@ -54,29 +54,29 @@ export default class Display extends Component {
 //     dispatch
 //     moveXXX(source, target)
 // }
-  moveXXX (source, target){
-        console.log('src&tar: ', source, target);
-        // console.log('requestKittens is : ', this.props.requestKittens);
-        source = _.find(data, {key: parseInt(source, 10)});
-        target = _.find(data, {key: parseInt(target, 10)});
+  moveXXX (source, target) {
+    console.log('src&tar: ', source, target);
+    // console.log('requestKittens is : ', this.props.requestKittens);
+    source = _.find(data, { key: parseInt(source, 10) });
+    target = _.find(data, { key: parseInt(target, 10) });
 
-        var targetSort = target.sort;
+    var targetSort = target.sort;
 
-        //CAREFUL, For maximum performance we must maintain the array's order, but change sort
-        data.forEach(function(item){
-          //Decrement sorts between positions when target is greater
-          if(target.sort > source.sort && (item.sort <= target.sort && item.sort > source.sort)){
-            item.sort --;
-          //Incremenet sorts between positions when source is greator
-          }else if(item.sort >= target.sort && item.sort < source.sort){
-            item.sort ++;
-          }
-        });
+    //CAREFUL, For maximum performance we must maintain the array's order, but change sort
+    data.forEach(function(item) {
+      //Decrement sorts between positions when target is greater
+      if(target.sort > source.sort && (item.sort <= target.sort && item.sort > source.sort)){
+        item.sort --;
+      //Incremenet sorts between positions when source is greator
+      }else if(item.sort >= target.sort && item.sort < source.sort) {
+        item.sort ++;
+      }
+    });
 
-        source.sort = targetSort;
-        console.log('dam this kitten', store.getState());
-        return this.props.requestKittens.bind(this);
-        // this.props.requestKittens;
+    source.sort = targetSort;
+    console.log('dam this kitten', store.getState());
+    return this.props.requestKittens.bind(this);
+    // this.props.requestKittens;
   }
 
   // handleClick(){
@@ -88,14 +88,14 @@ export default class Display extends Component {
   //true false onMove hack
 
   render () {
-const { data, changeSort } = this.props;
+    const { data, changeSort } = this.props;
     // console.log('value::::::::::::::::: ', this.props.value);
     // console.log('data of type: ', typeof(data), 'is', data);
     // console.log('thischidlren', this.props.children)
-    return <AbsoluteGrid
+    return < AbsoluteGrid
         items={data} displayObject={<DisplayItem/>}
-                               dragEnabled={true}
-                               responsive={true}
+                               dragEnabled
+                               responsive
                                verticalMargin={42}
                                itemWidth={200}
                                itemHeight={200}>
