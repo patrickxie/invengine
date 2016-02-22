@@ -2,8 +2,8 @@ import React, { Component, forceUpdate } from 'react';
 
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
-import { requestAPIData } from '../actions/contacts_data';
-
+import { requestAPIData, changeSort } from '../actions/contacts_data';
+console.log('succesffully imported changesort: ', changeSort);
 import { browserHistory } from 'react-router';
 
 import DisplayItem from '../components/DisplayItem.jsx';
@@ -13,13 +13,12 @@ import Colors from 'material-ui/lib/styles/colors';
 import * as _ from 'lodash';
 
 
-// Create a Redux store holding the state of your app.
-// Its API is { subscribe, dispatch, getState }.
-
 
 export default class Display extends Component {
   constructor(props){
     super(props);
+    const { data, changeSort } = this.props;
+    console.log('constructor changeSort', changeSort);
     // const { dirtyd } = this.props;
     // const { value, moveD, requestKittens } = this.props;
             // console.log('requestKittens is :: ', this.props.requestKittens);
@@ -42,28 +41,29 @@ export default class Display extends Component {
     this.props.requestAPIData();
   }
 
-  sendtwoaction() {
-    console.log('att');
-    this.props.moveD();
-    console.log('att2');
-  }
+  // sendtwoaction() {
+  //   console.log('att');
+  //   this.props.moveD();
+  //   console.log('att2');
+  // }
 
 
-// onMove={newMove}
+// onMove={newMove.bind(this)}
 // newMove(source, target){
-//     dispatch
+//     this.props.changeSort()
 //     moveXXX(source, target)
 // }
+
   moveXXX (source, target) {
     console.log('src&tar: ', source, target);
     // console.log('requestKittens is : ', this.props.requestKittens);
-    source = _.find(data, { key: parseInt(source, 10) });
-    target = _.find(data, { key: parseInt(target, 10) });
+    source = _.find(this.props.data, { key: parseInt(source, 10) });
+    target = _.find(this.props.data, { key: parseInt(target, 10) });
 
     var targetSort = target.sort;
-
+    var sorteddata = this.props.data;
     //CAREFUL, For maximum performance we must maintain the array's order, but change sort
-    data.forEach(function(item) {
+    sorteddata.forEach(function(item) {
       //Decrement sorts between positions when target is greater
       if(target.sort > source.sort && (item.sort <= target.sort && item.sort > source.sort)){
         item.sort --;
@@ -72,10 +72,11 @@ export default class Display extends Component {
         item.sort ++;
       }
     });
-
+    console.log('IT CHANGED: ', sorteddata === this.props.data);
     source.sort = targetSort;
-    console.log('dam this kitten', store.getState());
-    return this.props.requestKittens.bind(this);
+    console.log('what THIS refers to right b4 return', this);
+    console.log('what changeSort is', this.props.changeSort);
+    return this.props.changeSort(sorteddata);
     // this.props.requestKittens;
   }
 
@@ -88,12 +89,12 @@ export default class Display extends Component {
   //true false onMove hack
 
   render () {
-    const { data, changeSort } = this.props;
     // console.log('value::::::::::::::::: ', this.props.value);
     // console.log('data of type: ', typeof(data), 'is', data);
     // console.log('thischidlren', this.props.children)
     return < AbsoluteGrid
-        items={data} displayObject={<DisplayItem/>}
+        items={this.props.data} displayObject={<DisplayItem/>}
+                onMove={this.moveXXX.bind(this)}
                                dragEnabled
                                responsive
                                verticalMargin={42}
@@ -153,7 +154,7 @@ export default class Display extends Component {
 // Connected Component
 export default connect(
   state => ({ data: state.data }),
-  { requestAPIData }
+  { requestAPIData, changeSort }
 )(
   useSheet(Display, STYLES)
 );
