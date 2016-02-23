@@ -7,18 +7,18 @@ import Colors from 'material-ui/lib/styles/colors';
 
 const DisplayItem = ({ item, index, itemsLength })=> (
         // console.log('uri: ', state.routing.location.pathname);
-        // console.log('pics', item.picture.medium)
-  <GridTile
-          key={item.key}
-          title={item.last_name}
-          actionIcon={<IconButton><StarBorder color='white'/></IconButton>}
-          actionPosition='left'
-          titlePosition='bottom'
-          style={STYLES.tile}
-          titleBackground='linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)'
-        ><img src={item.picture[0].medium}/>
-   {index} of {itemsLength}: {item.first_name}
-   </GridTile>
+        console.log('items ', item);
+  return (<GridTile
+            key={item.key}
+            title={item.last_name}
+            actionIcon={<IconButton><StarBorder color='white'/></IconButton>}
+            actionPosition='left'
+            titlePosition='bottom'
+            style={STYLES.tile}
+            titleBackground='linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)'
+          ><img src={item.picture[0].medium}/>
+     {item.sort},{item.key}: {item.first_name}
+     </GridTile>)
 )
 
 //inside gridTile, ther should be 2 compnents of <img> type, one determines the

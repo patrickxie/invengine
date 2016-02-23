@@ -18,45 +18,15 @@ export default class Display extends Component {
   constructor(props){
     super(props);
     const { data, changeSort } = this.props;
-    console.log('constructor changeSort', changeSort);
-    // const { dirtyd } = this.props;
-    // const { value, moveD, requestKittens } = this.props;
-            // console.log('requestKittens is :: ', this.props.requestKittens);
-    // this.props.dirtyd = data;
-    // console.log(data);
-    // this.state = { counter: store.getState()};
-    // console.log('state is:  ', this.state);
-    // console.log('value & increaseActionclick', value, moveD);
-    // this.render = this.render.bind(this);
-    // console.log('this.render', this.render);
-    // console.log('children prop aka dragmanager prop:', this.props.children);
-    // console.log('moveD', this.moveD);
-
-    // console.log('func', this.func);
-
-
+    // console.log('constructor changeSort', changeSort);
   }
 
   componentDidMount() {
     this.props.requestAPIData();
   }
 
-  // sendtwoaction() {
-  //   console.log('att');
-  //   this.props.moveD();
-  //   console.log('att2');
-  // }
-
-
-// onMove={newMove.bind(this)}
-// newMove(source, target){
-//     this.props.changeSort()
-//     moveXXX(source, target)
-// }
-
-  moveXXX (source, target) {
-    console.log('src&tar: ', source, target);
-    // console.log('requestKittens is : ', this.props.requestKittens);
+  move (source, target) {
+    // console.log('src&tar: ', source, target);
     source = _.find(this.props.data, { key: parseInt(source, 10) });
     target = _.find(this.props.data, { key: parseInt(target, 10) });
 
@@ -76,10 +46,12 @@ export default class Display extends Component {
     source.sort = targetSort;
     console.log('what THIS refers to right b4 return', this);
     console.log('what changeSort is', this.props.changeSort);
-    return this.props.changeSort(sorteddata);
-    // this.props.requestKittens;
+    this.props.changeSort(sorteddata);
+    this.forceUpdate();
+    // this.render(this.props.data);
+    console.log('what is render', this.render);
   }
-
+// }
   // handleClick(){
   //   console.log('bong');
   //   console.log('routeActions :', routeActions);
@@ -89,12 +61,13 @@ export default class Display extends Component {
   //true false onMove hack
 
   render () {
-    // console.log('value::::::::::::::::: ', this.props.value);
-    // console.log('data of type: ', typeof(data), 'is', data);
-    // console.log('thischidlren', this.props.children)
+    // filterpPop, zoom
     return < AbsoluteGrid
         items={this.props.data} displayObject={<DisplayItem/>}
-                onMove={this.moveXXX.bind(this)}
+                onMove={_.debounce((this.move.bind(this)),120)}
+                sortProp={'sort'}
+                keyProp={'key'}
+                animation={'transform 300ms ease'}
                                dragEnabled
                                responsive
                                verticalMargin={42}
@@ -103,51 +76,6 @@ export default class Display extends Component {
          </AbsoluteGrid>
   }
 }
-
-//        onMove={this.moveXXX}
-
-//Map Redux state to component props
-// function mapStateToProps (state) {
-//   return {
-//     value: state.count
-//   }
-// }
-
-// Map Redux actions to component props
-// function mapDispatchToProps (dispatch) {
-//   return {
-//     moveD: () => dispatch(increaseAction)
-//     // moveD: () => bindActionCreators(increaseAction, dispatch)
-//   }
-// }
-
-// function requestKittens() {
-//     console.log('wtttff');
-//   return dispatch => { dispatch(increaseAction)};
-// }
-
-// function onMoveAction (source, target){
-//         console.log('src&tar: ', source, target);
-//         source = _.find(data, {key: parseInt(source, 10)});
-//         target = _.find(data, {key: parseInt(target, 10)});
-
-//         var targetSort = target.sort;
-
-//         //CAREFUL, For maximum performance we must maintain the array's order, but change sort
-//         data.forEach(function(item){
-//           //Decrement sorts between positions when target is greater
-//           if(target.sort > source.sort && (item.sort <= target.sort && item.sort > source.sort)){
-//             item.sort --;
-//           //Incremenet sorts between positions when source is greator
-//           }else if(item.sort >= target.sort && item.sort < source.sort){
-//             item.sort ++;
-//           }
-//         });
-
-//         source.sort = targetSort;
-//         return increaseAction;
-//   }
-
 
 
 
@@ -160,7 +88,32 @@ export default connect(
 );
 
 
+  // moveXXX (source, target) {
+  //   console.log('src&tar: ', source, target);
+  //   // console.log('requestKittens is : ', this.props.requestKittens);
+  //   source = _.find(this.props.data, { key: parseInt(source, 10) });
+  //   target = _.find(this.props.data, { key: parseInt(target, 10) });
 
+  //   var targetSort = target.sort;
+  //   var sorteddata = this.props.data;
+  //   //CAREFUL, For maximum performance we must maintain the array's order, but change sort
+  //   sorteddata.forEach(function(item) {
+  //     //Decrement sorts between positions when target is greater
+  //     if(target.sort > source.sort && (item.sort <= target.sort && item.sort > source.sort)){
+  //       item.sort --;
+  //     //Incremenet sorts between positions when source is greator
+  //     }else if(item.sort >= target.sort && item.sort < source.sort) {
+  //       item.sort ++;
+  //     }
+  //   });
+  //   console.log('IT CHANGED: ', sorteddata === this.props.data);
+  //   source.sort = targetSort;
+  //   console.log('what THIS refers to right b4 return', this);
+  //   console.log('what changeSort is', this.props.changeSort);
+  //   this.props.changeSort(sorteddata);
+  //   this.forceUpdate();
+  //   console.log('what is render', this.render);
+  // }
 
 // onMove={this.onMoveDebounced.bind(this, this.props)}
 
@@ -282,25 +235,3 @@ const STYLES = {
 // )(
 //   useSheet(Kittens, STYLES)
 // );
-
-
-
-// import { createStore, bindActionCreators } from 'redux'
-// import { Provider } from 'react-redux'
-
-// function counter (state = {count: 0}, action) {
-//   let count = state.count
-//   switch (action.type) {
-//     case 'increase':
-//       return {count: count + 1}
-//     default:
-//       return state
-//   }
-// }
-
-// let store = createStore(counter)
-// const increaseAction = {type: 'increase'}
-
-// store.subscribe(() =>
-//   console.log('store:',store.getState())
-// )
