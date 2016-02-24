@@ -17,8 +17,8 @@ async function request({ url, data, params = {} }) {
       ...params
     })
     const contentType = response.headers.get('content-type');
-    console.log('body is ', response.body);
-    console.log('response code is', response.status);
+    // console.log('body is ', response.body);
+    // console.log('response code is', response.status);
 
     if (response.status < 200 || response.status >= 400) {
       const error = Error('API Error');

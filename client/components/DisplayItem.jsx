@@ -5,19 +5,20 @@ import StarBorder from 'material-ui/lib/svg-icons/toggle/star-border';
 import IconButton from 'material-ui/lib/icon-button';
 import Colors from 'material-ui/lib/styles/colors';
 
+
 const DisplayItem = ({ item, index, itemsLength })=> (
         // console.log('uri: ', state.routing.location.pathname);
         // console.log('pics', item.picture.medium)
   <GridTile
           key={item.key}
-          title={item.last_name}
+          title={item.first_name}
           actionIcon={<IconButton><StarBorder color='white'/></IconButton>}
           actionPosition='left'
           titlePosition='bottom'
           style={STYLES.tile}
           titleBackground='linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)'
         ><img src={item.picture[0].medium}/>
-   {item.sort},{item.key}: {item.first_name}
+   {item.sort}:{item.key}
    </GridTile>
 )
 
@@ -42,7 +43,8 @@ const STYLES = {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFDDDD',
-    color: '#660000'
+    color: '#660000',
+    border: 'solid 1px #e0e0e0'
   }
 };
 

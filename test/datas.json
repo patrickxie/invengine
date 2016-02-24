@@ -1,4 +1,4 @@
-var data = [
+[
   {
     "key": 1,
     "individual_id": 121,
@@ -180,5 +180,3 @@ var data = [
     "sort":10
   }
 ]
-
-export data
