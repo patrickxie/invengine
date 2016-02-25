@@ -22,7 +22,7 @@ import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import { toggle } from '../actions/to_invite_list';
 
 
-
+import FlatButton from 'material-ui/lib/flat-button';
 import PopoverAnimationFromTop from 'material-ui/lib/popover/popover-animation-from-top';
 import RadioButton from 'material-ui/lib/radio-button';
 import RaisedButton from 'material-ui/lib/raised-button';
@@ -31,7 +31,7 @@ import FontIcon from 'material-ui/lib/font-icon';
 import IconButton from 'material-ui/lib/icon-button';
 import ActionHome from 'material-ui/lib/svg-icons/action/home';
 
-
+import ActionFlightTakeoff from 'material-ui/lib/svg-icons/action/flight-takeoff';
 
 export default class Display extends Component {
   constructor(props){
@@ -90,10 +90,7 @@ export default class Display extends Component {
 
 
 
-    handleChangeDuration = (event) => {
-    // console.log('event:', event.target.value==='');
-     // console.log('Nan2:', event.target.value=='\ ');
-     //  console.log('Nan3:', event.target.value===' ');
+  handleChangeDuration = (event) => {
     var search = new RegExp(event.target.value, 'i');
     this.props.data.forEach(function(item){
       item.filtered = !item.first_name.match(search);
@@ -110,7 +107,7 @@ export default class Display extends Component {
   handleBlurExit=()=>{
     setTimeout(function() {
       this.filtervalue('');
-    }.bind(this),400);
+    }.bind(this),10);
   };
 
 
@@ -143,23 +140,18 @@ export default class Display extends Component {
                                itemHeight={200}>
          </AbsoluteGrid>
         <FloatingActionButton mini secondary={true} style={STYLES.searchButton}
-         onClick={this.handleTouchTap} onTouchTap={this.handleTouchTap}
+         onTouchTap={this.handleTouchTap}
          >
              <Search />
         </FloatingActionButton>
-        <Popover
-          open={this.state.open}
-          anchorEl={this.state.anchorEl}
-          canAutoPosition
-          onRequestClose={this.handleRequestClose}
-        >
             <div style={STYLES.popover}>
+                 <Search />
                 <TextField 
+                    style={STYLES.txtField}
                     onChange={this.handleChangeText}
-                    onBlur = {this.handleBlurExit}
                     hintText="Search friends..." / >
+                 <FlatButton label="Done" onTouchTap = {this.handleBlurExit} color={Colors.red500} />
             </div>
-        </Popover>
          <FloatingActionButton mini secondary={true} style={STYLES.inviteButton}
          onClick={() => browserHistory.push('/invite')} 
          onTouchTap={() => browserHistory.push('/invite')}
@@ -196,8 +188,32 @@ const STYLES = {
   iconButton:{
     fill: '#fab1ce'
   },
+  txtField:{
+    width:200
+  },
+  wide:{
+    width:'100%',
+    // backgroundColor:'black',
+    height:30
+  },
   popover: {
-    padding: 20,
+    // padding: 20,
+    // display: 'block',
+    // marginLeft: 'auto',
+    // marginRight: 'auto',
+    // display: 'flex',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // // backgroundColor: 'pink',
+    background: 'rgba(0,0,0,0.1)',
+    // position: 'fixed',
+    // bottom: 0,
+    // zIndex: '5',
+  position: 'fixed',
+  bottom: '0%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+
   },
   searchButton: {
     left: '7%',
@@ -209,7 +225,8 @@ const STYLES = {
     right: '7%',
     bottom: '7%',
     backgroundColor: '#fab1ce',
-    position: 'fixed'
+    position: 'fixed',
+    cursor: 'pointer'
   },
   snackbar:{
     backgroundColor: 'yellow',
@@ -219,6 +236,12 @@ const STYLES = {
     width:300,
     height:300,
     backgroundColor: 'pink',
+  },
+  hide:{
+    display: 'none',
+  },
+  show:{
+    display: 'block',
   }
 };
 

@@ -11,8 +11,6 @@ import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import FlatButton from 'material-ui/lib/flat-button';
 import Colors from 'material-ui/lib/styles/colors';
 import Paper from 'material-ui/lib/paper';
-
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import Logo from '../svg/InvengineLogo.svg';
 
 
@@ -27,12 +25,6 @@ export default class Index extends Component {
     // this.props.requestKittens();
   }
 
-  // handleClick(){
-  //   console.log('bong');
-  //   console.log('routeActions :', routeActions);
-  //   () => routeActions.push('/foo')
-  // }
-
   render () {
     const { sheet, children } = this.props;
     return (
@@ -45,15 +37,18 @@ export default class Index extends Component {
         iconElementRight={<span>
             <span style={STYLES.barButton}>
               <FlatButton style={STYLES.barButtonTxt} label= 'Home'
-              onClick={() => browserHistory.push('/home')} />
+              onClick={() => browserHistory.push('/home')} 
+              onTouchTap={() => browserHistory.push('/home')}/>
             </span>
             <span style={STYLES.barButton}>
               <FlatButton style={STYLES.barButtonTxt} label= 'Import'
-              onClick={() => browserHistory.push('/')} />
+              onClick={() => browserHistory.push('/')} 
+              onTouchTap={() => browserHistory.push('/')}/>
             </span>
             <span style={STYLES.barButton}>
               <FlatButton style={STYLES.barButtonTxt} label= 'Invite'
-              onClick={() => browserHistory.push('/invite')} />
+              onClick={() => browserHistory.push('/invite')} 
+              onTouchTap={() => browserHistory.push('/invite')}/>
             </span></span>}
         />
         {this.props.children}
@@ -61,28 +56,7 @@ export default class Index extends Component {
   }
 }
 
-//   render() {
-//     const { sheet, push, children } = this.props;
 
-//     return (
-//     <div>
-//       <header>
-//         Links:
-//         {' '}
-//         <Link to='/'>bar</Link>
-//         {' '}
-//         <Link to='/foo'>Foo</Link>
-//         {' '}
-//         <Link to='/kittens'>kittens</Link>
-//       </header>
-//       <div>
-//         <button onClick={() => browserHistory.push('/foo')}>Go to /foo</button>
-//       </div>
-//       <div style={{ marginTop: '1.5em' }}>{this.props.children}</div>
-//     </div>
-//     )
-//   }
-// }
 
 
 const STYLES = {
@@ -138,7 +112,8 @@ const STYLES = {
   barButtonTxt: {
     color: Colors.indigoA200,
     position: 'relative',
-    top:6
+    top:6,
+    cursor: 'pointer'
   },
   logowrap: {
     position: 'relative',

@@ -25,6 +25,9 @@ import Kittens from './components/Kittens';
 import {Foo, Bar, Auth, Index, Invite, Display} from './pages/export';
 
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
 jss.use(jssVendorPrefixer());
 jss.use(jssPx());
 jss.use(jssNested());
