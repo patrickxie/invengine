@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
 import { requestAPIData, changeSort } from '../actions/contacts_data';
@@ -12,11 +11,16 @@ import AbsoluteGrid from 'react-absolute-grid';
 import Colors from 'material-ui/lib/styles/colors';
 import * as _ from 'lodash';
 
-import FloatingActionButton from 'material-ui/lib/floating-action-button';
+
 import Search from 'material-ui/lib/svg-icons/action/search';
-import TextField from 'material-ui/lib/text-field';
+import PersonAdd from 'material-ui/lib/svg-icons/social/person-add';
 
 import Popover from 'material-ui/lib/popover/popover';
+import TextField from 'material-ui/lib/text-field';
+import FloatingActionButton from 'material-ui/lib/floating-action-button';
+
+import { toggle } from '../actions/to_invite_list';
+
 
 
 import PopoverAnimationFromTop from 'material-ui/lib/popover/popover-animation-from-top';
@@ -32,7 +36,8 @@ import ActionHome from 'material-ui/lib/svg-icons/action/home';
 export default class Display extends Component {
   constructor(props){
     super(props);
-    const { data, changeSort } = this.props;
+    const { data, changeSort, toggle, toggleStatus } = this.props;
+    // console.log(this.props.toggle);
     this.state = {
       open: false,
     };
@@ -83,16 +88,10 @@ export default class Display extends Component {
     });
   };
 
-  //   var onFilter = function(event){
-  //   var search = new RegExp(event.target.value, 'i');
-  //   sampleItems.forEach(function(item){
-  //     item.filtered = !item.name.match(search);
-  //   });
-  //   render();
-  // };
+
 
     handleChangeDuration = (event) => {
-    console.log('event:', event.target.value==='');
+    // console.log('event:', event.target.value==='');
      // console.log('Nan2:', event.target.value=='\ ');
      //  console.log('Nan3:', event.target.value===' ');
     var search = new RegExp(event.target.value, 'i');
@@ -103,36 +102,36 @@ export default class Display extends Component {
 
   };
 
-// handleChangeDuration(event){
-//     filtervalue(event.target.value)
-// }
 
- handleChangeText=(event)=>{
-   this.filtervalue(event.target.value);
- };
+  handleChangeText=(event)=>{
+    this.filtervalue(event.target.value);
+  };
 
- handleBlurExit=()=>{
-   setTimeout(function() {
-     this.filtervalue('');
-   }.bind(this),400);
- };
+  handleBlurExit=()=>{
+    setTimeout(function() {
+      this.filtervalue('');
+    }.bind(this),400);
+  };
 
 
 
- filtervalue = (value) => {
-    console.log('this is called', value);
-   var search = new RegExp(value, 'i');
-   this.props.data.forEach(function(item) {
-     item.filtered = !item.first_name.match(search);
-   });
-   this.forceUpdate();
- };
+  filtervalue = (value) => {
+     console.log('this is called', value);
+    var search = new RegExp(value, 'i');
+    this.props.data.forEach(function(item) {
+      item.filtered = !item.first_name.match(search);
+    });
+    this.forceUpdate();
+  };
 
- render () {
+  render () {
     // filterpPop, zoom
+    // console.log('toggle 2:', this.props.toggle)
     return <div>
         < AbsoluteGrid
-        items={this.props.data} displayObject={<DisplayItem/>}
+        items={this.props.data} displayObject={<DisplayItem 
+            onToggleItem={this.props.toggle} toggleProp={this.props.toggleStatus}
+        />}
                 onMove={_.debounce((this.move.bind(this)),120)}
                 sortProp={'sort'}
                 keyProp={'key'}
@@ -143,7 +142,7 @@ export default class Display extends Component {
                                itemWidth={200}
                                itemHeight={200}>
          </AbsoluteGrid>
-        <FloatingActionButton secondary={true} style={STYLES.floatButton}
+        <FloatingActionButton mini secondary={true} style={STYLES.searchButton}
          onClick={this.handleTouchTap} onTouchTap={this.handleTouchTap}
          >
              <Search />
@@ -161,26 +160,36 @@ export default class Display extends Component {
                     hintText="Search friends..." / >
             </div>
         </Popover>
-        </div>
-      
+         <FloatingActionButton mini secondary={true} style={STYLES.inviteButton}
+         onClick={() => browserHistory.push('/invite')} 
+         onTouchTap={() => browserHistory.push('/invite')}
+         >
+             <PersonAdd />
+        </FloatingActionButton>
+        </div>  
   }
 }
 
-  //   var onFilter = function(event){
-  //   var search = new RegExp(event.target.value, 'i');
-  //   sampleItems.forEach(function(item){
-  //     item.filtered = !item.name.match(search);
-  //   });
-  //   render();
-  // };
+    // var rankByProbabilitySort = function(data){
+    //   // console.log('ayy', data);
+    //     var result = data.sort(function (a, b) {
+    //       if (a.inviteProbability > b.inviteProbability) {
+    //         return 1;
+    //       }
+    //       if (a.inviteProbability < b.inviteProbability) {
+    //         return -1;
+    //       }
+    //       // a must be equal to b
+    //       return 0;
+    //     });
+    //     for (var i = 0; i < result.length; i++) {
+    //         result[i].sort = i+1;
+    //     };
+    //     // console.log("***result is:", result);
 
-  //   handleChangeDuration = (event) => {
-  //   const value = event.target.value;
-  //   this.setState({
-  //     autoHideDuration: value.length > 0 ? parseInt(value) : 0,
-  //   });
-  // };
+    //     return result;
 
+    // };
 
 
 const STYLES = {
@@ -190,10 +199,17 @@ const STYLES = {
   popover: {
     padding: 20,
   },
-  floatButton: {
-    left: '10%',
-    bottom: '10%',
-    backgroundColor: '#fab1ce' 
+  searchButton: {
+    left: '7%',
+    bottom: '7%',
+    backgroundColor: '#fab1ce',
+    position: 'fixed'
+  },
+  inviteButton: {
+    right: '7%',
+    bottom: '7%',
+    backgroundColor: '#fab1ce',
+    position: 'fixed'
   },
   snackbar:{
     backgroundColor: 'yellow',
@@ -203,70 +219,12 @@ const STYLES = {
     width:300,
     height:300,
     backgroundColor: 'pink',
-  },
-  title: {
-    cursor: 'pointer',
-    color: Colors.indigo500
-  },
-  index: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFDDDD',
-    color: '#660000'
-  },
-  kitten: {
-    textDecoration: 'none',
-    display: 'flex',
-    flexDirection: 'column',
-    flexBasis: '33%',
-    padding: '0.5rem',
-    boxSizing: 'border-box'
-  },
-  button: {
-    padding: '1rem 1.5rem',
-    background: '#FFAAAA',
-    '&:hover': {
-      background: '#FFBBBB'
-    },
-    border: 0,
-    borderRadius: '0.5rem',
-    cursor: 'pointer',
-    textAlign: 'center',
-    userSelect: 'none'
-  },
-  info: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-
-    '& svg': {
-      fill: 'currentColor'
-    }
-  },
-  appbar: {
-    backgroundColor: Colors.grey20,
-  },
-  barButton: {
-    flexBasis:'10%'
-  },
-  barButtonTxt: {
-    color: Colors.indigoA200,
-    position: 'relative',
-    top:6
-  },
-  logowrap: {
-    position: 'relative',
-    bottom:2
   }
 };
 
 export default connect(
-  state => ({ data: state.data }),
-  { requestAPIData, changeSort }
+  state => ({ data: state.data, toggleStatus: state.toinvlist }),
+  { requestAPIData, changeSort, toggle }
 )(
   useSheet(Display, STYLES)
 );

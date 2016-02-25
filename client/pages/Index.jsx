@@ -12,8 +12,9 @@ import FlatButton from 'material-ui/lib/flat-button';
 import Colors from 'material-ui/lib/styles/colors';
 import Paper from 'material-ui/lib/paper';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import Logo from '../svg/InvengineLogo.svg';
-// console.log('ayyyyy', pic);
+
 
 export default class Index extends Component {
   // constructor(props){

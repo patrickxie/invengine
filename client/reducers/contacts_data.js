@@ -7,6 +7,7 @@ const api = (state, action) => (
   action.data
 );
 
+
 const swap = (state, action) => (
     action.data
 );
