@@ -2,9 +2,20 @@
 import React, { Component } from 'react';
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
-import { requestAPIData, changeSort } from '../actions/contacts_data';
+import { inputUrl } from '../actions/assist_variables';
 
 import { browserHistory } from 'react-router';
+
+import URL from '../components/URL';
+
+
+
+// import MobileTearSheet from '../../../MobileTearSheet';
+import Avatar from 'material-ui/lib/avatar';
+import List from 'material-ui/lib/lists/list';
+import ListItem from 'material-ui/lib/lists/list-item';
+import Divider from 'material-ui/lib/divider';
+import CommunicationChatBubble from 'material-ui/lib/svg-icons/communication/chat-bubble';
 
 export default class Invitepage extends Component {
   // constructor(props){
@@ -17,17 +28,32 @@ export default class Invitepage extends Component {
     // this.props.requestKittens();
   }
 
-  // handleClick(){
-  //   console.log('bong');
-  //   console.log('routeActions :', routeActions);
-  //   () => routeActions.push('/foo')
-  // }
+  handleClick(){
+    alert('bong');
+    // console.log('routeActions :', routeActions);
+    // () => routeActions.push('/foo')
+  }
 
   render () {
-    const { id } = this.props;
-    return <div><h1>hello invitepage</h1> {id[1]?<p>T</p>:<p>F</p>} </div>;
+    const { invitees } = this.props;
+    console.log('invitees are: ', invitees);
+
+    return <div><URL/><h1 onDoubleClick={this.handleClick}>
+      'hello'</h1> <Divider/>
+    <List subheader="Recent chats">
+        {invitees.map(person => (
+          <ListItem key={person.key}
+        primaryText={person.first_name+' '+ person.last_name}
+        leftAvatar={<Avatar src={person.picture[0].medium}/>} />
+        ))}
+
+    </List>
+  </div>;
   }
 }
+
+
+
 
 const STYLES = {
   iconButton:{
@@ -52,9 +78,8 @@ const STYLES = {
   }
 };
 
-
 export default connect(
-  state => ({ id: state.toinvlist }),
+  state => ({ invitees: state.data.filter((item)=>state.toinvlist[item.key]===true) }),
   // { requestAPIData, changeSort }
 )(
   useSheet(Invitepage, STYLES)

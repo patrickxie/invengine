@@ -15,7 +15,8 @@
       }
     ],
     "inviteProbability": 0.87,
-    "sort":1
+    "sort":1,
+    "email":"testachiotestronaut@gmail.com"
   },
   {
     "key": 2,
@@ -33,7 +34,8 @@
       }
     ],
     "inviteProbability": 0.2,
-    "sort":2
+    "sort":2,
+    "email":"testachiotestronaut@gmail.com"
   },
   {
     "key": 3,
@@ -51,7 +53,8 @@
       }
     ],
     "inviteProbability": 0.66,
-    "sort":3
+    "sort":3,
+    "email":"testachiotestronaut@gmail.com"
   },
   {
     "key": 4,
@@ -69,7 +72,8 @@
       }
     ],
     "inviteProbability": 0.83,
-    "sort":4
+    "sort":4,
+    "email":"testachiotestronaut@gmail.com"
   },
   {
     "key": 5,
@@ -87,7 +91,8 @@
       }
     ],
     "inviteProbability": 0.96,
-    "sort":5
+    "sort":5,
+    "email":"testachiotestronaut@gmail.com"
   },
   {
     "key": 6,
@@ -105,7 +110,8 @@
       }
     ],
     "inviteProbability": 0.33,
-    "sort":6
+    "sort":6,
+    "email":"testachiotestronaut@gmail.com"
   },
   {
     "key": 7,
@@ -123,7 +129,8 @@
       }
     ],
     "inviteProbability": 0.32,
-    "sort":7
+    "sort":7,
+    "email":"testachiotestronaut@gmail.com"
   },
   {
     "key": 8,
@@ -141,7 +148,8 @@
       }
     ],
     "inviteProbability": 0.6,
-    "sort":8
+    "sort":8,
+    "email":"testachiotestronaut@gmail.com"
   },
   {
     "key": 9,
@@ -159,7 +167,8 @@
       }
     ],
     "inviteProbability": 0.55,
-    "sort":9
+    "sort":9,
+    "email":"testachiotestronaut@gmail.com"
   },
   {
     "key": 10,
@@ -177,6 +186,7 @@
       }
     ],
     "inviteProbability": 0.46,
-    "sort":10
+    "sort":10,
+    "email":"testachiotestronaut@gmail.com"
   }
 ]

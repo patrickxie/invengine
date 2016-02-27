@@ -1,6 +1,5 @@
-export function toggle(id, status){
-    // console.log('lmmao');
-    return dispatch => dispatch(
+export function toggle(id, status) {
+  return dispatch => dispatch(
         { type: 'toggled',
           id, status
          });

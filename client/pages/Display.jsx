@@ -20,7 +20,7 @@ import TextField from 'material-ui/lib/text-field';
 import FloatingActionButton from 'material-ui/lib/floating-action-button';
 
 import { toggle } from '../actions/to_invite_list';
-
+import Paper from 'material-ui/lib/paper';
 
 import FlatButton from 'material-ui/lib/flat-button';
 import PopoverAnimationFromTop from 'material-ui/lib/popover/popover-animation-from-top';
@@ -88,6 +88,11 @@ export default class Display extends Component {
     });
   };
 
+  closeAndDone =()=>{
+    this.handleRequestClose();
+    this.handleBlurExit();
+  };
+
 
 
   handleChangeDuration = (event) => {
@@ -113,7 +118,7 @@ export default class Display extends Component {
 
 
   filtervalue = (value) => {
-     console.log('this is called', value);
+     // console.log('this is called', value);
     var search = new RegExp(value, 'i');
     this.props.data.forEach(function(item) {
       item.filtered = !item.first_name.match(search);
@@ -139,21 +144,22 @@ export default class Display extends Component {
                                itemWidth={200}
                                itemHeight={200}>
          </AbsoluteGrid>
-        <FloatingActionButton mini secondary={true} style={STYLES.searchButton}
+{this.state.open ? <Paper style={STYLES.popover}>
+                 <Search style={STYLES.searchIcon} />
+                <TextField 
+                    style={STYLES.txtField}
+                    onChange={this.handleChangeText}
+                    hintText="Search friends..." />
+                 <FlatButton label="Done" onTouchTap = {this.closeAndDone}
+                 style={STYLES.c} color={Colors.red500} />
+            </Paper>
+            : <FloatingActionButton mini secondary={true} style={STYLES.searchButton}
          onTouchTap={this.handleTouchTap}
          >
              <Search />
         </FloatingActionButton>
-            <div style={STYLES.popover}>
-                 <Search />
-                <TextField 
-                    style={STYLES.txtField}
-                    onChange={this.handleChangeText}
-                    hintText="Search friends..." / >
-                 <FlatButton label="Done" onTouchTap = {this.handleBlurExit} color={Colors.red500} />
-            </div>
-         <FloatingActionButton mini secondary={true} style={STYLES.inviteButton}
-         onClick={() => browserHistory.push('/invite')} 
+}
+         <FloatingActionButton mini secondary={true} style={STYLES.inviteButton} 
          onTouchTap={() => browserHistory.push('/invite')}
          >
              <PersonAdd />
@@ -161,6 +167,25 @@ export default class Display extends Component {
         </div>  
   }
 }
+
+
+
+// {this.state.open ? <div style={STYLES.popover}>
+//                  <Search />
+//                 <TextField 
+//                     style={STYLES.txtField}
+//                     onChange={this.handleChangeText}
+//                     hintText="Search friends..." / >
+//                  <FlatButton label="Done" onTouchTap = {this.handleBlurExit} color={Colors.red500} />
+//             </div>
+//             : <FloatingActionButton mini secondary={true} style={STYLES.searchButton}
+//          onTouchTap={this.handleTouchTap}
+//          >
+//              <Search />
+//         </FloatingActionButton>
+// }
+
+
 
     // var rankByProbabilitySort = function(data){
     //   // console.log('ayy', data);
@@ -185,11 +210,16 @@ export default class Display extends Component {
 
 
 const STYLES = {
+  c: {
+    backgroundColor: 'white'
+  },
   iconButton:{
     fill: '#fab1ce'
   },
   txtField:{
-    width:200
+    width:"60%",
+    backgroundColor: 'white',
+    zIndex: '8',
   },
   wide:{
     width:'100%',
@@ -204,15 +234,16 @@ const STYLES = {
     // display: 'flex',
     // alignItems: 'center',
     // justifyContent: 'center',
-    // // backgroundColor: 'pink',
-    background: 'rgba(0,0,0,0.1)',
+    backgroundColor: 'white',
+    height:'3em',
+    // background: 'rgba(0,0,0,0.1)',
     // position: 'fixed',
     // bottom: 0,
-    // zIndex: '5',
-  position: 'fixed',
-  bottom: '0%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+    zIndex: '8',
+    position: 'fixed',
+    bottom: '3%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
 
   },
   searchButton: {
@@ -242,6 +273,12 @@ const STYLES = {
   },
   show:{
     display: 'block',
+  },
+  searchIcon:{
+    position: 'relative',
+    left:'3px',
+    top:'8px',
+    zIndex: '8',
   }
 };
 

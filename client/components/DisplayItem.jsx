@@ -30,7 +30,7 @@ class DisplayItem extends Component {
 
              <div style={STYLES.wrapper}>   <ActionCheckCircle style={STYLES.on} color={Colors.grey50}/>
                 <img style={STYLES.check} src={this.props.item.picture[0].medium} /> </div>
-:
+        :
            <div style={STYLES.wrapper}> <ActionCheckCircle style={STYLES.off}/>
              <img style={STYLES.check} src={this.props.item.picture[0].medium} /> </div>
     }
