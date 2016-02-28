@@ -4,4 +4,3 @@ export function toggle(id, status) {
           id, status
          });
 }
-
