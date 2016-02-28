@@ -52,19 +52,14 @@ export default class Invitepage extends Component {
     const { invitees } = this.props;
     console.log('invitees are: ', invitees);
 
-    const headerBar = (<div>
-    <span style={STYLES.unit}><EM/></span>
-    <span style={STYLES.unit}><ToolbarSeparator  /></span>
-    <span style={STYLES.unit}><FB/></span>
-    <span style={STYLES.unit}><ToolbarSeparator  /></span>
-    <span style={STYLES.unit}><TW/></span>
-    <span style={STYLES.unit}><ToolbarSeparator  /></span>
-    <span style={STYLES.unit}><GO/></span>
-    <span style={STYLES.unit}><ToolbarSeparator  /></span>
-    <span style={STYLES.unit}><RE/></span>
-    <span style={STYLES.unit}><ToolbarSeparator  /></span>
-    <span style={STYLES.unit}><IN/></span>
-    <span style={STYLES.unit}><ToolbarSeparator  /></span>
+    const headerBar = (<div style={STYLES.container} >
+    <div style={STYLES.unit}><EM/></div>
+    <div style={STYLES.unit}><FB/></div>
+    <div style={STYLES.unit}><TW/></div>
+    <div style={STYLES.unit}><GO/></div>
+    <div style={STYLES.unit}><RE/></div>
+    <div style={STYLES.unit}><IN/></div>
+    <span style={STYLES.stretch}></span>
     </div>);
 
     return <div><URL/><h1 onDoubleClick={this.handleClick}>
@@ -78,12 +73,16 @@ export default class Invitepage extends Component {
           <div style={STYLES.right}>
             <List>
               <ListItem>{headerBar}</ListItem>
+
             </List>
           </div>
       </div>
+       <div className='dirty'/>
   </div>;
   }
 }
+
+// style={STYLES.t2}
 // <div style={STYLES.test}>  </div>
     // <span style={STYLES.unit}><ToolbarSeparator  /></span>
 //
@@ -107,35 +106,28 @@ export default class Invitepage extends Component {
 
 const STYLES = {
   unit:{
-    width:'8.3%',
-    // height:'80px',
-    display:'inline-block',
-    // backgroundColor: 'silver'
-    // webkitAlignContent: 'center',
-    // alignContent: 'center'
+    width: '16.6%',
+    display: 'inline-block',
+    textAlign: 'center',
+    zoom: 1
 
   },
   icons:{
     fill:'blue',
-    // display:'flex',
-    justifyContent: 'space-around',
-    // width: '70%',
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-    // justifyContent: 'space-between',
-    // alignContent: 'stretch',
-    // flexBasis: '20%',
-    backgroundColor:'cyan',
-    width: '100%'
   },
-  t2:{
-    backgroundColor: 'magenta',
-    // display:'flex',
-    // justifyContent: 'space-between',
-    // width: '60%',
+  container:{
+    fill:'#000080',
+    // border: '1px solid #c3c3c3',
+    textAlign: 'justify',
+    MsTextJustify: 'distribute-all-lines',
+    textJustify: 'distribute-all-lines',
+
   },
-  parent:{
-    display: 'flex'
+  stretch:{
+    width: '100%',
+    display: 'inline-block',
+    fontSize: 0,
+    lineHeight: 0
   },
   left: {
     width: '30%',
