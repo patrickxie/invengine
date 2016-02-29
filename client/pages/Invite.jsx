@@ -19,10 +19,7 @@ import IN from '../svg/instagram.svg';
 import EM from '../svg/email.svg';
 import GO from '../svg/google-plus.svg';
 
-import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
-
-
-
+import Toggle from 'material-ui/lib/toggle';
 
 // import MobileTearSheet from '../../../MobileTearSheet';
 import Avatar from 'material-ui/lib/avatar';
@@ -30,6 +27,12 @@ import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import Divider from 'material-ui/lib/divider';
 import CommunicationChatBubble from 'material-ui/lib/svg-icons/communication/chat-bubble';
+
+import ActionGrade from 'material-ui/lib/svg-icons/action/grade';
+import ActionInfo from 'material-ui/lib/svg-icons/action/info';
+import ContentInbox from 'material-ui/lib/svg-icons/content/inbox';
+import ContentDrafts from 'material-ui/lib/svg-icons/content/drafts';
+import ContentSend from 'material-ui/lib/svg-icons/content/send';
 
 export default class Invitepage extends Component {
   // constructor(props){
@@ -62,25 +65,116 @@ export default class Invitepage extends Component {
     <span style={STYLES.stretch}></span>
     </div>);
 
-    return <div><URL/><h1 onDoubleClick={this.handleClick}>
-      'hello'</h1> <Divider/>
-      <div style={STYLES.parent}>
-          <div style={STYLES.left}>
-            <List subheader='Currently only email is working, the rest will be implemented soon!'>
+    const dot = (<Toggle
+      defaultToggled={true}
+      style={STYLES.toggle}
+    />);
 
-            </List>
+    return (<div><URL/><h5 onDoubleClick={this.handleClick}>
+      email is only option working right now, all the others are features coming soon!</h5> <Divider/>
+        <span style={STYLES.left} /><span style={STYLES.right}>{headerBar}</span>
+        <Divider/>
+        <div style={STYLES.parent}>
+          <div style={STYLES.left}>
+            <List>
+      <ListItem style={STYLES.listItem} primaryText="Inbox" leftIcon={<ContentInbox />} />
+      <ListItem primaryText="Starred" leftIcon={<ActionGrade />} />
+      <ListItem primaryText="Sent mail" leftIcon={<ContentSend />} />
+      <ListItem primaryText="Drafts" leftIcon={<ContentDrafts />} />
+      <ListItem primaryText="Inbox" leftIcon={<ContentInbox />} />
+    </List>
           </div>
           <div style={STYLES.right}>
             <List>
-              <ListItem>{headerBar}</ListItem>
-
-            </List>
+      <ListItem style={STYLES.listItem}>
+        {dot}
+      </ListItem>
+      <ListItem primaryText="Starred" leftIcon={<ActionGrade />} />
+      <ListItem primaryText="Sent mail" leftIcon={<ContentSend />} />
+         <ListItem>
+        {dot}
+      </ListItem>
+      <ListItem primaryText="Inbox" leftIcon={<ContentInbox />} />
+    </List>
           </div>
-      </div>
-       <div className='dirty'/>
-  </div>;
+        </div>
+  </div>);
   }
 }
+// need same height for all listItem, in fact need same CSS style for all listitem
+
+const STYLES = {
+  listItem:{
+    height:'100',
+  },
+  unit:{
+    width: '16.6%',
+    display: 'inline-block',
+    textAlign: 'center',
+    backgroundColor:'red',
+    zoom: 1
+
+  },
+  icons:{
+    fill:'blue',
+  },
+  parent:{
+    backgroundColor:'cyan',
+  },
+  container:{
+    fill:'#000080',
+    // border: '1px solid #c3c3c3',
+    textAlign: 'justify',
+    // MsTextJustify: 'distribute-all-lines',
+    textJustify: 'distribute-all-lines',
+
+  },
+  stretch:{
+    width: '100%',
+    display: 'inline-block',
+    fontSize: 0,
+    lineHeight: 0
+  },
+  left: {
+    width: '30%',
+    display: 'inline-block',
+    // height: '300px',
+    backgroundColor: 'pink'
+  },
+  right: {
+    width: '70%',
+    // height: 300,
+    display: 'inline-block',
+    backgroundColor: 'yellow'
+  },
+  testbg: {
+    backgroundColor: 'magenta',
+  },
+  testbg2: {
+    backgroundColor: 'lightgrey',
+  },
+  floatButton: {
+    left: '10%',
+    bottom: '10%',
+    backgroundColor: '#fab1ce'
+  },
+  snackbar:{
+    backgroundColor: 'yellow',
+    fill: '#FFDDDD'
+  },
+  test:{
+    width:'100%',
+    height:'3em',
+    backgroundColor: 'pink',
+  },
+  block: {
+    maxWidth: 250,
+  },
+  toggle: {
+    marginBottom: 16,
+  },
+};
+
 
 // style={STYLES.t2}
 // <div style={STYLES.test}>  </div>
@@ -103,62 +197,6 @@ export default class Invitepage extends Component {
         // leftAvatar={<Avatar src={person.picture[0].medium}/>} />
         // ))}
 
-
-const STYLES = {
-  unit:{
-    width: '16.6%',
-    display: 'inline-block',
-    textAlign: 'center',
-    zoom: 1
-
-  },
-  icons:{
-    fill:'blue',
-  },
-  container:{
-    fill:'#000080',
-    // border: '1px solid #c3c3c3',
-    textAlign: 'justify',
-    MsTextJustify: 'distribute-all-lines',
-    textJustify: 'distribute-all-lines',
-
-  },
-  stretch:{
-    width: '100%',
-    display: 'inline-block',
-    fontSize: 0,
-    lineHeight: 0
-  },
-  left: {
-    width: '30%',
-    display: 'inline-block',
-    height: '300px',
-    backgroundColor: 'pink'
-  },
-  right: {
-    width: '70%',
-    height: 300,
-    display: 'inline-block',
-    backgroundColor: 'yellow'
-  },
-  whitebg: {
-    backgroundColor: 'white',
-  },
-  floatButton: {
-    left: '10%',
-    bottom: '10%',
-    backgroundColor: '#fab1ce'
-  },
-  snackbar:{
-    backgroundColor: 'yellow',
-    fill: '#FFDDDD'
-  },
-  test:{
-    width:'100%',
-    height:'3em',
-    backgroundColor: 'pink',
-  }
-};
 
 export default connect(
   state => ({ invitees: state.data.filter((item)=>state.toinvlist[item.key]===true) }),
