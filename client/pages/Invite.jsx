@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
-import { inputUrl } from '../actions/assist_variables';
+import { inputUrl, channelIconToggle, populateIconTable } from '../actions/assist_variables';
 
 import { browserHistory } from 'react-router';
 
@@ -35,99 +35,123 @@ import ContentDrafts from 'material-ui/lib/svg-icons/content/drafts';
 import ContentSend from 'material-ui/lib/svg-icons/content/send';
 
 export default class Invitepage extends Component {
-  // constructor(props){
-  //   super(props);
-  //   // const { children} = this.props;
-  //   // console.log(this.props.push);
-  // }
-
-  componentDidMount() {
-    // this.props.requestKittens();
+  constructor(props){
+    super(props);
+    const { invitees, channels, channelIconToggle } = this.props;
+     console.log('invitees constructor are: ', invitees);
+    // this.props.populateIconTable(this.props.invitees);
+    const go = <div/>;
+   
   }
 
-  handleClick(){
-    alert('bong');
-    // console.log('routeActions :', routeActions);
-    // () => routeActions.push('/foo')
+  componentWillMount() {
+    this.props.populateIconTable(this.props.invitees);
+  }
+
+  // handleClick(key, channel){
+  //   console.log('key: ', key);
+
+  //   // invitees[ke]
+  //   this.props.invitees[key].channels[channel] = !this.props.invitees[key].channels[channel]
+  //   console.log('invitees after handleclick: ', this.props.invitees[key])
+  // }
+  componentDidMount(){
+    console.log('mounted@@@@@@');
+    console.log('this.props.channel is: ', this.props.channels);
+    console.log('this.props.channel is: ', JSON.stringify(this.props.channels));
+     console.log('this.props.channels2 are: ', this.props.channels[0]);
+    console.log('this.props.channels3 are: ', this.props.channels[0].EM);
+
+    this.go =  (this.props.invitees.map((person, i) => (
+          <ListItem key={i}
+        primaryText={person.first_name+' '+ person.last_name}
+        leftAvatar={<Avatar src={person.picture[0].medium}/>}>
+            {this.props.channels[0].EM? 
+ <div style={STYLES.container} >
+  <div style={STYLES.On}
+  onTouchTap={this.props.channelIconToggle.bind(this,i,'EM', true)}><EM/>{i}</div>
+ </div>
+ :
+  <div style={STYLES.container} >
+  <div style={STYLES.Off}
+  onTouchTap={this.props.channelIconToggle.bind(this,i,'EM', true)}><EM/>{i}</div>
+ </div>
+
+
+}
+
+          </ListItem>
+
+        
+)));
+    console.log('finish executing didmount');
+
   }
 
   render () {
-    const { invitees } = this.props;
-    console.log('invitees are: ', invitees);
+        // const { invitees, channels, channelIconToggle } = this.props;
+        // const { channels } = this.props;
+    // console.log('invitees are: ', this.props.invitees);
+    // console.log('channels are: ', JSON.stringify(this.props.channels));
+    // console.log('this.props.channels2 are: ', this.props.channels[0]);
+    // console.log('this.props.channels3 are: ', this.props.channels[0].EM);
+    // console.log('channels2 are: ', channels[0]);
+    // console.log('channels3 are: ', channels[0].EM);
+    // console.log(i);
+    console.log('GO shud be null', this.go);
 
-    const headerBar = (<div style={STYLES.container} >
-    <div style={STYLES.unit}><EM/></div>
-    <div style={STYLES.unit}><FB/></div>
-    <div style={STYLES.unit}><TW/></div>
-    <div style={STYLES.unit}><GO/></div>
-    <div style={STYLES.unit}><RE/></div>
-    <div style={STYLES.unit}><IN/></div>
-    <span style={STYLES.stretch}></span>
-    </div>);
+    return (<div><URL/><h5>
+        email is only option working right now, all the others are features coming soon!</h5> <Divider/>
+       <List>
+       {this.go}
 
-    const dot = (<Toggle
-      defaultToggled={true}
-      style={STYLES.toggle}
-    />);
 
-    return (<div><URL/><h5 onDoubleClick={this.handleClick}>
-      email is only option working right now, all the others are features coming soon!</h5> <Divider/>
-        <span style={STYLES.left} /><span style={STYLES.right}>{headerBar}</span>
-        <Divider/>
-        <div style={STYLES.parent}>
-          <div style={STYLES.left}>
-            <List>
-      <ListItem style={STYLES.listItem} primaryText="Inbox" leftIcon={<ContentInbox />} />
-      <ListItem primaryText="Starred" leftIcon={<ActionGrade />} />
-      <ListItem primaryText="Sent mail" leftIcon={<ContentSend />} />
-      <ListItem primaryText="Drafts" leftIcon={<ContentDrafts />} />
-      <ListItem primaryText="Inbox" leftIcon={<ContentInbox />} />
-    </List>
-          </div>
-          <div style={STYLES.right}>
-            <List>
-      <ListItem style={STYLES.listItem}>
-        {dot}
-      </ListItem>
-      <ListItem primaryText="Starred" leftIcon={<ActionGrade />} />
-      <ListItem primaryText="Sent mail" leftIcon={<ContentSend />} />
-         <ListItem>
-        {dot}
-      </ListItem>
-      <ListItem primaryText="Inbox" leftIcon={<ContentInbox />} />
-    </List>
-          </div>
-        </div>
+
+
+       </List>
   </div>);
   }
 }
 // need same height for all listItem, in fact need same CSS style for all listitem
 
+    // <div style={STYLES.toggle}><Toggle thumbStyle={STYLES.testbg2} defaultToggled={true} /></div>
+
 const STYLES = {
   listItem:{
     height:'100',
+    border: '1px solid #c3c3c3',
   },
-  unit:{
-    width: '16.6%',
+  On:{
+    fill:'#000080',
+    width: '14.2%',
     display: 'inline-block',
     textAlign: 'center',
-    backgroundColor:'red',
+    // backgroundColor:'red',
     zoom: 1
 
+  },
+  Off:{
+    fill:'grey',
+    width: '14.2%',
+    display: 'inline-block',
+    textAlign: 'center',
+    zoom: 1
   },
   icons:{
     fill:'blue',
   },
   parent:{
     backgroundColor:'cyan',
+    display: 'block'
   },
   container:{
-    fill:'#000080',
-    // border: '1px solid #c3c3c3',
+    // fill:'#000080',
     textAlign: 'justify',
     // MsTextJustify: 'distribute-all-lines',
     textJustify: 'distribute-all-lines',
-
+    width: '70%',
+    position: 'absolute',
+    right: '0px'
   },
   stretch:{
     width: '100%',
@@ -139,19 +163,20 @@ const STYLES = {
     width: '30%',
     display: 'inline-block',
     // height: '300px',
-    backgroundColor: 'pink'
+    // backgroundColor: 'pink'
   },
   right: {
     width: '70%',
     // height: 300,
     display: 'inline-block',
-    backgroundColor: 'yellow'
+    // backgroundColor: 'purple'
   },
   testbg: {
     backgroundColor: 'magenta',
   },
   testbg2: {
-    backgroundColor: 'lightgrey',
+    backgroundColor: 'black',
+        textAlign: 'center',
   },
   floatButton: {
     left: '10%',
@@ -159,7 +184,7 @@ const STYLES = {
     backgroundColor: '#fab1ce'
   },
   snackbar:{
-    backgroundColor: 'yellow',
+    backgroundColor: 'purple',
     fill: '#FFDDDD'
   },
   test:{
@@ -171,7 +196,11 @@ const STYLES = {
     maxWidth: 250,
   },
   toggle: {
-    marginBottom: 16,
+    width: '16.6%',
+    display: 'inline-block',
+    textAlign: 'center',
+    backgroundColor:'red',
+    zoom: 1
   },
 };
 
@@ -182,7 +211,7 @@ const STYLES = {
 //
     // <List subheader='Currently only email is working, the rest will be implemented soon!'>
     //     <ListItem>{headerBar}</ListItem>
-    //     {invitees.map(person => (
+    //     {this.props.invitees.map(person => (
     //       <ListItem key={person.key}
     //     primaryText={person.first_name+' '+ person.last_name}
     //     leftAvatar={<Avatar src={person.picture[0].medium}/>} />
@@ -191,16 +220,14 @@ const STYLES = {
     // </List>
 
 
-        // {invitees.map(person => (
-        //   <ListItem key={person.key}
-        // primaryText={person.first_name+' '+ person.last_name}
-        // leftAvatar={<Avatar src={person.picture[0].medium}/>} />
-        // ))}
-
 
 export default connect(
-  state => ({ invitees: state.data.filter((item)=>state.toinvlist[item.key]===true) }),
-  // { requestAPIData, changeSort }
+  // state => ({ invitees: state.data.filter((item)=>state.toinvlist[item.key]===true).map(item => ({...item, channels:{
+  //   EM:false, FB:false, TW:false, GO:false, RE: false, IN: false, PI:false}
+  //   })) }),
+    state => ({invitees: state.data.filter((item)=>state.toinvlist[item.key]===true), channels: state.assistvars}),
+        // .key]===true), channels: state.assistvars.channels}),
+  { channelIconToggle, populateIconTable }
 )(
   useSheet(Invitepage, STYLES)
 );

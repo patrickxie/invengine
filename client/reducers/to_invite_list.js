@@ -13,6 +13,9 @@ const toggle = (state, action) => ({
   [action.id] : action.status
 });
 
+
+
+
 // const untoggle = (state, action) => (
 //   state.filter(i => i !== action.id)
 // );
