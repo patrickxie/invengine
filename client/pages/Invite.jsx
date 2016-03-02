@@ -2,11 +2,12 @@
 import React, { Component } from 'react';
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
-import { inputUrl, channelIconToggle, populateIconTable } from '../actions/assist_variables';
+import { populateIconTable } from '../actions/assist_variables';
 
 import { browserHistory } from 'react-router';
 
 import URL from '../components/URL';
+import InviteTable from '../components/InviteTable';
 
 import FacebookBoxIcon from '../svg/facebook-box.svg';
 import FacebookMessengerIcon from '../svg/facebook-messenger.svg';
@@ -37,56 +38,46 @@ import ContentSend from 'material-ui/lib/svg-icons/content/send';
 export default class Invitepage extends Component {
   constructor(props){
     super(props);
-    const { invitees, channels, channelIconToggle } = this.props;
-     console.log('invitees constructor are: ', invitees);
+    const { invitees } = this.props;
+     // console.log('invitees constructor are: ', invitees);
     // this.props.populateIconTable(this.props.invitees);
-    const go = <div/>;
+    // const go = <div/>;
    
   }
 
-  componentWillMount() {
-    this.props.populateIconTable(this.props.invitees);
-  }
+//   componentDidMount(){
+//     console.log('mounted@@@@@@');
+//     console.log('this.props.channel is: ', this.props.channels);
+//     console.log('this.props.channel is: ', JSON.stringify(this.props.channels));
+//      console.log('this.props.channels2 are: ', this.props.channels[0]);
+//     console.log('this.props.channels3 are: ', this.props.channels[0].EM);
 
-  // handleClick(key, channel){
-  //   console.log('key: ', key);
+//     this.go =  (this.props.invitees.map((person, i) => (
+//           <ListItem key={i}
+//         primaryText={person.first_name+' '+ person.last_name}
+//         leftAvatar={<Avatar src={person.picture[0].medium}/>}>
+//             {this.props.channels[0].EM? 
+//  <div style={STYLES.container} >
+//   <div style={STYLES.On}
+//   onTouchTap={this.props.channelIconToggle.bind(this,i,'EM', true)}><EM/>{i}</div>
+//  </div>
+//  :
+//   <div style={STYLES.container} >
+//   <div style={STYLES.Off}
+//   onTouchTap={this.props.channelIconToggle.bind(this,i,'EM', true)}><EM/>{i}</div>
+//  </div>
+// }
 
-  //   // invitees[ke]
-  //   this.props.invitees[key].channels[channel] = !this.props.invitees[key].channels[channel]
-  //   console.log('invitees after handleclick: ', this.props.invitees[key])
-  // }
+//           </ListItem>
+     
+// )));
+// console.log('finish executing didmount');
+//   }
+
   componentDidMount(){
-    console.log('mounted@@@@@@');
-    console.log('this.props.channel is: ', this.props.channels);
-    console.log('this.props.channel is: ', JSON.stringify(this.props.channels));
-     console.log('this.props.channels2 are: ', this.props.channels[0]);
-    console.log('this.props.channels3 are: ', this.props.channels[0].EM);
-
-    this.go =  (this.props.invitees.map((person, i) => (
-          <ListItem key={i}
-        primaryText={person.first_name+' '+ person.last_name}
-        leftAvatar={<Avatar src={person.picture[0].medium}/>}>
-            {this.props.channels[0].EM? 
- <div style={STYLES.container} >
-  <div style={STYLES.On}
-  onTouchTap={this.props.channelIconToggle.bind(this,i,'EM', true)}><EM/>{i}</div>
- </div>
- :
-  <div style={STYLES.container} >
-  <div style={STYLES.Off}
-  onTouchTap={this.props.channelIconToggle.bind(this,i,'EM', true)}><EM/>{i}</div>
- </div>
-
-
-}
-
-          </ListItem>
-
-        
-)));
-    console.log('finish executing didmount');
-
+     this.props.populateIconTable(this.props.invitees);
   }
+
 
   render () {
         // const { invitees, channels, channelIconToggle } = this.props;
@@ -98,17 +89,11 @@ export default class Invitepage extends Component {
     // console.log('channels2 are: ', channels[0]);
     // console.log('channels3 are: ', channels[0].EM);
     // console.log(i);
-    console.log('GO shud be null', this.go);
+    // console.log('GO shud be null', this.go);
 
     return (<div><URL/><h5>
         email is only option working right now, all the others are features coming soon!</h5> <Divider/>
-       <List>
-       {this.go}
-
-
-
-
-       </List>
+       <InviteTable/>
   </div>);
   }
 }
@@ -220,14 +205,26 @@ const STYLES = {
     // </List>
 
 
+  // componentWillMount() {
+  //   this.props.populateIconTable(this.props.invitees);
+  // }
+
+  // handleClick(key, channel){
+  //   console.log('key: ', key);
+
+  //   // invitees[ke]
+  //   this.props.invitees[key].channels[channel] = !this.props.invitees[key].channels[channel]
+  //   console.log('invitees after handleclick: ', this.props.invitees[key])
+  // }
+
 
 export default connect(
   // state => ({ invitees: state.data.filter((item)=>state.toinvlist[item.key]===true).map(item => ({...item, channels:{
   //   EM:false, FB:false, TW:false, GO:false, RE: false, IN: false, PI:false}
   //   })) }),
-    state => ({invitees: state.data.filter((item)=>state.toinvlist[item.key]===true), channels: state.assistvars}),
+    state => ({invitees: state.data.filter((item)=>state.toinvlist[item.key]===true) }),
         // .key]===true), channels: state.assistvars.channels}),
-  { channelIconToggle, populateIconTable }
+  { populateIconTable }
 )(
   useSheet(Invitepage, STYLES)
 );

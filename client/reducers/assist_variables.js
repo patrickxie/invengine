@@ -7,17 +7,27 @@
 // };
 const DEFAULT_STATE = [
   {
-    EM:false, FB:false, TW:false, GO:false, RE: false, IN: false, PI:false
+    EM:false, FB:false, TW:false, GO:false, RE: false, IN: false, PI:false, first_name: 'test', last_name: 'ikle', picture:[
+      {
+        "large": "http://api.randomuser.me/portraits/men/31.jpg",
+        "medium": "http://api.randomuser.me/portraits/med/men/31.jpg"
+      },
+      {
+        "large": "http://api.randomuser.me/portraits/men/27.jpg",
+        "medium": "http://api.randomuser.me/portraits/med/men/27.jpg"
+      }
+    ]
   }
 ];
 
 const generate = (state, action)=>
 {
   console.log('generated passed!');
-  let a = action.table.map((item,i)=>({
-    EM:false, FB:false, TW:false, GO:false, RE: false, IN: false, PI:false
+  let a = action.table.map( item =>({
+    EM:false, FB:false, TW:false, GO:false, RE: false, IN: false, PI:false, ...item
     }));
   console.log('generated this; ', a);
+  // console.log('Picture Error:', a[0].picture[0].medium)
   return  a;
 }
 
