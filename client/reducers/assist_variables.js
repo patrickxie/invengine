@@ -34,7 +34,9 @@ const generate = (state, action)=>
 const channel_icon_toggle = (state, action) =>{
 let a = [
   ...state.slice(0,action.key),
-  { ...state[action.key],  [action.channel]:!state[action.key].EM },
+  { ...state[action.key],  
+    [action.channel]:!state[action.key][action.channel]
+  },
   ...state.slice(action.key+1)
   ];
   console.log('after reducer: ', a);

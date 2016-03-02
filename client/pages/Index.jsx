@@ -15,15 +15,6 @@ import Logo from '../svg/InvengineLogo.svg';
 
 
 export default class Index extends Component {
-  // constructor(props){
-  //   super(props);
-  //   // const { children} = this.props;
-  //   // console.log(this.props.push);
-  // }
-
-  componentDidMount() {
-    // this.props.requestKittens();
-  }
 
   render () {
     const { sheet, children } = this.props;

@@ -5,10 +5,14 @@ import TextField from 'material-ui/lib/text-field';
 const URL = () => (
   <Paper>
     <TextField
-      hintText="https://myspace.com"
+      floatingLabelText="Enter what you would like to share"
+      hintText="http://myspace.com"
     />
   </Paper>
 );
+//submit button, onEnterkepressdon={dispatch}
+//paste button, onPaste={dispatch} 
+
 
 // export default connect(
 //   state => ({ kittens: state.kittens }),
