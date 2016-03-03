@@ -1,13 +1,7 @@
 import React from 'react';
 import useSheet from 'react-jss';
-
-import TW from '../svg/twitter.svg';
-import FB from '../svg/facebook.svg';
-import RE from '../svg/reddit.svg';
-import PI from '../svg/pinterest.svg';
-import IN from '../svg/instagram.svg';
-import EM from '../svg/email.svg';
-import GO from '../svg/google-plus.svg';
+import Colors from 'material-ui/lib/styles/colors';
+import { FB, TW, RE, PI, IN, EM, GO } from '../svg/index.js';
 
 import Avatar from 'material-ui/lib/avatar';
 import ListItem from 'material-ui/lib/lists/list-item';
@@ -48,7 +42,7 @@ const InviteItem = ({ sheet, id, itemInfo, onChannelIconToggle }) =>(
 
 const STYLES = {
   On:{
-    fill:'#000080',
+    fill:Colors.indigo500,
     width: '14.2%',
     display: 'inline-block',
     textAlign: 'center',

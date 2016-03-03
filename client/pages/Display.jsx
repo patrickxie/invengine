@@ -2,36 +2,19 @@ import React, { Component } from 'react';
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
 import { requestAPIData, changeSort } from '../actions/contacts_data';
-
 import { browserHistory } from 'react-router';
-
 import DisplayItem from '../components/DisplayItem.jsx';
 import AbsoluteGrid from 'react-absolute-grid';
-
 import Colors from 'material-ui/lib/styles/colors';
 import * as _ from 'lodash';
-
-
 import Search from 'material-ui/lib/svg-icons/action/search';
 import PersonAdd from 'material-ui/lib/svg-icons/social/person-add';
-
-import Popover from 'material-ui/lib/popover/popover';
 import TextField from 'material-ui/lib/text-field';
 import FloatingActionButton from 'material-ui/lib/floating-action-button';
-
 import { toggle } from '../actions/to_invite_list';
 import Paper from 'material-ui/lib/paper';
-
 import FlatButton from 'material-ui/lib/flat-button';
-import PopoverAnimationFromTop from 'material-ui/lib/popover/popover-animation-from-top';
-import RadioButton from 'material-ui/lib/radio-button';
-import RaisedButton from 'material-ui/lib/raised-button';
-import ActionGrade from 'material-ui/lib/svg-icons/action/grade';
-import FontIcon from 'material-ui/lib/font-icon';
-import IconButton from 'material-ui/lib/icon-button';
-import ActionHome from 'material-ui/lib/svg-icons/action/home';
 
-import ActionFlightTakeoff from 'material-ui/lib/svg-icons/action/flight-takeoff';
 
 export default class Display extends Component {
   constructor(props){

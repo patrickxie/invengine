@@ -1,10 +1,3 @@
-// // import * as actionTypes from '../actionTypes/kittens';
-
-// const DEFAULT_STATE = {
-//   channels:{
-//     EM:[],TW:[], FB:[]
-//   }
-// };
 const DEFAULT_STATE = [
   {
     EM:false, FB:false, TW:false, GO:false, RE: false, IN: false, PI:false, first_name: 'test', last_name: 'ikle', picture:[
@@ -22,12 +15,9 @@ const DEFAULT_STATE = [
 
 const generate = (state, action)=>
 {
-  console.log('generated passed!');
   let a = action.table.map( item =>({
     EM:false, FB:false, TW:false, GO:false, RE: false, IN: false, PI:false, ...item
     }));
-  console.log('generated this; ', a);
-  // console.log('Picture Error:', a[0].picture[0].medium)
   return  a;
 }
 
@@ -39,7 +29,6 @@ let a = [
   },
   ...state.slice(action.key+1)
   ];
-  console.log('after reducer: ', a);
   return a;
 };
 
@@ -60,7 +49,6 @@ let a = [
 // };
 
 export default function assist_variables(state = DEFAULT_STATE, action) {
-  console.log('past the reducer!!!');
   return ({
     ['populate_Icon_Table']: generate,
     ['channel_icon_toggle']: channel_icon_toggle

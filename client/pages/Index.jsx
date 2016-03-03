@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
-import { requestKittens } from '../actions/kittens';
-
 import { browserHistory } from 'react-router';
-
 import AppBar from 'material-ui/lib/app-bar';
 import IconButton from 'material-ui/lib/icon-button';
-import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 import FlatButton from 'material-ui/lib/flat-button';
 import Colors from 'material-ui/lib/styles/colors';
-import Paper from 'material-ui/lib/paper';
 import Logo from '../svg/InvengineLogo.svg';
 
 
 export default class Index extends Component {
-
   render () {
     const { sheet, children } = this.props;
     return (
@@ -54,23 +48,6 @@ const STYLES = {
   title: {
     cursor: 'pointer',
     color: Colors.indigo500
-  },
-  index: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFDDDD',
-    color: '#660000'
-  },
-  kitten: {
-    textDecoration: 'none',
-    display: 'flex',
-    flexDirection: 'column',
-    flexBasis: '33%',
-    padding: '0.5rem',
-    boxSizing: 'border-box'
   },
   button: {
     padding: '1rem 1.5rem',
@@ -115,7 +92,7 @@ const STYLES = {
 
 export default connect(
   () => ({}),
-  { requestKittens }
+  // {  }
 )(
   useSheet(Index, STYLES)
 );
