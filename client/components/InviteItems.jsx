@@ -42,7 +42,7 @@ const InviteItems = ({ sheet, id, itemInfo, onChannelIconToggle }) =>(
 
 const STYLES = {
   On:{
-    fill:Colors.indigo500,
+    fill:Colors.indigoA200,
     width: '14.2%',
     display: 'inline-block',
     textAlign: 'center',
