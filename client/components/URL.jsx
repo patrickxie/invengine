@@ -3,6 +3,7 @@ import Paper from 'material-ui/lib/paper';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 import FlatButton from 'material-ui/lib/flat-button';
+import Colors from 'material-ui/lib/styles/colors';
 
 class URL extends Component {
     constructor(props) {
@@ -40,7 +41,8 @@ class URL extends Component {
       return <Paper style={STYLES.container}>
         <div style={STYLES.display}>
             <h5 style={STYLES.displayTxt}>
-            CURRENT URL TO INVITE PEOPLE TO: {this.state.display} </h5>
+            CURRENT URL TO INVITE PEOPLE TO:
+            <span style={STYLES.txt}> {this.state.display}</span> </h5>
         </div>
         <TextField
           floatingLabelText="Enter share destination URL"
@@ -88,6 +90,12 @@ const STYLES = {
     },
     displayTxt:{
         padding: '10'
+    },
+    txt: {
+        backgroundColor: Colors.grey50,
+        // border: '1px solid #c3c3c3',
+        borderRadius: 4,
+        color: 'blue'
     }
 };
 
