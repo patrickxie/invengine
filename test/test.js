@@ -1,6 +1,5 @@
 var assert = require('assert');
 var expect = require('chai').expect;
-import Index from '../client/pages/Foo';
 import AppBar from 'material-ui/lib/app-bar';
 import AbsoluteGrid from 'react-absolute-grid';
 import ReactTestUtils from 'react-addons-test-utils';
@@ -17,7 +16,7 @@ describe('Array', function() {
 describe('Test 2:', function() {
   describe('import test', function () {
     it('should be imported as a function', function () {
-      assert.equal(typeof(Index), typeof(s=>s));
+      assert.equal(typeof(AbsoluteGrid), typeof(s=>s));
     });
   });
 });
