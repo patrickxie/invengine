@@ -22,13 +22,24 @@ const generate = (state, action)=>
 }
 
 const channel_icon_toggle = (state, action) =>{
-let a = [
+  let a = [
   ...state.slice(0,action.key),
   { ...state[action.key],  
     [action.channel]:!state[action.key][action.channel]
   },
   ...state.slice(action.key+1)
   ];
+  return a;
+};
+
+const all = (state, action) =>{
+  let a = 
+  state.map(item=>{
+    console.log('TOF',!item[action.channel])
+    return {
+    ...item,
+    [action.channel]:!item[action.channel]
+  }});
   return a;
 };
 
@@ -51,6 +62,7 @@ let a = [
 export default function assist_variables(state = DEFAULT_STATE, action) {
   return ({
     ['populate_Icon_Table']: generate,
-    ['channel_icon_toggle']: channel_icon_toggle
+    ['channel_icon_toggle']: channel_icon_toggle,
+    ['toggle_icon_all']: all
   }[action.type] || (s => s))(state, action);
 }

@@ -13,6 +13,14 @@ export function channelIconToggle(key, channel) {
     });
 }
 
+export function toggleIconAll(channel) {
+  return dispatch => dispatch(
+    {
+      type:'toggle_icon_all',
+      channel
+    });
+}
+
 export function populateIconTable(table) {
   return dispatch=> dispatch(
     {

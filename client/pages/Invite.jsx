@@ -22,8 +22,6 @@ export default class Invitepage extends Component {
   render () {
     return (<div>
              <URL/>
-                <h5>
-        email is only option working right now, all the others are features coming soon!</h5> 
             <Divider/>
                 <InviteTable/>
         </div>);

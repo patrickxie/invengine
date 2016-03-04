@@ -7,7 +7,7 @@ import Avatar from 'material-ui/lib/avatar';
 import ListItem from 'material-ui/lib/lists/list-item';
 
 
-const InviteItem = ({ sheet, id, itemInfo, onChannelIconToggle }) =>(
+const InviteItems = ({ sheet, id, itemInfo, onChannelIconToggle }) =>(
   <ListItem key={id}
     primaryText={itemInfo.first_name+' '+ itemInfo.last_name}
     leftAvatar={<Avatar src={itemInfo.picture[0].medium}/>} >
@@ -64,4 +64,4 @@ const STYLES = {
   },
 };
 
-export default useSheet(InviteItem, STYLES);
+export default useSheet(InviteItems, STYLES);
