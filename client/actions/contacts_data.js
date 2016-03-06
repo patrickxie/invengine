@@ -34,12 +34,15 @@ export function requestAPIData() {
 }
 
 
-// export function changeSort(sorteddata) {
-//   console.log('wtttff');
-//   return dispatch => { dispatch(
-//     { type: 'data_sort_swap', data: sorteddata }
-//     )};
+// export function requestData(){
+
 // }
+
+// function requestLocalData(){
+  
+// }
+
+
 export function changeSort(sorteddata) {
   // console.log('changeSort called.');
   return dispatch => { dispatch(
