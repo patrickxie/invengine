@@ -33,7 +33,10 @@ jss.use(jssPx());
 jss.use(jssNested());
 jss.use(jssCamelCase());
 
-// const history = browserHistory();
+
+// import { syncHistoryWithStore } from 'react-router-redux'
+// const store = configureStore()
+// const history = syncHistoryWithStore(browserHistory, store)
 const middleware = syncHistory(browserHistory);
 
 //original
@@ -67,26 +70,12 @@ middleware.listenForReplays(store);
 // middleware.listenForReplays(store)
 
 
+  // if (module.hot) {
+  //   module.hot.accept('../reducers', () => {
+  //     store.replaceReducer(require('./../reducers').default);
+  //   });
+  // }
 
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <Index />
-//   </Provider>,
-//   document.getElementById('root')
-// );
-// import Paper from 'material-ui/lib/paper';
-
-// const style = {
-//   height: 100,
-//   width: 100,
-//   margin: 20,
-//   textAlign: 'center',
-//   display: 'inline-block',
-// };
-// ReactDOM.render(
-//   <Paper style={style}>Hello Vorld</Paper>,
-//   document.getElementById('root')
-// );
 
 ReactDOM.render(
   <Provider store={store}>

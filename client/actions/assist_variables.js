@@ -1,10 +1,3 @@
-// export function inputUrl(url){
-//     return dispatch => dispatch(
-//         { type: 'input_url',
-//           url
-//          });
-// }
-
 export function channelIconToggle(key, channel) {
   return dispatch => dispatch(
     {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
 import { channelIconToggle, toggleIconAll } from '../actions/assist_variables';
+import { sendInvites } from '../actions/config_variables';
 import InviteItems from '../components/InviteItems';
 import List from 'material-ui/lib/lists/list';
 import Colors from 'material-ui/lib/styles/colors';
@@ -34,7 +35,8 @@ export default class InviteTable extends Component {
 
   render() {
     // console.log('props in render() is: ', this.props);
-    const { sheet, channels, toggleIconAll, channelIconToggle } = this.props;
+    // add payload into props
+    const { sheet, channels, toggleIconAll, channelIconToggle, sendInvites  } = this.props;
 
     return(<div >
     {!!channels.length &&
@@ -89,12 +91,14 @@ export default class InviteTable extends Component {
         <RaisedButton
           label='Send Invites'
           style={STYLES.sendbutton}
+          onTouchTap={sendInvites}
         />
     </div>
   </div>);
   }
-
 }
+
+// onClick={sendInvites(payload)}
 
 const STYLES = {
   buttonGrouper: {
@@ -145,8 +149,9 @@ const STYLES = {
 };
 
 export default connect(
+    // channels: state.assistvars, payload: {channels, state.configvars.url}
   state => ({ channels: state.assistvars }),
-  { channelIconToggle, toggleIconAll }
+  { channelIconToggle, toggleIconAll, sendInvites }
 )(
   useSheet(InviteTable, STYLES)
 );

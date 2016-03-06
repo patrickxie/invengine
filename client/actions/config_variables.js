@@ -1,74 +1,87 @@
 import { get, post, del } from '../utils/api';
 
+export function inputUrl(url) {
+  return dispatch => dispatch(
+      { type: 'input_url',
+        url
+       });
+}
 
 
-export function sendInvites(data) {
-  return async dispatch => {
+export function sendInvites() {
+  return async (dispatch, getState) => {
+    const { assistvars, configvars } = getState();
+    let data = { url:configvars.url, invites: assistvars};
     dispatch({
       type: 'send_invites',
-      data
     });
 
     try {
-      const result = await post('/api/kittens', data);
-
+      const result = await post('https://httpbin.org/post', data);
       dispatch({
-        type: actionTypes.ADD_KITTEN_SUCCESS,
-        kitten: result
+        type: 'send_invites_success',
+        success: result
       });
     } catch(e) {
       dispatch({
-        type: actionTypes.ADD_KITTEN_ERROR
+        type: 'send_invites_failure',
+        error: e
       });
+      //call this method again, after certain interval
+    // console.log('wtf');
+    // setTimeout(() => {
+    //   console.log('did this hap');
+    //   return sendInvites();
+    //   console.log('sure did');
+
+    // }, 3000)
     }
   }
 }
 
-export function requestKittens() {
-  return async dispatch => {
-    dispatch({
-      type: actionTypes.REQUEST_KITTENS
-    });
+// if !result 
+//    sendInvites()
 
-    try {
-      const result = await get('/api/kittens');
+// export function requestKittens() {
+//   return async dispatch => {
+//     dispatch({
+//       type: actionTypes.REQUEST_KITTENS
+//     });
 
-      dispatch({
-        type: actionTypes.REQUEST_KITTENS_SUCCESS,
-        kittens: result
-      });
-    } catch(e) {
-      dispatch({
-        type: actionTypes.REQUEST_KITTENS_ERROR
-      });
-    }
-  }
-}
+//     try {
+//       const result = await get('/api/kittens');
 
-export function deleteKitten(kittenId) {
-  return async dispatch => {
-    dispatch({
-      type: actionTypes.DELETE_KITTEN,
-      kittenId
-    });
+//       dispatch({
+//         type: actionTypes.REQUEST_KITTENS_SUCCESS,
+//         kittens: result
+//       });
+//     } catch(e) {
+//       dispatch({
+//         type: actionTypes.REQUEST_KITTENS_ERROR
+//       });
+//     }
+//   }
+// }
 
-    try {
-      await del(`/api/kittens/${kittenId}`);
+// export function deleteKitten(kittenId) {
+//   return async dispatch => {
+//     dispatch({
+//       type: actionTypes.DELETE_KITTEN,
+//       kittenId
+//     });
 
-      dispatch({
-        type: actionTypes.DELETE_KITTEN_SUCCESS,
-        kittenId
-      });
-    } catch(e) {
-      dispatch({
-        type: actionTypes.DELETE_KITTEN_ERROR,
-        kittenId
-      });
-    }
-  }
-}
+//     try {
+//       await del(`/api/kittens/${kittenId}`);
 
-// export function switchFoo() {
-//   console.log('BING');
-//   return dispatch => dispatch(routeActions.push('/foo'));
+//       dispatch({
+//         type: actionTypes.DELETE_KITTEN_SUCCESS,
+//         kittenId
+//       });
+//     } catch(e) {
+//       dispatch({
+//         type: actionTypes.DELETE_KITTEN_ERROR,
+//         kittenId
+//       });
+//     }
+//   }
 // }

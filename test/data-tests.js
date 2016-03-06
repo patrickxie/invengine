@@ -1,7 +1,7 @@
 require("babel-register");
 var assert = require('assert');
 var expect = require('chai').expect;
-import { requestData } from "../client/actions/contacts_data";
+import { sendInvites } from "../client/actions/config_variables";
 
 
 
@@ -17,17 +17,18 @@ const mockStore = configureMockStore(middlewares)
 //     nock.cleanAll()
 //   })
 
-//   it('creates RequestData has been done', (done) => {
-//     nock('http://localhost:5000/')
-//       .get('/todo/api/v1.0/contacts')
-//       .reply(200, sample )
+//   it(`returns send_invites_success after invite data has been sent 
+//     to server successfully`, (done) => {
+//     nock('http://localhost:3000/')
+//       .get('/api/send_invites')
+//       .reply(200)
 
 //     const expectedActions = [
-//       { type: 'obtain_data' },
-//       { type: 'obtain_data_api_success', sample }
+//       { type: 'send_invites' },
+//       { error: 'ReferenceError: window is not defined', type: 'send_invites_failure' }
 //     ]
 //     const store = mockStore({ sample : [] }, expectedActions, done)
-//     store.dispatch(requestData())
+//     store.dispatch(sendInvites({url:'example.com', channels:[1,2,3]}))
 //   })
 // })
 
@@ -54,13 +55,6 @@ const mockStore = configureMockStore(middlewares)
 // });
 
 
-// describe('API Test 3:', function() {
-//   describe('should retrieve data and dispatch to store', function () {
-//     it('should check the type of the action object', function () {
-//       expect(requestData().type).to.be.equal('obtain_data_api_success');
-//     });
-//   });
-// });
 
 
 var sample = {

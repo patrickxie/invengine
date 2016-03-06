@@ -6,12 +6,14 @@ import toinvlist from './to_invite_list';
 import configvars from './config_variables';
 
 import { routeReducer } from 'react-router-redux'
+// import { routerReducer } from 'react-router-redux';
 
 const reducers = combineReducers({
   data: contacts_data,
   assistvars,
   toinvlist,
   configvars,
+  //routing: routeReducer the newest version
   routing: routeReducer
 });
 
