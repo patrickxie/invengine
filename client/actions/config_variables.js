@@ -10,7 +10,8 @@ export function inputUrl(url) {
 
 export function sendInvites() {
   return async (dispatch, getState) => {
-    const { assistvars, configvars } = getState();
+    let { assistvars, configvars } = getState();
+    //add USER_ID: configvars.USER_ID here
     let data = { url:configvars.url, invites: assistvars};
     dispatch({
       type: 'send_invites',
@@ -20,21 +21,13 @@ export function sendInvites() {
       const result = await post('https://httpbin.org/post', data);
       dispatch({
         type: 'send_invites_success',
-        success: result
+        USER_ID: result
       });
     } catch(e) {
       dispatch({
         type: 'send_invites_failure',
         error: e
       });
-      //call this method again, after certain interval
-    // console.log('wtf');
-    // setTimeout(() => {
-    //   console.log('did this hap');
-    //   return sendInvites();
-    //   console.log('sure did');
-
-    // }, 3000)
     }
   }
 }

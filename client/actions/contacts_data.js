@@ -1,5 +1,4 @@
-// import { get, post, del } from '../utils/api';
-import { get } from '../utils/api';
+import { get, post, del } from '../utils/api'; 
 //requestLocalStorageData() from local storage
 //requestAPIData() from api
 //requestImportData() from auth page
@@ -8,7 +7,7 @@ import { get } from '../utils/api';
 export function requestAPIData() {
   return async dispatch => {
     dispatch({
-      type: 'obtain_data'
+      type: 'obtain_data_api'
     });
 
     try {
@@ -21,8 +20,8 @@ export function requestAPIData() {
       // console.log('I got dee results', result);
       dispatch({
         type: 'obtain_data_api_success',
-        data: result
       });
+      dispatch(mergeData(result));
     } catch(e) {
       // console.log('okay error happened here:: ', e);
       dispatch({
@@ -34,14 +33,26 @@ export function requestAPIData() {
 }
 
 
-// export function requestData(){
 
-// }
 
-// function requestLocalData(){
-  
-// }
+export function requestData(){
+  return async (dispatch, getState) => {
+    dispatch({
+        type: 'obtain_data_api'
+    });
+    let { data, imported } = getState();
+    imported.length ? dispatch(mergeData(imported)) : hasData;
+    let hasData = data.length? null : requestAPIData();
 
+  }
+}
+
+function mergeData(data){
+  return { type: 'merge_data', data }
+}
+
+// var k = getState().data.length, imported.map( i => i.sort = k)
+//find highest key and iterate on top of it.
 
 export function changeSort(sorteddata) {
   // console.log('changeSort called.');

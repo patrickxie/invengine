@@ -8,9 +8,12 @@ const url = (state, action) => ({
 });
 
 
+// const userID = (state, action) => ({
+//     ...state,
+//     USER_ID: action.USER_ID
+// })
 
-
-
+//add ['SEND_INVITE_SUCCESS']: userID
 export default function to_invite_list(state = DEFAULT_STATE, action) {
   // console.log('ayyyy');
   return ({

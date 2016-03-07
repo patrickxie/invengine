@@ -151,25 +151,6 @@ export default class Display extends Component {
   }
 }
 
-
-
-// {this.state.open ? <div style={STYLES.popover}>
-//                  <Search />
-//                 <TextField 
-//                     style={STYLES.txtField}
-//                     onChange={this.handleChangeText}
-//                     hintText="Search friends..." / >
-//                  <FlatButton label="Done" onTouchTap = {this.handleBlurExit} color={Colors.red500} />
-//             </div>
-//             : <FloatingActionButton mini secondary={true} style={STYLES.searchButton}
-//          onTouchTap={this.handleTouchTap}
-//          >
-//              <Search />
-//         </FloatingActionButton>
-// }
-
-
-
     // var rankByProbabilitySort = function(data){
     //   // console.log('ayy', data);
     //     var result = data.sort(function (a, b) {

@@ -52,186 +52,24 @@ class KittenAPI(Resource):
 #         return contacts
 
 
+    # @staticmethod
+    # def post_invite_history():
+    #     from app import db
 
-# contacts = [
-#   {
-#     "key": 1,
-#     "individual_id": 121,
-#     "first_name": "Louis",
-#     "last_name": "Duncan",
-#     "picture": [
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/1.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/1.jpg"
-#       },
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/2.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/2.jpg"
-#       }
-#     ],
-#     "inviteProbability": 0.87,
-#     "sort":1
-#   },
-#   {
-#     "key": 2,
-#     "individual_id": 322,
-#     "first_name": "Wanda",
-#     "last_name": "Austin",
-#     "picture": [
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/3.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/3.jpg"
-#       },
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/4.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/4.jpg"
-#       }
-#     ],
-#     "inviteProbability": 0.2,
-#     "sort":2
-#   },
-#   {
-#     "key": 3,
-#     "individual_id": 453,
-#     "first_name": "Janice",
-#     "last_name": "Chapman",
-#     "picture": [
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/5.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/5.jpg"
-#       },
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/6.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/6.jpg"
-#       }
-#     ],
-#     "inviteProbability": 0.66,
-#     "sort":3
-#   },
-#   {
-#     "key": 4,
-#     "individual_id": 124,
-#     "first_name": "Andrea",
-#     "last_name": "Bennett",
-#     "picture": [
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/7.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/7.jpg"
-#       },
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/8.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/8.jpg"
-#       }
-#     ],
-#     "inviteProbability": 0.83,
-#     "sort":4
-#   },
-#   {
-#     "key": 5,
-#     "individual_id": 35,
-#     "first_name": "Justin",
-#     "last_name": "Flores",
-#     "picture": [
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/9.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/9.jpg"
-#       },
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/14.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/14.jpg"
-#       }
-#     ],
-#     "inviteProbability": 0.96,
-#     "sort":5
-#   },
-#   {
-#     "key": 6,
-#     "individual_id": 6,
-#     "first_name": "Alan",
-#     "last_name": "Webb",
-#     "picture": [
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/15.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/15.jpg"
-#       },
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/21.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/21.jpg"
-#       }
-#     ],
-#     "inviteProbability": 0.33,
-#     "sort":6
-#   },
-#   {
-#     "key": 7,
-#     "individual_id": 7212,
-#     "first_name": "Teresa",
-#     "last_name": "Parker",
-#     "picture": [
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/22.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/22.jpg"
-#       },
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/23.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/23.jpg"
-#       }
-#     ],
-#     "inviteProbability": 0.32,
-#     "sort":7
-#   },
-#   {
-#     "key": 8,
-#     "individual_id": 4238,
-#     "first_name": "Donna",
-#     "last_name": "Medina",
-#     "picture": [
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/24.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/24.jpg"
-#       },
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/25.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/25.jpg"
-#       }
-#     ],
-#     "inviteProbability": 0.6,
-#     "sort":8
-#   },
-#   {
-#     "key": 9,
-#     "individual_id": 3239,
-#     "first_name": "Juan",
-#     "last_name": "Robinson",
-#     "picture": [
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/26.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/26.jpg"
-#       },
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/27.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/27.jpg"
-#       }
-#     ],
-#     "inviteProbability": 0.55,
-#     "sort":9
-#   },
-#   {
-#     "key": 10,
-#     "individual_id": 1310,
-#     "first_name": "Jacqueline",
-#     "last_name": "Kelley",
-#     "picture": [
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/28.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/28.jpg"
-#       },
-#       {
-#         "large": "http://api.randomuser.me/portraits/women/29.jpg",
-#         "medium": "http://api.randomuser.me/portraits/med/women/29.jpg"
-#       }
-#     ],
-#     "inviteProbability": 0.46,
-#     "sort":10
-#   }
-# ]
+    #     count = ids.query.count()
+
+    #     if ids not in count
+
+    #     assign new UUID to these invit history
+
+            # if already in count then return the ID back
+    #     db.session.add(nUUID)
+    #     db.session.commit()
+    # outsource the above to a process
+    #
+    #     return {
+    #         'id': new_kitten.id,
+    #         'created': new_kitten.created.isoformat() + 'Z'
+    #     }
+    # return { uuid }
+
