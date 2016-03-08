@@ -4,9 +4,9 @@ import GridList from 'material-ui/lib/grid-list/grid-list';
 import StarBorder from 'material-ui/lib/svg-icons/toggle/star-border';
 import IconButton from 'material-ui/lib/icon-button';
 import Colors from 'material-ui/lib/styles/colors';
-import Dialog from 'material-ui/lib/dialog';
-
 import ActionCheckCircle from 'material-ui/lib/svg-icons/action/check-circle';
+
+import Cards from './DisplayItemCards';
 
 
 class DisplayItem extends Component {
@@ -16,12 +16,11 @@ class DisplayItem extends Component {
     }
     render() {
         var currentStatus = this.props.toggleProp[this.props.item.key] ? true : false;
-      return  ( <div onTouchTap={()=> this.props.onToggleItem(this.props.item.key, !currentStatus)} >
+      return  ( <div onTouchTap={()=> this.props.onToggleItem(this.props.item.key, !currentStatus)}  >
         <GridTile
           key={this.props.item.key}
           title={this.props.item.first_name}
           subtitle={this.props.item.last_name}
-          actionIcon={<IconButton><StarBorder color='white'/></IconButton>}
           actionPosition='left'
           titlePosition='bottom'
           style={STYLES.tile}
@@ -29,12 +28,12 @@ class DisplayItem extends Component {
         >   
         { currentStatus ? 
 
-             <div style={STYLES.wrapper}>   <ActionCheckCircle style={STYLES.on} color={Colors.grey50}/>
+            <div style={STYLES.wrapper}>   <ActionCheckCircle style={STYLES.on} color={Colors.grey50}/>
                 <img style={STYLES.check} src={this.props.item.picture[0].medium} /> </div>
         :
-           <div style={STYLES.wrapper}> <ActionCheckCircle style={STYLES.off}/>
+            <div style={STYLES.wrapper}> <ActionCheckCircle style={STYLES.off}/>
              <img style={STYLES.check} src={this.props.item.picture[0].medium} /> </div>
-    }
+        }
 
 
         </GridTile>
