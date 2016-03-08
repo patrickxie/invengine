@@ -2,9 +2,9 @@ import { get, post, del } from '../utils/api';
 
 export function inputUrl(url) {
   return dispatch => dispatch(
-      { type: 'input_url',
-        url
-       });
+    { type: 'input_url',
+      url
+    });
 }
 
 

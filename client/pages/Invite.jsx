@@ -63,7 +63,7 @@ const STYLES = {
   },
   testbg2: {
     backgroundColor: 'black',
-        textAlign: 'center',
+    textAlign: 'center',
   },
   floatButton: {
     left: '10%',

@@ -8,7 +8,7 @@ const DEFAULT_STATE = [];
 
 
 const swap = (state, action) => (
-    action.data
+  action.data
 );
 
 const localstorage = (state, action) => ([

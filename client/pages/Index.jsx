@@ -11,7 +11,7 @@ import Logo from '../svg/InvengineLogo.svg';
 
 export default class Index extends Component {
   render () {
-    const { sheet, children } = this.props;
+    const { sheet } = this.props;
     return (
      <div>
         <AppBar style={STYLES.appbar}

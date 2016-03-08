@@ -14,7 +14,7 @@ import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import { toggle } from '../actions/to_invite_list';
 import Paper from 'material-ui/lib/paper';
 import FlatButton from 'material-ui/lib/flat-button';
-
+import Dialog from 'material-ui/lib/dialog';
 
 export default class Display extends Component {
   constructor(props){
@@ -38,26 +38,18 @@ export default class Display extends Component {
 
     var targetSort = target.sort;
     var sorteddata = this.props.data;
-    //CAREFUL, For maximum performance we must maintain the array's order, but change sort
     sorteddata.forEach(function(item) {
-      //Decrement sorts between positions when target is greater
       if(target.sort > source.sort && (item.sort <= target.sort && item.sort > source.sort)){
         item.sort --;
-      //Incremenet sorts between positions when source is greator
       }else if(item.sort >= target.sort && item.sort < source.sort) {
         item.sort ++;
       }
     });
-    // console.log('IT CHANGED: ', sorteddata === this.props.data);
     source.sort = targetSort;
-    // console.log('what THIS refers to right b4 return', this);
-    // console.log('what changeSort is', this.props.changeSort);
     this.props.changeSort(sorteddata);
     this.forceUpdate();
-    // this.render(this.props.data);
-    // console.log('what is render', this.render);
   }
-// }
+
   handleTouchTap = (event) => {
     this.setState({
       open: true,
@@ -67,7 +59,7 @@ export default class Display extends Component {
 
   handleRequestClose = () => {
     this.setState({
-      open: false,
+      open: false
     });
   };
 
@@ -76,17 +68,13 @@ export default class Display extends Component {
     this.handleBlurExit();
   };
 
-
-
   handleChangeDuration = (event) => {
     var search = new RegExp(event.target.value, 'i');
-    this.props.data.forEach(function(item){
+    this.props.data.forEach(function(item) {
       item.filtered = !item.first_name.match(search);
     });
     this.forceUpdate();
-
   };
-
 
   handleChangeText=(event)=>{
     this.filtervalue(event.target.value);
@@ -98,8 +86,6 @@ export default class Display extends Component {
     }.bind(this),10);
   };
 
-
-
   filtervalue = (value) => {
      // console.log('this is called', value);
     var search = new RegExp(value, 'i');
@@ -110,13 +96,12 @@ export default class Display extends Component {
   };
 
   render () {
-    // filterpPop, zoom
     // console.log('toggle 2:', this.props.toggle)
-    return <div>
+    return (<div>
         < AbsoluteGrid
         items={this.props.data} displayObject={<DisplayItem 
             onToggleItem={this.props.toggle} toggleProp={this.props.toggleStatus}
-        />}
+              />}
                 onMove={_.debounce((this.move.bind(this)),120)}
                 sortProp={'sort'}
                 keyProp={'key'}
@@ -126,8 +111,9 @@ export default class Display extends Component {
                                verticalMargin={10}
                                itemWidth={200}
                                itemHeight={200}>
-         </AbsoluteGrid>
-{this.state.open ? <Paper style={STYLES.popover}>
+        </AbsoluteGrid>
+{ this.state.open ?
+        <Paper style={STYLES.popover}>
                  <Search style={STYLES.searchIcon} />
                 <TextField 
                     style={STYLES.txtField}
@@ -135,19 +121,20 @@ export default class Display extends Component {
                     hintText="Search friends..." />
                  <FlatButton label="Done" onTouchTap = {this.closeAndDone}
                  style={STYLES.c} color={Colors.red500} />
-            </Paper>
-            : <FloatingActionButton mini secondary={true} style={STYLES.searchButton}
+        </Paper>
+: 
+        <FloatingActionButton mini secondary={true} style={STYLES.searchButton}
          onTouchTap={this.handleTouchTap}
          >
              <Search />
         </FloatingActionButton>
 }
-         <FloatingActionButton mini secondary={true} style={STYLES.inviteButton} 
+         <FloatingActionButton mini secondary style={STYLES.inviteButton} 
          onTouchTap={() => browserHistory.push('/invite')}
          >
              <PersonAdd />
         </FloatingActionButton>
-        </div>  
+        </div>);
   }
 }
 

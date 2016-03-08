@@ -14,7 +14,7 @@ import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
 
 import ImportContacts from '../components/ImportContacts';
-import ImportSingle from '../components/ImportSingleContacts';
+import ImportSingle from '../components/ImportSingleContact';
 import { addSingleContact, addMultipleContacts, consent } from '../actions/imported'
 
 import ActionAndroid from 'material-ui/lib/svg-icons/action/android';

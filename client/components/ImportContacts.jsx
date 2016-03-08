@@ -13,6 +13,7 @@ class ImportContacts extends Component {
 
   handleOpen = () => {
     this.setState({open: true});
+    this.props.onConsent('user_consent');
   };
 
   handleClose = () => {
@@ -54,3 +55,26 @@ class ImportContacts extends Component {
 
 export default ImportContacts;
 
+// <script>
+//   (function(u){
+//     var d=document,s='script',a=d.createElement(s),m=d.getElementsByTagName(s)[0];
+//     a.async=1;a.src=u;m.parentNode.insertBefore(a,m);
+//   })('//api.cloudsponge.com/widget/c49906adec2fb3b50967415690a4082f639911af.js');
+//   window.csPageOptions = { textarea_id: "contact_list" };
+// </script>
+
+
+
+
+  // window.csPageOptions = {
+  //   textarea_id:'contact_list',
+  //   mobile_render:true,
+  //   inlineOauth:'mobile',
+  //   selectAccount:true,
+  //   sources: ['gmail','yahoo','windowslive','linkedin','icloud','aol','addressbook','outlook']
+  // };
+
+  // (function(u){
+  //   var d=document,s='script',a=d.createElement(s),m=d.getElementsByTagName(s)[0];
+  //   a.async=1;a.src=u;m.parentNode.insertBefore(a,m);
+  // })('//api.cloudsponge.com/widget/CLOUDSPONGE_DEMO_DOMAIN_KEY.js');

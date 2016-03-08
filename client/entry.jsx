@@ -14,15 +14,10 @@ import reducers from './reducers';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
-
-
-import {compose} from 'redux';
+import { compose } from 'redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistory } from 'react-router-redux';
-
-
-import Kittens from './components/Kittens';
-import { Auth, Index, Invite, Display} from './pages/export';
+import { Auth, Index, Invite, Display } from './pages/export';
 
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -81,10 +76,10 @@ ReactDOM.render(
   <Provider store={store}>
     <div>
       <Router history={browserHistory}>
-        <Route path="/" component={Index}>
+        <Route path='/' component={Index}>
           <IndexRoute component={Auth}/>
-          <Route path="invite" component={Invite}/>
-          <Route path="home" component={Display}/>
+          <Route path='invite' component={Invite}/>
+          <Route path='home' component={Display}/>
         </Route>
       </Router>
     </div>
