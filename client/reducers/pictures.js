@@ -4,6 +4,7 @@ const add = (state, action) => ([
     ...state,
     action.data
 ]);
+//https://unsplash.it/200/200/?random
 
 export default function assist_variables(state = DEFAULT_STATE, action) {
   return ({

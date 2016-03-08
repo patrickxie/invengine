@@ -4,6 +4,7 @@ import GridList from 'material-ui/lib/grid-list/grid-list';
 import StarBorder from 'material-ui/lib/svg-icons/toggle/star-border';
 import IconButton from 'material-ui/lib/icon-button';
 import Colors from 'material-ui/lib/styles/colors';
+import Dialog from 'material-ui/lib/dialog';
 
 import ActionCheckCircle from 'material-ui/lib/svg-icons/action/check-circle';
 

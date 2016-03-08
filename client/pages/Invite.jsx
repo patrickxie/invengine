@@ -3,12 +3,9 @@ import React, { Component } from 'react';
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
 import { populateIconTable } from '../actions/assist_variables';
-
 import URL from '../components/URL';
 import InviteTable from '../components/InviteTable';
-
 import Divider from 'material-ui/lib/divider';
-
 
 export default class Invitepage extends Component {
   constructor(props) {

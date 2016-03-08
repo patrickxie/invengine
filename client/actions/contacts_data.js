@@ -38,7 +38,7 @@ export function requestAPIData() {
 export function requestData(){
   return async (dispatch, getState) => {
     dispatch({
-        type: 'obtain_data_api'
+        type: 'obtain_data'
     });
     let { data, imported } = getState();
     imported.length ? dispatch(mergeData(imported)) : hasData;

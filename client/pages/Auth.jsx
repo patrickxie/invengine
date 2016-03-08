@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Divider from 'material-ui/lib/divider';
 import Paper from 'material-ui/lib/paper';
 import Menu from 'material-ui/lib/menus/menu';
@@ -9,42 +10,20 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import FontIcon from 'material-ui/lib/font-icon';
 import Colors from 'material-ui/lib/styles/colors';
 import FlatButton from 'material-ui/lib/flat-button';
-
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
 
+import ImportContacts from '../components/ImportContacts';
+import ImportSingle from '../components/ImportSingleContacts';
+import { addSingleContact, addMultipleContacts, consent } from '../actions/imported'
 
 import ActionAndroid from 'material-ui/lib/svg-icons/action/android';
 
-const STYLES = {
-    stepText : {
-        color: 'grey',
-        // textAlign: 'center',
-        textIndent: '15'
-    },
-    toolbar: {
-        // width: '50%',
-    },
-    canvas: {
-        margin: 'auto',
-        width: '80%',
-        border: 'solid 1px #e0e0e0',
-        position: 'relative',
-        top:10
-    },
-    button: {
-        // fill: Colors.deepOrange400
-        borderRadius:5,
-        margin: 'auto'
-        // border: 'solid 1px #e0e0e0',
-    }
-};
-
-const MenuExampleSimple = () => (
+const Authpage = ({ addSingleContact, addMultipleContacts, consent }) => (
 <Paper style={STYLES.canvas}>
    <Toolbar styles={STYLES.toolbar}>
     <ToolbarGroup firstChild={true} float='left'>
-      <h4 style={STYLES.stepText}>Step 1: Import your contacts</h4>
+      <h4 style={STYLES.stepText}>Step 1: Add or Import your contacts</h4>
     </ToolbarGroup>
    </Toolbar>
    <div>
@@ -57,6 +36,9 @@ const MenuExampleSimple = () => (
       labelColor={Colors.indigoA200}
       icon={<FontIcon className='muidocs-icon-custom-github'/>}
      />
+     <ImportSingle dispatchMethod={addSingleContact} onConsent={consent} labelName={'Add New'} />
+     <ImportContacts labelName={'Import from Gmail'}/>
+
    </div>
 <Divider />
    <Toolbar styles={STYLES.toolbar}>
@@ -85,24 +67,42 @@ const MenuExampleSimple = () => (
    </div>
 <Divider />
     <FlatButton
-      label="Next"
-      labelPosition="before"
+      label='Next'
+      labelPosition='before'
       primary={true}
       icon={<ActionAndroid />}
       onTouchTap={()=>browserHistory.push('/home')}
     />
 
 </Paper>
-
 );
 
-export default MenuExampleSimple;
+const STYLES = {
+    stepText : {
+        color: 'grey',
+        // textAlign: 'center',
+        textIndent: '15'
+    },
+    toolbar: {
+        // width: '50%',
+    },
+    canvas: {
+        margin: 'auto',
+        width: '80%',
+        border: 'solid 1px #e0e0e0',
+        position: 'relative',
+        top:10
+    },
+    button: {
+        // fill: Colors.deepOrange400
+        borderRadius:5,
+        margin: 'auto'
+        // border: 'solid 1px #e0e0e0',
+    }
+};
 
-     // <RaisedButton
-     //  label='Fake Data'
-     //  linkButton={true}
-     //  href='https://github.com/callemall/material-ui'
-     //  style={STYLES.button}
-     //  labelColor={Colors.indigoA200}
-     //  icon={<FontIcon className='muidocs-icon-custom-github'/>}
-     // />
+// export default Authpage;
+export default connect(
+  state => ({ url: state.configvars.url }),
+  { addSingleContact, addMultipleContacts, consent }
+)(Authpage );
