@@ -8,7 +8,8 @@ import ActionCheckCircle from 'material-ui/lib/svg-icons/action/check-circle';
 import FlatButton from 'material-ui/lib/flat-button';
 import Cards from './DisplayItemCards';
 import Dialog from 'material-ui/lib/dialog';
-
+import Tappable from 'react-tappable';
+console.log(Tappable);
 class DisplayItem extends Component {
   constructor(props) {
     super(props);
@@ -71,6 +72,7 @@ class DisplayItem extends Component {
 
     var currentStatus = this.props.toggleProp[this.props.item.key] ? true : false;
     return  (<div onTouchTap={this.getClickHandler(this.singleTouch, this.dblClickorLongPress)}>
+        <Tappable onPress={this.dblClickorLongPress}>
         <Dialog
           contentStyle={STYLES.modal}
           autoScrollBodyContent
@@ -105,7 +107,7 @@ class DisplayItem extends Component {
 
 
       </GridTile>
-
+      </Tappable>
   </div>)
   }
 }

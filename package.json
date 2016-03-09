@@ -36,6 +36,7 @@
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "6.3.14",
+    "faker": "3.0.1",
     "flummox": "3.6.8",
     "history": "2.0.0",
     "jss": "3.2.0",
@@ -56,6 +57,7 @@
     "react-router-redux": "3.0.0",
     "react-svg-loader": "0.0.6",
     "react-tap-event-plugin": "0.2.2",
+    "react-tappable": "0.8.0",
     "redux": "3.0.5",
     "redux-logger": "2.4.0",
     "redux-promise": "0.5.1",
