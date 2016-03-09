@@ -5,7 +5,7 @@ import StarBorder from 'material-ui/lib/svg-icons/toggle/star-border';
 import IconButton from 'material-ui/lib/icon-button';
 import Colors from 'material-ui/lib/styles/colors';
 import ActionCheckCircle from 'material-ui/lib/svg-icons/action/check-circle';
-
+import FlatButton from 'material-ui/lib/flat-button';
 import Cards from './DisplayItemCards';
 import Dialog from 'material-ui/lib/dialog';
 
@@ -16,18 +16,73 @@ class DisplayItem extends Component {
     this.state = {
       open: false,
     };
+
+    this.handleOpen = () => {
+      this.setState({ open: true });
+    };
+
+    this.handleClose = () => {
+      this.setState({ open: false });
+    };
+
+    this.singleTouch = () => {
+      this.props.onToggleItem(this.props.item.key, !this.props.toggleProp[this.props.item.key] ? true : false);
+    };
+
+    this.dblClickorLongPress = () => {
+      this.handleOpen();
+    };
+
+    this.getClickHandler = (onClick, onDblClick, delay) => {
+      var timeoutID = null;
+      delay = delay || 250;
+      return function (event) {
+        if (!timeoutID) {
+          timeoutID = setTimeout(function () {
+            onClick(event);
+            timeoutID = null
+          }, delay);
+        } else {
+          timeoutID = clearTimeout(timeoutID);
+          onDblClick(event);
+        }
+      };
+    };
+
+
   }
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+
   render() {
+    const actions = [
+      <FlatButton
+        label='Cancel'
+        secondary
+        onTouchTap={this.handleClose}
+      />,
+      <FlatButton
+        label='Done'
+        primary
+        keyboardFocused
+        onTouchTap={this.handleClose}
+      />,
+    ];
+
     var currentStatus = this.props.toggleProp[this.props.item.key] ? true : false;
-    return  ( <div onTouchTap={()=> this.props.onToggleItem(this.props.item.key, !currentStatus)}  >
+    return  (<div onTouchTap={this.getClickHandler(this.singleTouch, this.dblClickorLongPress)}>
+        <Dialog
+          contentStyle={STYLES.modal}
+          autoScrollBodyContent
+          actions={actions}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleClose}
+        >
+        <Cards item={this.props.item} />
+        </Dialog>
+
+
       <GridTile
         key={this.props.item.key}
         title={this.props.item.first_name}
@@ -50,6 +105,7 @@ class DisplayItem extends Component {
 
 
       </GridTile>
+
   </div>)
   }
 }
@@ -97,6 +153,10 @@ const STYLES = {
     // opacity: 1,
     // visibility: 'visible'
     zIndex: '-1'
+  },
+  modal: {
+    width: '600px',
+    maxWidth: 'none',
   }
 };
 
