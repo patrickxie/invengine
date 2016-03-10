@@ -22,6 +22,9 @@ const importData = (state, action) => ([
 ]);
 
 const merge = (state, action) => {
+  //takes state, and action, and merge together
+  // then it adds sort and key, and removes duplicates
+  //should take the highest Key too to remove 
   return action.data
 }
 
@@ -32,6 +35,7 @@ const merge = (state, action) => {
 
 // }
 
+//handle picture
 
 export default function contacts_data(state = DEFAULT_STATE, action) {
   return ({

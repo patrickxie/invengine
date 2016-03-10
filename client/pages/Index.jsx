@@ -17,22 +17,22 @@ export default class Index extends Component {
         <AppBar style={STYLES.appbar}
         title={<span style={STYLES.title}>Invengine</span>}
         iconElementLeft={<IconButton>
-                         <div className={sheet.classes.logowrap}> <Logo width={35} height={28}/></div>
+                       <div className={sheet.classes.logowrap}> <Logo width={35} height={28}/></div>
                         </IconButton>}
         iconElementRight={<span>
             <span style={STYLES.barButton}>
-              <FlatButton style={STYLES.barButtonTxt} label= 'Home'
-              onClick={() => browserHistory.push('/home')} 
-              onTouchTap={() => browserHistory.push('/home')}/>
-            </span>
-            <span style={STYLES.barButton}>
               <FlatButton style={STYLES.barButtonTxt} label= 'Import'
-              onClick={() => browserHistory.push('/')} 
+              onClick={() => browserHistory.push('/')}
               onTouchTap={() => browserHistory.push('/')}/>
             </span>
             <span style={STYLES.barButton}>
+              <FlatButton style={STYLES.barButtonTxt} label= 'Home'
+              onClick={() => browserHistory.push('/home')}
+              onTouchTap={() => browserHistory.push('/home')}/>
+            </span>
+            <span style={STYLES.barButton}>
               <FlatButton style={STYLES.barButtonTxt} label= 'Invite'
-              onClick={() => browserHistory.push('/invite')} 
+              onClick={() => browserHistory.push('/invite')}
               onTouchTap={() => browserHistory.push('/invite')}/>
             </span></span>}
         />

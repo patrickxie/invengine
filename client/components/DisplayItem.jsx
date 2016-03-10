@@ -9,7 +9,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 import Cards from './DisplayItemCards';
 import Dialog from 'material-ui/lib/dialog';
 import Tappable from 'react-tappable';
-console.log(Tappable);
+
 class DisplayItem extends Component {
   constructor(props) {
     super(props);
@@ -157,8 +157,8 @@ const STYLES = {
     zIndex: '-1'
   },
   modal: {
-    width: '600px',
-    maxWidth: 'none',
+    // width: '600px',
+    // maxWidth: 'none',
   }
 };
 

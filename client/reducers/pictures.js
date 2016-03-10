@@ -1,15 +1,18 @@
-const DEFAULT_STATE = {};
+const DEFAULT_STATE = [];
 
 const add = (state, action) => ([
     ...state,
-    action.data
+    action.picture
 ]);
-//https://unsplash.it/200/200/?random
 
-export default function assist_variables(state = DEFAULT_STATE, action) {
+const setPic = (state, action) =>([
+  
+])
+
+
+export default function pictures(state = DEFAULT_STATE, action) {
   return ({
-    ['download_picture_success']: add,
-    // ['channel_icon_toggle']: channel_icon_toggle,
-    // ['toggle_icon_all']: all
+    ['generate_picture']: add,
+    ['set_picture_into_data']: setPic,
   }[action.type] || (s => s))(state, action);
 }

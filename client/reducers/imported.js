@@ -16,6 +16,7 @@ export default function imported(state = DEFAULT_STATE, action) {
   return ({
     ['import_multiple_contacts']: addimport,
     ['import_single_contact']: addimport,
+    ['generated_contact']: addimport,
     ['transfered_to_data']: transfered
   }[action.type] || (s => s))(state, action);
 }

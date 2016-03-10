@@ -14,7 +14,7 @@ import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import { toggle } from '../actions/to_invite_list';
 import Paper from 'material-ui/lib/paper';
 import FlatButton from 'material-ui/lib/flat-button';
-import Dialog from 'material-ui/lib/dialog';
+
 
 export default class Display extends Component {
   constructor(props){
@@ -98,8 +98,8 @@ export default class Display extends Component {
   render () {
     // console.log('toggle 2:', this.props.toggle)
     return (<div>
-        < AbsoluteGrid
-        items={this.props.data} displayObject={<DisplayItem 
+        <AbsoluteGrid
+        items={this.props.data} displayObject={<DisplayItem
             onToggleItem={this.props.toggle} toggleProp={this.props.toggleStatus}
               />}
                 onMove={_.debounce((this.move.bind(this)),120)}
@@ -110,20 +110,19 @@ export default class Display extends Component {
                                responsive
                                verticalMargin={10}
                                itemWidth={200}
-                               itemHeight={200}>
-        </AbsoluteGrid>
+                               itemHeight={200} />
 { this.state.open ?
         <Paper style={STYLES.popover}>
                  <Search style={STYLES.searchIcon} />
-                <TextField 
+                <TextField
                     style={STYLES.txtField}
                     onChange={this.handleChangeText}
-                    hintText="Search friends..." />
-                 <FlatButton label="Done" onTouchTap = {this.closeAndDone}
+                    hintText='Search friends...' />
+                 <FlatButton label='Done' onTouchTap = {this.closeAndDone}
                  style={STYLES.c} color={Colors.red500} />
         </Paper>
-: 
-        <FloatingActionButton mini secondary={true} style={STYLES.searchButton}
+:
+        <FloatingActionButton mini secondary style={STYLES.searchButton}
          onTouchTap={this.handleTouchTap}
          >
              <Search />

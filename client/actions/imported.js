@@ -1,5 +1,7 @@
 import { get, post, del } from '../utils/api'; 
+import faker from 'faker';
 
+// console.log(faker.fake('{{name.lastName}}, {{name.firstName}} {{name.suffix}}'));
 
 export function addSingleContact(contacts) {
   return dispatch => dispatch(
@@ -27,6 +29,38 @@ export function consent(source) {
     });
 }
 
+export function generateContact() {
+  // let num = Math.floor((Math.random() * 1000) + 1);
+  //medium image is 150 x 150, large 512 x512
+  let num = Math.floor((Math.random()*95)+1);
+  let gender = num % 2 ? 'men':'women';
+  const contacts = {
+    first_name: faker.name.firstName(),
+    last_name: faker.name.lastName(),
+    picture: [{
+      large: `https://unsplash.it/600/377?image=${num}`,
+      medium: `http://api.randomuser.me/portraits/med/${gender}/${num}.jpg`
+    }
+    ],
+    phone: faker.phone.phoneNumber(),
+    avatar: `http://api.randomuser.me/portraits/med/${gender}/${num}.jpg`,
+    domain: faker.internet.domainName(),
+    email:faker.internet.email(),
+    address: '',
+    company: faker.company.companyName(),
+    fake: true
+  }
+  return dispatch => dispatch(
+    {
+      type:'generated_contact',
+      contacts
+    });
+}
+
+    // picture: [{
+    //   large: `https://unsplash.it/600/377?image=${num}`
+    // }
+    // ],
 
 // export function deleteKitten(kittenId) {
 //   return async dispatch => {
@@ -53,12 +87,12 @@ export function consent(source) {
 
 // https://api.cloudsponge.com/begin_import/user_consent.json
 
-// <Link to="route" target="_blank" onClick={(event) => {event.preventDefault(); window.open(this.makeHref("route"));}} />
+// <Link to='route' target='_blank' onClick={(event) => {event.preventDefault(); window.open(this.makeHref('route'));}} />
 
 // {()=>window.open('http://stackoverflow.com/', '_blank')}
 
 // response = {  
-//   "status": "success",
-//   "url": "https://api.cloudsponge.com/n/FULNW3D",
-//   "import_id": 1126
+//   'status': 'success',
+//   'url': 'https://api.cloudsponge.com/n/FULNW3D',
+//   'import_id': 1126
 // }

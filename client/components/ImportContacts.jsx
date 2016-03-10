@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RaisedButton from 'material-ui/lib/raised-button';
 import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
+import Colors from 'material-ui/lib/styles/colors';
 
 class ImportContacts extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class ImportContacts extends Component {
 
   handleOpen = () => {
     this.setState({open: true});
-    this.props.onConsent('user_consent');
+    // this.props.onConsent('user_consent');
   };
 
   handleClose = () => {
@@ -38,7 +39,8 @@ class ImportContacts extends Component {
     return (
       <div>
         <RaisedButton label={labelName} 
-            onTouchTap={this.handleOpen.bind(this)} />
+            onTouchTap={this.handleOpen.bind(this)}
+            labelColor={Colors.indigoA200} />
         <Dialog
           title="Dialog With Actions"
           actions={actions}

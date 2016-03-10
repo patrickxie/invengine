@@ -3,6 +3,7 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
 import TextField from 'material-ui/lib/text-field';
+import Colors from 'material-ui/lib/styles/colors';
 
 class ImportContacts extends Component {
   constructor(props) {
@@ -28,6 +29,10 @@ class ImportContacts extends Component {
   handleClose = () => {
     this.setState({ ...this.state, open: false });
     this.props.dispatchMethod(this.state.contact);
+  };  
+
+  handleCloseCancel = () => {
+    this.setState({ ...this.state, open: false });
   };
 
   handleChange(e, key) {
@@ -48,7 +53,7 @@ class ImportContacts extends Component {
       <FlatButton
         label='Cancel'
         secondary
-        onTouchTap={this.handleClose}
+        onTouchTap={this.handleCloseCancel}
       />,
       <FlatButton
         label='Submit'
@@ -60,7 +65,8 @@ class ImportContacts extends Component {
 
     return (
       <div>
-        <RaisedButton label={labelName} onTouchTap={this.handleOpen} />
+        <RaisedButton label={labelName} onTouchTap={this.handleOpen}
+          labelColor={Colors.indigoA200} />
         <Dialog
           title='Input Contact Info:'
           actions={actions}

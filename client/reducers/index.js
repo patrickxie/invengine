@@ -5,6 +5,7 @@ import assistvars from './assist_variables';
 import toinvlist from './to_invite_list';
 import configvars from './config_variables';
 import imported from './imported';
+import pictures from './pictures';
 import { routeReducer } from 'react-router-redux'
 // import { routerReducer } from 'react-router-redux';
 
@@ -14,6 +15,7 @@ const reducers = combineReducers({
   assistvars,
   toinvlist,
   configvars,
+  pictures,
   //routing: routeReducer the newest version
   routing: routeReducer
 });
