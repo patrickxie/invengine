@@ -33,16 +33,17 @@ class DisplayItemCards extends Component {
     <CardMedia
       overlay={<CardTitle title={item.first_name} subtitle={item.email} />}
     >
-     {!!galleryChildCard.length ? <img src={galleryChildCard[0].large}/>  : <img src='http://lorempixel.com/600/377/sports/Dummy-Text/'/>}
+     {!!galleryChildCard.length ? <img src={galleryChildCard[0].large}/>
+       : <img src='http://lorempixel.com/600/377/sports/Dummy-Text/'/>}
     </CardMedia>
-    <CardTitle title="Card title" subtitle="Card subtitle" />
+    <CardTitle title='Card title' subtitle='Card subtitle' />
     {this.state.switcher?
       <CardText>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
       Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
       Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-      </CardText> 
+      </CardText>
       :
       <CardText>
       <li>address: {item.address||'tacos'}</li>
