@@ -82,7 +82,7 @@ class DisplayItem extends Component {
           open={this.state.open}
           onRequestClose={this.handleClose}
         >
-        <Cards item={this.props.item} set={this.props.onSetPic}
+        <Cards item={this.props.item} id={this.props.item.key} set={this.props.onSetPic}
           galleryChildCard={this.props.galleryChild} />
         </Dialog>
 

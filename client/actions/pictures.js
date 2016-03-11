@@ -12,7 +12,8 @@ export function generatePic() {
   });
 }
 
-export function setPic() {
+export function setPic(key) {
+  console.log('key is:', key);
   // return (dispatch, getState) =>{
   return (dispatch) =>{
     dispatch ({
