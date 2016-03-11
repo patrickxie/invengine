@@ -12,7 +12,7 @@ class DisplayItemCards extends Component {
   constructor(props) {
     super(props);
     this.state = { switcher: false };
-    const { set, item, galleryChildCard, id } = this.props;
+    // const { set, item, galleryChildCard, id } = this.props;
   }
 
     switcherFunc() {
@@ -22,18 +22,18 @@ class DisplayItemCards extends Component {
 
 
   render() {
-    // const { item, set, galleryChildCard } = this.props;
+    const { item, set, galleryChildCard, id } = this.props;
     // console.log('what gallerychild is : ', galleryChildCard);
     return(<Card>
     <CardHeader
-      title={this.props.item.first_name}
-      subtitle={this.props.item.last_name}
-      avatar={this.props.item.avatar||'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png'}
+      title={item.first_name}
+      subtitle={item.last_name}
+      avatar={item.avatar||'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png'}
     />
     <CardMedia
-      overlay={<CardTitle title={this.props.item.first_name} subtitle={this.props.item.email} />}
+      overlay={<CardTitle title={item.first_name} subtitle={item.email} />}
     >
-      <img src={this.props.galleryChildCard[0].large} />
+      <img src={galleryChildCard[0].large||'http://lorempixel.com/600/377/sports/Dummy-Text/'} />
     </CardMedia>
     <CardTitle title="Card title" subtitle="Card subtitle" />
     {this.state.switcher?
@@ -45,12 +45,12 @@ class DisplayItemCards extends Component {
       </CardText> 
       :
       <CardText>
-      <li>address: {this.props.item.address||'tacos'}</li>
-      <li>birthday: {this.props.item.birthday}</li>
+      <li>address: {item.address||'tacos'}</li>
+      <li>birthday: {item.birthday}</li>
       </CardText>
     }
     <CardActions>
-        <FlatButton label='New Pic' onTouchTap={this.props.set.bind(this, this.props.id)}/>
+        <FlatButton label='New Pic' onTouchTap={set.bind(this, id)}/>
         <FlatButton label='More Info' onTouchTap={this.switcherFunc.bind(this)} />
     </CardActions>
   </Card>);

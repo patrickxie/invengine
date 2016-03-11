@@ -15,7 +15,7 @@ export function generatePic() {
 export function setPic(key) {
   console.log('key is:', key);
   // return (dispatch, getState) =>{
-  return (dispatch) =>{
+  return (dispatch, getState) =>{
     dispatch ({
       type: 'browse_next_picture',
     // pic: getState().pictures
