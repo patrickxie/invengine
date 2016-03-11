@@ -35,17 +35,17 @@ export function requestAPIData() {
 
 
 
-export function requestData(){
-  return async (dispatch, getState) => {
-    dispatch({
-        type: 'obtain_data'
-    });
-    let { data, imported } = getState();
-    imported.length ? dispatch(mergeData(imported)) : hasData;
-    let hasData = data.length? null : requestAPIData();
+// export function requestData(){
+//   return async (dispatch, getState) => {
+//     dispatch({
+//         type: 'obtain_data'
+//     });
+//     let { data, imported } = getState();
+//     imported.length ? dispatch(mergeData(imported)) : hasData;
+//     let hasData = data.length? null : requestAPIData();
 
-  }
-}
+//   }
+// }
 
 function mergeData(data){
   return { type: 'merge_data', data }

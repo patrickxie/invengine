@@ -1,12 +1,12 @@
 const DEFAULT_STATE = [];
 
 const add = (state, action) => ([
-    ...state,
+  ...state,
   { large: action.picLarge, medium: action.picMedium }
 ]);
 
 // const setPic = (state, action) =>([
-  
+ 
 // ])
 
 const browse = (state, action) =>{

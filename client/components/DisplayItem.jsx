@@ -50,11 +50,7 @@ class DisplayItem extends Component {
         }
       };
     };
-
-
   }
-
-
 
   render() {
     const actions = [

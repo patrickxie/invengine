@@ -58,6 +58,9 @@ class DisplayItemCards extends Component {
   }
 }
 
+
+// {galleryChildCard[0].large}
+
 const STYLES = {
   off: {
     cursor: 'pointer',
