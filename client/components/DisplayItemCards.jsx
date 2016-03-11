@@ -16,22 +16,23 @@ class DisplayItemCards extends Component {
 
     switcherFunc() {
       console.log('state: ', this.state);
-      this.setState({ switcher: !this.state.switcher});
+      this.setState({ switcher: !this.state.switcher });
     }
 
 
   render() {
-  const { item } = this.props;
-  return(<Card>
+    const { item, set, galleryChildCard } = this.props;
+    console.log('what gallerychild is : ', galleryChildCard);
+    return(<Card>
     <CardHeader
       title={item.first_name}
       subtitle={item.last_name}
-      avatar="http://lorempixel.com/100/100/nature/"
+      avatar={item.avatar||'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png'}
     />
     <CardMedia
       overlay={<CardTitle title={item.first_name} subtitle={item.email} />}
     >
-      <img src="http://lorempixel.com/600/337/nature/" />
+      <img src={galleryChildCard[0].large} />
     </CardMedia>
     <CardTitle title="Card title" subtitle="Card subtitle" />
     {this.state.switcher?
@@ -49,8 +50,8 @@ class DisplayItemCards extends Component {
       </CardText>
     }
     <CardActions>
-      <FlatButton label="New Pic" />
-      <FlatButton label="More Info" onTouchTap={this.switcherFunc.bind(this)} />
+        <FlatButton label='New Pic' onTouchTap={set}/>
+        <FlatButton label='More Info' onTouchTap={this.switcherFunc.bind(this)} />
     </CardActions>
   </Card>);
   }

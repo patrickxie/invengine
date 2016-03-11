@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
 import { requestAPIData, changeSort } from '../actions/contacts_data';
+import { setPic } from '../actions/pictures';
 import { browserHistory } from 'react-router';
 import DisplayItem from '../components/DisplayItem.jsx';
 import AbsoluteGrid from 'react-absolute-grid';
@@ -19,7 +20,8 @@ import FlatButton from 'material-ui/lib/flat-button';
 export default class Display extends Component {
   constructor(props){
     super(props);
-    const { data, changeSort, toggle, toggleStatus } = this.props;
+    const { data, changeSort, toggle, toggleStatus, gallery, 
+      setPic } = this.props;
     // console.log(this.props.toggle);
     this.state = {
       open: false,
@@ -99,27 +101,30 @@ export default class Display extends Component {
     // console.log('toggle 2:', this.props.toggle)
     return (<div>
         <AbsoluteGrid
-        items={this.props.data} displayObject={<DisplayItem
-            onToggleItem={this.props.toggle} toggleProp={this.props.toggleStatus}
-              />}
-                onMove={_.debounce((this.move.bind(this)),120)}
-                sortProp={'sort'}
-                keyProp={'key'}
-                animation={'transform 300ms ease'}
-                               dragEnabled
-                               responsive
-                               verticalMargin={10}
-                               itemWidth={200}
-                               itemHeight={200} />
+        items={this.props.data} 
+        displayObject={<DisplayItem
+            onToggleItem={this.props.toggle} 
+            toggleProp={this.props.toggleStatus}
+            onSetPic={this.props.setPic}
+            galleryChild={this.props.gallery}/>}
+        onMove={_.debounce((this.move.bind(this)),120)}
+        sortProp={'sort'}
+        keyProp={'key'}
+        animation={'transform 300ms ease'}
+        dragEnabled
+        responsive
+        verticalMargin={10}
+        itemWidth={200}
+        itemHeight={200} />
 { this.state.open ?
         <Paper style={STYLES.popover}>
-                 <Search style={STYLES.searchIcon} />
-                <TextField
-                    style={STYLES.txtField}
-                    onChange={this.handleChangeText}
-                    hintText='Search friends...' />
-                 <FlatButton label='Done' onTouchTap = {this.closeAndDone}
-                 style={STYLES.c} color={Colors.red500} />
+          <Search style={STYLES.searchIcon} />
+              <TextField
+                  style={STYLES.txtField}
+                  onChange={this.handleChangeText}
+                  hintText='Search friends...' />
+              <FlatButton label='Done' onTouchTap = {this.closeAndDone}
+              style={STYLES.c} color={Colors.red500} />
         </Paper>
 :
         <FloatingActionButton mini secondary style={STYLES.searchButton}
@@ -233,8 +238,9 @@ const STYLES = {
 };
 
 export default connect(
-  state => ({ data: state.data, toggleStatus: state.toinvlist }),
-  { requestAPIData, changeSort, toggle }
+  state => ({ data: state.data, toggleStatus: state.toinvlist,
+  gallery: state.pictures }),
+  { requestAPIData, changeSort, toggle, setPic}
 )(
   useSheet(Display, STYLES)
 );

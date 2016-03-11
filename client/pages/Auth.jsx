@@ -83,7 +83,7 @@ const Authpage = ({ addSingleContact, addMultipleContacts, consent,
     <ListItem>
       {pics.map((pic, i) => (
         <Paper style={{ ...STYLES.circlePics,
-          backgroundImage:`url(${pic})` }}
+          backgroundImage:`url(${pic.large})` }}
           zDepth={2} circle key={i}/>
       ))}
     </ListItem>

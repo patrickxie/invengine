@@ -13,7 +13,7 @@ import Tappable from 'react-tappable';
 class DisplayItem extends Component {
   constructor(props) {
     super(props);
-    const { item, index, itemsLength, onToggleItem, toggleProp } = this.props;
+    const { item, index, itemsLength, onToggleItem, toggleProp, onSetPic, galleryChild } = this.props;
     this.state = {
       open: false,
     };
@@ -27,7 +27,8 @@ class DisplayItem extends Component {
     };
 
     this.singleTouch = () => {
-      this.props.onToggleItem(this.props.item.key, !this.props.toggleProp[this.props.item.key] ? true : false);
+      this.props.onToggleItem(this.props.item.key, !this.props.
+        toggleProp[this.props.item.key] ? true : false);
     };
 
     this.dblClickorLongPress = () => {
@@ -81,7 +82,8 @@ class DisplayItem extends Component {
           open={this.state.open}
           onRequestClose={this.handleClose}
         >
-        <Cards item={this.props.item} />
+        <Cards item={this.props.item} set={this.props.onSetPic}
+          galleryChildCard={this.props.galleryChild} />
         </Dialog>
 
 
