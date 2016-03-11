@@ -104,15 +104,9 @@ export default class Display extends Component {
         items={this.props.data} 
         displayObject={<DisplayItem
             onToggleItem={this.props.toggle} 
-<<<<<<< HEAD
             toggleProp={this.props.toggleStatus}
             onSetPic={this.props.setPic}
             galleryChild={this.props.gallery}/>}
-=======
-            toggleProp={this.props.toggleStatus} 
-              onSetPic={this.props.setPic}
-              galleryChild={this.props.gallery}/>}
->>>>>>> fix-broken-displayitemcard
         onMove={_.debounce((this.move.bind(this)),120)}
         sortProp={'sort'}
         keyProp={'key'}
@@ -124,7 +118,6 @@ export default class Display extends Component {
         itemHeight={200} />
 { this.state.open ?
         <Paper style={STYLES.popover}>
-<<<<<<< HEAD
           <Search style={STYLES.searchIcon} />
               <TextField
                   style={STYLES.txtField}
@@ -132,15 +125,6 @@ export default class Display extends Component {
                   hintText='Search friends...' />
               <FlatButton label='Done' onTouchTap = {this.closeAndDone}
               style={STYLES.c} color={Colors.red500} />
-=======
-         <Search style={STYLES.searchIcon} />
-          <TextField
-              style={STYLES.txtField}
-              onChange={this.handleChangeText}
-              hintText='Search friends...' />
-         <FlatButton label='Done' onTouchTap = {this.closeAndDone}
-         style={STYLES.c} color={Colors.red500} />
->>>>>>> fix-broken-displayitemcard
         </Paper>
 :
         <FloatingActionButton mini secondary style={STYLES.searchButton}
@@ -255,13 +239,8 @@ const STYLES = {
 
 export default connect(
   state => ({ data: state.data, toggleStatus: state.toinvlist,
-<<<<<<< HEAD
   gallery: state.pictures }),
   { requestAPIData, changeSort, toggle, setPic}
-=======
-    gallery: state.pictures }),
-  { requestAPIData, changeSort, toggle, setPic }
->>>>>>> fix-broken-displayitemcard
 )(
   useSheet(Display, STYLES)
 );
