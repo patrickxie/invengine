@@ -28,7 +28,7 @@ class DisplayItemCards extends Component {
     <CardHeader
       title={item.first_name}
       subtitle={item.last_name}
-      avatar={item.avatar||'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png'}
+      avatar={item.picture[0].medium||'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png'}
     />
     <CardMedia
       overlay={<CardTitle title={item.first_name} subtitle={item.email} />}

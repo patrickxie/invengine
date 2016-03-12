@@ -29,6 +29,8 @@ const merge = (state, action) => {
   return action.data
 }
 
+//remove duplicate
+// _.maxby
 // addSort(){
 
 // }
@@ -52,15 +54,6 @@ const setPic = (state, action) => {
   ];
   return result;
 } ;
-
-//index is not index, instead it's the object
-
-// (
-//   //find the index of the object using _.find
-//   //slice the state before, 
-//   state[key].picture.large: action.pic
-//   //slice the state after
-// );
 
 export default function contacts_data(state = DEFAULT_STATE, action) {
   return ({
