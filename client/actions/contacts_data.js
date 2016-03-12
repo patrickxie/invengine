@@ -5,13 +5,14 @@ import { get, post, del } from '../utils/api';
 
 
 export function requestAPIData() {
+  console.log('requestAPI data is called!');
   return async dispatch => {
     dispatch({
       type: 'obtain_data_api'
     });
 
     try {
-      // console.log('this is contacts_data.js called');
+      console.log('before fetching api called');
       // const result = await get('/api/kittens/sampledata');
       //these are unfiltered results
       const result = await get('https://api.myjson.com/bins/1mnjz');
@@ -20,8 +21,9 @@ export function requestAPIData() {
       // console.log('I got dee results', result);
       dispatch({
         type: 'obtain_data_api_success',
+        data: result
       });
-      dispatch(mergeData(result));
+      // dispatch(mergeData(result));
     } catch(e) {
       // console.log('okay error happened here:: ', e);
       dispatch({
@@ -35,22 +37,33 @@ export function requestAPIData() {
 
 
 
-// export function requestData(){
-//   return async (dispatch, getState) => {
-//     dispatch({
-//         type: 'obtain_data'
-//     });
-//     let { data, imported } = getState();
-//     imported.length ? dispatch(mergeData(imported)) : hasData;
-//     let hasData = data.length? null : requestAPIData();
-
-//   }
-// }
-
-function mergeData(data){
-  return { type: 'merge_data', data }
+export function requestData() {
+  return (dispatch, getState) => {
+    console.log('warrning!!!!!');
+    dispatch({
+        type: 'obtain_data'
+    });
+    let { data, imported } = getState();
+    console.log('ok stuck here', data, imported);
+    dispatch(requestAPIData());
+    // let hasData = data.length? null : requestAPIData;
+    // console.log('hasdata: ', hasData)
+    // let r = imported.length ? mergeData(imported) : hasData;
+    // console.log('R should b a function: ', r)
+    // r();
+  }
 }
 
+function mergeData(data) {
+  // return { type: 'merge_data_from_imported', data }
+  return dispatch => { dispatch(
+    { type: 'merge_data_from_imported', data }
+    )};
+}
+
+// function importedData(data) {
+//   return { type: 'obtain_data_import', data }
+// }
 // var k = getState().data.length, imported.map( i => i.sort = k)
 //find highest key and iterate on top of it.
 

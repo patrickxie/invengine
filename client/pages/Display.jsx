@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
-import { requestAPIData, changeSort } from '../actions/contacts_data';
+import { requestData, changeSort } from '../actions/contacts_data';
 import { setPic } from '../actions/pictures';
 import { browserHistory } from 'react-router';
 import DisplayItem from '../components/DisplayItem.jsx';
@@ -21,7 +21,7 @@ export default class Display extends Component {
   constructor(props){
     super(props);
     const { data, changeSort, toggle, toggleStatus, gallery, 
-      setPic } = this.props;
+      setPic, requestData} = this.props;
     // console.log(this.props.toggle);
     this.state = {
       open: false,
@@ -30,7 +30,7 @@ export default class Display extends Component {
   }
 
   componentDidMount() {
-    this.props.requestAPIData();
+    this.props.requestData();
   }
 
   move (source, target) {
@@ -240,7 +240,7 @@ const STYLES = {
 export default connect(
   state => ({ data: state.data, toggleStatus: state.toinvlist,
   gallery: state.pictures }),
-  { requestAPIData, changeSort, toggle, setPic}
+  { requestData, changeSort, toggle, setPic}
 )(
   useSheet(Display, STYLES)
 );

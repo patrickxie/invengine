@@ -50,6 +50,7 @@ export function generateContact() {
     company: faker.company.companyName(),
     fake: true
   }
+  console.log(JSON.stringify(contacts))
   return dispatch => dispatch(
     {
       type:'generated_contact',
