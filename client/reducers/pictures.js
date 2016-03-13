@@ -1,4 +1,6 @@
-const DEFAULT_STATE = [];
+let placeholder = { large: 'http://image-link-archive.meteor.com/images/placeholder-640x480.png' , medium: 'http://image-link-archive.meteor.com/images/placeholder-640x480.png' };
+
+const DEFAULT_STATE = [ placeholder ]; //what if i just add a buffer pic here
 
 const add = (state, action) => ([
   ...state,

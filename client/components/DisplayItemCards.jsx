@@ -23,7 +23,12 @@ class DisplayItemCards extends Component {
 
   render() {
     const { item, set, galleryChildCard, id } = this.props;
-    // console.log('what gallerychild is : ', galleryChildCard);
+    console.log('what gallerychild is : ', galleryChildCard);
+    // let placeholder = { large: 'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png' , medium: 'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png' };
+    // const galleryWithDefault = [placeholder,...galleryChildCard];
+    // console.log('galleryDefault', galleryWithDefault)
+    // const mismatch = item.picture[0].medium !== galleryChildCard[0].large ? galleryChildCard : item.picture[0] ;
+    // console.log('mismatch is', mismatch);
     return(<Card>
     <CardHeader
       title={item.first_name}
@@ -51,7 +56,7 @@ class DisplayItemCards extends Component {
       </CardText>
     }
     <CardActions>
-        <FlatButton label='New Pic' onTouchTap={set.bind(this, id)}/>
+        <FlatButton label='Set New Pic' onTouchTap={set.bind(this, id)}/>
         <FlatButton label='More Info' onTouchTap={this.switcherFunc.bind(this)} />
     </CardActions>
   </Card>);

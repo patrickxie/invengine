@@ -5,7 +5,6 @@ import { get, post, del } from '../utils/api';
 
 
 export function requestAPIData() {
-  console.log('requestAPI data is called!');
   return async dispatch => {
     dispatch({
       type: 'obtain_data_api'
@@ -39,16 +38,16 @@ export function requestAPIData() {
 
 export function requestData() {
   return (dispatch, getState) => {
-    console.log('warrning!!!!!');
+    // console.log('warrning!!!!!');
     dispatch({
         type: 'obtain_data'
     });
     let { data, imported } = getState();
-    console.log('ok stuck here', data, imported);
+    // console.log('ok stuck here', data, imported);
 
     let r = imported.length ? dispatch(mergeData(imported)) :
       data.length? null : dispatch(requestAPIData());
-    console.log('R should b a function: ', r)
+    // console.log('R should b a function: ', r)
     // let hasData = data.length? null : dispatch(requestAPIData());
     // console.log('hasdata: ', hasData)
 
