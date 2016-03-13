@@ -35,12 +35,10 @@ const channel_icon_toggle = (state, action) =>{
 };
 
 const all = (state, action) =>{
-  let a =
-  state.map(item=>{
-    console.log('TOF',!item[action.channel])
+  let a = state.map(item=>{
     return {
       ...item,
-      [action.channel]:!item[action.channel]
+      [action.channel]:true
     }});
   return a;
 };

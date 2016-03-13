@@ -72,7 +72,7 @@ const STYLES = {
     position: 'absolute',
     top: '50%',
     transform: 'translateY(-50%)',
-    marginLeft:30
+    marginLeft:10
 
   },
   container: {

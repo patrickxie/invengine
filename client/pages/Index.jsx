@@ -7,7 +7,7 @@ import IconButton from 'material-ui/lib/icon-button';
 import FlatButton from 'material-ui/lib/flat-button';
 import Colors from 'material-ui/lib/styles/colors';
 import Logo from '../svg/InvengineLogo.svg';
-
+import MediaQuery from 'react-responsive';
 
 export default class Index extends Component {
   render () {
@@ -15,7 +15,9 @@ export default class Index extends Component {
     return (
      <div>
         <AppBar style={STYLES.appbar}
-        title={<span style={STYLES.title}>Invengine</span>}
+        title={ <MediaQuery query='(min-device-width: 475px)'>
+          <span style={STYLES.title}>Invengine</span> 
+          </MediaQuery>}
         iconElementLeft={<IconButton>
                        <div className={sheet.classes.logowrap}> <Logo width={35} height={28}/></div>
                         </IconButton>}

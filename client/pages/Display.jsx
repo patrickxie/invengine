@@ -114,8 +114,8 @@ export default class Display extends Component {
         dragEnabled
         responsive
         verticalMargin={10}
-        itemWidth={200}
-        itemHeight={200} />
+        itemWidth={175}
+        itemHeight={175} />
 { this.state.open ?
         <Paper style={STYLES.popover}>
           <Search style={STYLES.searchIcon} />

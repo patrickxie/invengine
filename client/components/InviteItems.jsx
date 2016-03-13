@@ -2,12 +2,42 @@ import React from 'react';
 import useSheet from 'react-jss';
 import Colors from 'material-ui/lib/styles/colors';
 import { FB, TW, RE, PI, IN, EM, GO } from '../svg/index.js';
-
+import MediaQuery from 'react-responsive';
 import Avatar from 'material-ui/lib/avatar';
 import ListItem from 'material-ui/lib/lists/list-item';
 
 
 const InviteItems = ({ sheet, id, itemInfo, onChannelIconToggle }) =>(
+  <div>
+  <MediaQuery query='(max-device-width: 1224px)'>
+  <ListItem key={id}
+    leftAvatar={<Avatar src={itemInfo.picture[0].medium}/>} >
+       <div style={STYLES.container} >
+         <div style={itemInfo.EM?STYLES.On:STYLES.Off}
+         onTouchTap={onChannelIconToggle.bind(this, id,'EM')}>
+         <EM/></div>
+         <div style={itemInfo.FB?STYLES.On:STYLES.Off}
+         onTouchTap={onChannelIconToggle.bind(this, id,'FB')}>
+         <FB/></div>
+         <div style={itemInfo.TW?STYLES.On:STYLES.Off}
+         onTouchTap={onChannelIconToggle.bind(this, id,'TW')}>
+         <TW/></div>
+         <div style={itemInfo.GO?STYLES.On:STYLES.Off}
+         onTouchTap={onChannelIconToggle.bind(this, id,'GO')}>
+         <GO/></div>
+         <div style={itemInfo.RE?STYLES.On:STYLES.Off}
+         onTouchTap={onChannelIconToggle.bind(this, id,'RE')}>
+         <RE/></div>
+         <div style={itemInfo.IN?STYLES.On:STYLES.Off}
+         onTouchTap={onChannelIconToggle.bind(this, id,'IN')}>
+         <IN/></div>
+         <div style={itemInfo.PI?STYLES.On:STYLES.Off}
+         onTouchTap={onChannelIconToggle.bind(this, id,'PI')}>
+         <PI/></div>
+       </div>
+  </ListItem>
+  </MediaQuery>
+ <MediaQuery query='(min-device-width: 1224px)'>
   <ListItem key={id}
     primaryText={itemInfo.first_name+' '+ itemInfo.last_name}
     leftAvatar={<Avatar src={itemInfo.picture[0].medium}/>} >
@@ -35,7 +65,8 @@ const InviteItems = ({ sheet, id, itemInfo, onChannelIconToggle }) =>(
          <PI/></div>
        </div>
   </ListItem>
-
+  </MediaQuery>
+  </div>
 );
 
 
