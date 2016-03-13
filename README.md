@@ -75,9 +75,3 @@ open http://localhost:3001
 - A basket of kittens 🐱
 - Simple Flask **API**, powered with [**Flask-RESTful**](https://flask-restful.readthedocs.org/en/0.3.3/), [**SQLAlchemy**](http://www.sqlalchemy.org/) and [**PostgreSQL**](http://www.postgresql.org/)
 - **UI**, powered with [**React**](http://facebook.github.io/react/), [**Babel**](https://babeljs.io/), [**Webpack**](http://webpack.github.io/) and [**React Transform HMR**](https://github.com/gaearon/react-transform-hmr)
-
-## License
-
-Copyright 2015, Alexander Kuznetsov &lt;alexkuz@gmail.com&gt;
-
-This boilerplate is based on [**React Webpack Boilerplate**](https://github.com/srn/react-webpack-boilerplate): MIT © [Søren Brokær](http://srn.io)
