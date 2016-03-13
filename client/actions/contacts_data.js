@@ -45,21 +45,28 @@ export function requestData() {
     });
     let { data, imported } = getState();
     console.log('ok stuck here', data, imported);
-    dispatch(requestAPIData());
-    // let hasData = data.length? null : requestAPIData;
+
+    let r = imported.length ? dispatch(mergeData(imported)) :
+      data.length? null : dispatch(requestAPIData());
+    console.log('R should b a function: ', r)
+    // let hasData = data.length? null : dispatch(requestAPIData());
     // console.log('hasdata: ', hasData)
-    // let r = imported.length ? mergeData(imported) : hasData;
-    // console.log('R should b a function: ', r)
-    // r();
+
   }
 }
 
 function mergeData(data) {
   // return { type: 'merge_data_from_imported', data }
-  return dispatch => { dispatch(
-    { type: 'merge_data_from_imported', data }
-    )};
+  return dispatch => { 
+    dispatch(
+      { type: 'merge_data_from_imported', data }
+    );
+    dispatch(
+      { type: 'transfered_to_data' }
+    );
+  }
 }
+
 
 // function importedData(data) {
 //   return { type: 'obtain_data_import', data }

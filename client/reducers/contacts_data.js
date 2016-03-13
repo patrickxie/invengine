@@ -38,15 +38,18 @@ const merge = (state, action) => {
   // then it adds sort and key, and removes duplicates
   //should take the highest Key too to remove 
   // let primary = [ ...state, ...action ];
-  let incrementItem = _.maxBy(state, 'key');
+  let incrementItem = state.length? _.maxBy(state, 'key'): {key:0}; // return when state =[]
+  console.log('incrementItem: ', incrementItem )
   let incrementVal = incrementItem.key;
+  console.log('increment: ', incrementVal)
   let keyedData = action.data.map((item, index)=>({ ...item,
     key:index+incrementVal+1 }));
+  console.log('keyedData', keyedData)
   let primary = _.unionBy(state, keyedData, 'key');
   console.log('primary: ', primary);
-  let secondary = primary.map((item,index)=>(
+  let result = primary.map((item,index)=>(
     { ...item,
-      sort:index,
+      sort:index+1,
       picture:[{ 
         large:item.picture[0].large?
          item.picture[0].large: 'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png',
@@ -54,7 +57,7 @@ const merge = (state, action) => {
          item.picture[0].medium: 'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png'
         }]
     }));
-  let result = secondary;
+  console.log('result: ', result);
   return result;
 };
 
