@@ -116,8 +116,8 @@ const STYLES = {
     color: Colors.indigo500
   },
   tile: {
-    width: '100%',
-    height: '100%',
+    width: '175',
+    height: '175',
     display: 'flex',
     alignItems: 'center',
     // justifyContent: 'center',
