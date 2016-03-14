@@ -44,13 +44,14 @@ export function generateContact() {
     ],
     phone: faker.phone.phoneNumber(),
     avatar: `http://api.randomuser.me/portraits/med/${gender}/${num}.jpg`,
-    domain: faker.internet.domainName(),
+    website: faker.internet.url(),
     email:faker.internet.email(),
-    address: '',
+    address: `${faker.address.streetAddress()}, ${faker.address.secondaryAddress()}
+    ${faker.address.city()}, ${faker.address.stateAbbr()}. ${faker.address.zipCode()}`,
     company: faker.company.companyName(),
+    title: faker.name.jobTitle(),
     fake: true
   }
-  console.log(JSON.stringify(contacts))
   return dispatch => dispatch(
     {
       type:'generated_contact',
