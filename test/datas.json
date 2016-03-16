@@ -16,7 +16,29 @@
     ],
     "inviteProbability": 0.87,
     "sort":1,
-    "email":"testachiotestronaut@gmail.com"
+    "email": "testachiotestronaut",
+    "extra_email":[
+         {
+            "address":"liz@gmail.com",
+            "type":"work",
+            "primary":true
+         },
+         {
+            "address":"liz@example.org",
+            "type":"home"
+         }
+      ],
+    "extra_phone":[
+         {
+            "number":"\n    (206)555-1212\n  ",
+            "type":"work",
+            "primary":true
+         },
+         {
+            "number":"\n    (206)555-1213\n  ",
+            "type":"home"
+         }
+      ],
   },
   {
     "key": 2,
