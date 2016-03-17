@@ -11,13 +11,7 @@ export function addSingleContact(contacts) {
     });
 }
 
-export function addMultipleContacts(contacts) {
-  return dispatch => dispatch(
-    {
-      type:'import_multiple_contacts',
-      contacts
-    });
-}
+
 
 export function consent(source) {
   let url = `/begin_import/${source}`;
@@ -59,42 +53,36 @@ export function generateContact() {
     });
 }
 
-    // picture: [{
-    //   large: `https://unsplash.it/600/377?image=${num}`
-    // }
-    // ],
 
-// export function deleteKitten(kittenId) {
-//   return async dispatch => {
-//     dispatch({
-//       type: actionTypes.DELETE_KITTEN,
-//       kittenId
-//     });
+export function addMultipleContacts(contacts) {
+  console.log(contacts);
+  const result = contacts.map((contact)=>{
+    let exist = (entity) => contact[entity] && contact[entity].length>0 ? true: false;
+    console.log(exist('addresses'));
+    let item = {
+      first_name: exist('first_name')? contact.first_name: 'TACO',
+      last_name: exist('last_name') ? contact.last_name: 'NACHO',
+      email: exist('email') ? contact.email[0].address: '',
+      phone: exist('phone') ? contact.phone[0].number: '',
+      address: exist('address')? contact.addresses[0].formatted : '',
+      extra_email: exist('email') ? contact.email.slice(1): [],
+      extra_phone: exist('phone') ? contact.phone.slice(1): [],
+      extra_addresses: exist('addresses')? contact.addresses.slice(1) : '',
+      picture: exist('photos')? contact.photos.slice(0,1) :
+        [{
+          large: 'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png',
+          medium: 'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png'
+        }],
+      company: exist('companies') ? contact.companies.slice(0,1):'',
+      title: exist('job_title') ? contact.job_title: ''
+    };
+    console.log(item);
+    return item;
+  });
 
-//     try {
-//       await del(`/api/kittens/${kittenId}`);
-
-//       dispatch({
-//         type: actionTypes.DELETE_KITTEN_SUCCESS,
-//         kittenId
-//       });
-//     } catch(e) {
-//       dispatch({
-//         type: actionTypes.DELETE_KITTEN_ERROR,
-//         kittenId
-//       });
-//     }
-//   }
-// }
-
-// https://api.cloudsponge.com/begin_import/user_consent.json
-
-// <Link to='route' target='_blank' onClick={(event) => {event.preventDefault(); window.open(this.makeHref('route'));}} />
-
-// {()=>window.open('http://stackoverflow.com/', '_blank')}
-
-// response = {  
-//   'status': 'success',
-//   'url': 'https://api.cloudsponge.com/n/FULNW3D',
-//   'import_id': 1126
-// }
+  return dispatch => dispatch(
+    {
+      type:'import_multiple_contacts',
+      contacts: result
+    });
+}

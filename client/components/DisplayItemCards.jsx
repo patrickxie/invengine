@@ -39,7 +39,7 @@ class DisplayItemCards extends Component {
       overlay={<CardTitle title={item.first_name} subtitle={item.email} />}
     >
      {!!galleryChildCard.length ? <img src={galleryChildCard[0].large}/>
-       : <img src='http://lorempixel.com/600/377/sports/Dummy-Text/'/>}
+       : <img src='https://unsplash.it/600/377/?random'/>}
     </CardMedia>
     <CardTitle title={`Company: ${item.company||''}`} subtitle={`title: ${item.title||''}`}  />
     {this.state.switcher?

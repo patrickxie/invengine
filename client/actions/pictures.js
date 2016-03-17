@@ -1,3 +1,5 @@
+import { get, post, del } from '../utils/api'; 
+
 export function generatePic() {
   let num = Math.floor((Math.random() * 1000) + 1);
   let picLarge = `https://unsplash.it/600/377?image=${num}`

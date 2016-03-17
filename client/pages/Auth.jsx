@@ -28,7 +28,33 @@ import ListItem from 'material-ui/lib/lists/list-item';
 
 
 class Authpage extends Component {
+  constructor(props) {
+    super(props);
+    const { addMultipleContacts } = this.props;
 
+    var address_book;
+// Asynchronously include the widget library.
+// TODO: replace with your widget script
+    (function(u) {
+      var d=document,s='script',a=d.createElement(s),m=d.getElementsByTagName(s)[0];
+      a.async=1;a.src=u;m.parentNode.insertBefore(a,m);
+    })('//api.cloudsponge.com/widget/c49906adec2fb3b50967415690a4082f639911af.js');
+// extra widget options go here:
+
+    window.csPageOptions = {
+      floatbox:{ outsideClickCloses:true },
+      sources: ['gmail', 'yahoo', 'windowslive', 'linkedin', 'icloud', 'outlook', 'addressbook'],
+      beforeDisplayContacts: function(contacts, source, owner) {
+        address_book = contacts;
+        console.log('owner', owner);
+        console.log(`owner is: ${owner} :from: ${source}`);
+        addMultipleContacts(address_book);
+        console.log('dispatcheds');
+        // return false if you don't want to display the 'choose your contacts UI'
+        return false; // the widget will now close..
+      }
+    };
+  }
 
   render() {
     const { addSingleContact, addMultipleContacts, consent,
@@ -54,8 +80,10 @@ class Authpage extends Component {
             dispatchMethod={addSingleContact} labelName={'Add New'}
             onConsent={consent}
             style={STYLES.gg}/></span>
-           <span style={STYLES.buttongroup}><ImportContacts labelName={'Import Contacts...'}
-             style={STYLES.gg}/></span>
+           <span style={STYLES.buttongroup}><RaisedButton label={'Import Contacts...'}
+            onTouchTap={()=>cloudsponge.launch()}
+            labelColor={Colors.indigoA200}
+            style={STYLES.gg}/></span>
          </div>
       </div>
     <Divider />

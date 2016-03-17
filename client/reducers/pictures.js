@@ -1,4 +1,5 @@
-let placeholder = { large: 'http://image-link-archive.meteor.com/images/placeholder-640x480.png' , medium: 'http://image-link-archive.meteor.com/images/placeholder-640x480.png' };
+const placeholder = { large: 'http://i.imgur.com/6bWhVT3.png?1' ,
+ medium: 'http://i.imgur.com/6bWhVT3.png?1' };
 
 const DEFAULT_STATE = [ placeholder ]; //what if i just add a buffer pic here
 
