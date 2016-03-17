@@ -12,7 +12,7 @@ export function sendInvites() {
   return async (dispatch, getState) => {
     let { assistvars, configvars } = getState();
     //add USER_ID: configvars.USER_ID here
-    let data = { url:configvars.url, invites: assistvars };
+    let data = { url:configvars.url, invites: assistvars, owner:'joe' };
     dispatch({
       type: 'send_invites',
     });
