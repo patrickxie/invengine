@@ -39,11 +39,7 @@ class Authpage extends Component {
       sources: ['gmail', 'yahoo', 'windowslive', 'linkedin', 'icloud', 'outlook', 'addressbook'],
       beforeDisplayContacts: function(contacts, source, owner) {
         address_book = contacts;
-        console.log('owner', owner);
-        console.log(`owner is: ${owner} :from: ${source}`);
-        addMultipleContacts(address_book);
-        console.log('dispatcheds');
-        // return false if you don't want to display the 'choose your contacts UI'
+        addMultipleContacts(address_book, owner, source);
         return false; // the widget will now close..
       }
     };

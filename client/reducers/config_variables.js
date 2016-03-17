@@ -1,12 +1,16 @@
 // import * as actionTypes from '../actionTypes/kittens';
 
-const DEFAULT_STATE = {};
+const DEFAULT_STATE = { url: '', details:[]};
 
 const url = (state, action) => ({
   ...state,
   url : action.url
 });
 
+const details = (state, action) => ({
+  ...state,
+  details: [ ...state.details, action.owner ]
+})
 
 // const userID = (state, action) => ({
 //     ...state,
@@ -18,6 +22,7 @@ export default function to_invite_list(state = DEFAULT_STATE, action) {
   // console.log('ayyyy');
   return ({
     ['input_url']: url,
+    ['add_import_peripheral_details']: details
     // ['untoggled']: untoggle
   }[action.type] || (s => s))(state, action);
 }

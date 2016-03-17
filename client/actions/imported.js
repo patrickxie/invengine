@@ -13,15 +13,15 @@ export function addSingleContact(contacts) {
 
 
 
-export function consent(source) {
-  let url = `/begin_import/${source}`;
-  console.log('url is:', url);
-  return dispatch => dispatch(
-    {
-      type:'contactbook_endpoint_consent',
-      source
-    });
-}
+// export function consent(source) {
+//   let url = `/begin_import/${source}`;
+//   console.log('url is:', url);
+//   return dispatch => dispatch(
+//     {
+//       type:'contactbook_endpoint_consent',
+//       source
+//     });
+// }
 
 export function generateContact() {
   // let num = Math.floor((Math.random() * 1000) + 1);
@@ -54,11 +54,9 @@ export function generateContact() {
 }
 
 
-export function addMultipleContacts(contacts) {
-  console.log(contacts);
+export function addMultipleContacts(contacts, owner, source) {
   const result = contacts.map((contact)=>{
     let exist = (entity) => contact[entity] && contact[entity].length>0 ? true: false;
-    console.log(exist('addresses'));
     let item = {
       first_name: exist('first_name')? contact.first_name: 'TACO',
       last_name: exist('last_name') ? contact.last_name: 'NACHO',
@@ -76,13 +74,19 @@ export function addMultipleContacts(contacts) {
       company: exist('companies') ? contact.companies.slice(0,1):'',
       title: exist('job_title') ? contact.job_title: ''
     };
-    console.log(item);
     return item;
   });
 
-  return dispatch => dispatch(
-    {
-      type:'import_multiple_contacts',
-      contacts: result
-    });
+  return dispatch =>{
+    dispatch(
+      {
+        type:'import_multiple_contacts',
+        contacts: result
+      });
+    dispatch(
+      {
+        type:'add_import_peripheral_details',
+        owner, source
+      });
+  }
 }

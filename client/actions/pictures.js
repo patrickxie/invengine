@@ -1,14 +1,14 @@
 import { get, post, del } from '../utils/api';
 
-export function generatePic() {
-  let num = Math.floor((Math.random() * 1000) + 1);
-  let picLarge = `https://unsplash.it/600/377?image=${num}`
-  let picMedium = `https://unsplash.it/200/200?image=${num}`
-  return dispatch => dispatch({
-    type:'generate_picture',
-    picLarge, picMedium
-  });
-}
+// export function generatePic() {
+//   let num = Math.floor((Math.random() * 1000) + 1);
+//   let picLarge = `https://unsplash.it/600/377?image=${num}`
+//   let picMedium = `https://unsplash.it/200/200?image=${num}`
+//   return dispatch => dispatch({
+//     type:'generate_picture',
+//     picLarge, picMedium
+//   });
+// }
 
 export function setPic(key) {
   return (dispatch, getState) =>{
@@ -30,26 +30,38 @@ export function setPic(key) {
 
 
 
+//need to implement a timeout for when the server goes down or when its not 404
 
-// function Axion(dispatch, contacts) {
-//   console.log('ayyy lmao');
-  
-//   dispatch({ type: 'import_multiple_contacts', contacts:result })
-//   // dispatch({ type: 'DURTYDATA', contacts})
-// }
+export function generatePic() {
+  let num = Math.floor((Math.random() * 1000) + 1);
+  let picLarge = `https://unsplash.it/600/377?image=${num}`
+  let picMedium = `https://unsplash.it/200/200?image=${num}`
+  return async dispatch => {
+    dispatch({
+      type: 'request_picture'
+    });
 
+    try {
+      await get('picLarge');
 
-
-    // picture: [{
-    //   large: `https://unsplash.it/600/377?image=${num}`
-    // }
-    // ],
+      dispatch({
+        type: 'request_picture_valid',
+        picLarge, picMedium
+      });
+    } catch(e) {
+      dispatch({
+        type: 'request_picture_not_valid'
+      });
+      console.log('caught a BIG FAT TROUT')
+      dispatch(generatePic());
+    }
+  }
+}
 
 // export function deleteKitten(kittenId) {
 //   return async dispatch => {
 //     dispatch({
-//       type: actionTypes.DELETE_KITTEN,
-//       kittenId
+//       type: generate_picture,
 //     });
 
 //     try {
