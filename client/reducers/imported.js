@@ -11,7 +11,7 @@ const multiple = (state, action) => ([
 ]);
 
 
-const transfered = (state, action) => ( DEFAULT_STATE )
+const transfered = (state, action) => ( DEFAULT_STATE ) //eslint-disable-line
 
 export default function imported(state = DEFAULT_STATE, action) {
   return ({

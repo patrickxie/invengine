@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import GridTile from 'material-ui/lib/grid-list/grid-tile';
-import GridList from 'material-ui/lib/grid-list/grid-list';
-import StarBorder from 'material-ui/lib/svg-icons/toggle/star-border';
-import IconButton from 'material-ui/lib/icon-button';
 import Colors from 'material-ui/lib/styles/colors';
 import ActionCheckCircle from 'material-ui/lib/svg-icons/action/check-circle';
 import FlatButton from 'material-ui/lib/flat-button';
@@ -13,7 +10,7 @@ import Tappable from 'react-tappable';
 class DisplayItem extends Component {
   constructor(props) {
     super(props);
-    const { item, index, itemsLength, onToggleItem, toggleProp, onSetPic, galleryChild } = this.props;
+    const { item, index, itemsLength, onToggleItem, toggleProp, onSetPic, galleryChild } = this.props; //eslint-disable-line
     this.state = {
       open: false,
     };

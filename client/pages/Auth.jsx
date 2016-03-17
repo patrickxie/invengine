@@ -37,7 +37,7 @@ class Authpage extends Component {
     window.csPageOptions = {
       floatbox:{ outsideClickCloses:true },
       sources: ['gmail', 'yahoo', 'windowslive', 'linkedin', 'icloud', 'outlook', 'addressbook'],
-      beforeDisplayContacts: function(contacts, source, owner) {
+      beforeDisplayContacts (contacts, source, owner) {
         address_book = contacts;
         addMultipleContacts(address_book, owner, source);
         return false; // the widget will now close..
@@ -46,7 +46,7 @@ class Authpage extends Component {
   }
 
   render() {
-    const { addSingleContact, addMultipleContacts, generateContact, newFriend, generatePic, pics } = this.props;
+    const { addSingleContact, generateContact, newFriend, generatePic, pics } = this.props;
     return (<Paper style={STYLES.canvas}>
       <Toolbar styles={STYLES.toolbar}>
         <ToolbarGroup firstChild float='left'>
@@ -68,7 +68,7 @@ class Authpage extends Component {
             dispatchMethod={addSingleContact} labelName={'Add New'}
             style={STYLES.gg}/></span>
            <span style={STYLES.buttongroup}><RaisedButton label={'Import Contacts...'}
-            onTouchTap={()=>cloudsponge.launch()}
+            onTouchTap={()=>cloudsponge.launch()} //eslint-disable-line
             labelColor={Colors.indigoA200}
             style={STYLES.gg}/></span>
          </div>
@@ -195,11 +195,9 @@ const STYLES = {
     textAlign: 'center',
     display: 'inline-block',
     backgroundSize: 'cover',
-    // backgroundImage: `url(${suzy})`
   }
 };
 
-// export default Authpage;
 export default connect(
   state => ({ newFriend: state.imported[state.imported.length-1], pics:state.pictures }),
   { addSingleContact, addMultipleContacts, generateContact, generatePic }

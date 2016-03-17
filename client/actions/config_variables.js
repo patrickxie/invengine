@@ -1,4 +1,4 @@
-import { get, post, del } from '../utils/api';
+import { get, post, del } from '../utils/api'; //eslint-disable-line
 
 export function inputUrl(url) {
   return dispatch => dispatch(
@@ -31,50 +31,3 @@ export function sendInvites() {
     }
   }
 }
-
-// if !result
-//    sendInvites()
-
-// export function requestKittens() {
-//   return async dispatch => {
-//     dispatch({
-//       type: actionTypes.REQUEST_KITTENS
-//     });
-
-//     try {
-//       const result = await get('/api/kittens');
-
-//       dispatch({
-//         type: actionTypes.REQUEST_KITTENS_SUCCESS,
-//         kittens: result
-//       });
-//     } catch(e) {
-//       dispatch({
-//         type: actionTypes.REQUEST_KITTENS_ERROR
-//       });
-//     }
-//   }
-// }
-
-// export function deleteKitten(kittenId) {
-//   return async dispatch => {
-//     dispatch({
-//       type: actionTypes.DELETE_KITTEN,
-//       kittenId
-//     });
-
-//     try {
-//       await del(`/api/kittens/${kittenId}`);
-
-//       dispatch({
-//         type: actionTypes.DELETE_KITTEN_SUCCESS,
-//         kittenId
-//       });
-//     } catch(e) {
-//       dispatch({
-//         type: actionTypes.DELETE_KITTEN_ERROR,
-//         kittenId
-//       });
-//     }
-//   }
-// }

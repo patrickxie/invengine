@@ -9,7 +9,7 @@ import Colors from 'material-ui/lib/styles/colors';
 import RaisedButton from 'material-ui/lib/raised-button';
 import { FB, TW, RE, PI, IN, EM, GO } from '../svg/index.js';
 import Popover from 'material-ui/lib/popover/popover';
-import PopoverAnimationFromTop from 'material-ui/lib/popover/popover-animation-from-top';
+
 
 export default class InviteTable extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ export default class InviteTable extends Component {
     };
   }
 
-   handleTouchTap = (event) => {
+  handleTouchTap = (event) => {
     event.preventDefault();
     this.setState({
       open: true,
@@ -36,7 +36,7 @@ export default class InviteTable extends Component {
   render() {
     // console.log('props in render() is: ', this.props);
     // add payload into props
-    const { sheet, channels, toggleIconAll, channelIconToggle, sendInvites  } = this.props;
+    const { channels, toggleIconAll, channelIconToggle, sendInvites  } = this.props;
 
     return(<div >
     {!!channels.length &&
@@ -58,8 +58,8 @@ export default class InviteTable extends Component {
         <Popover
           open={this.state.open}
           anchorEl={this.state.anchorEl}
-          anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-          targetOrigin={{horizontal: 'middle', vertical: 'bottom'}}
+          anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+          targetOrigin={{ horizontal: 'middle', vertical: 'bottom' }}
           onRequestClose={this.handleRequestClose}
         >
           <div style={STYLES.popover}>
@@ -149,7 +149,6 @@ const STYLES = {
 };
 
 export default connect(
-    // channels: state.assistvars, payload: {channels, state.configvars.url}
   state => ({ channels: state.assistvars }),
   { channelIconToggle, toggleIconAll, sendInvites }
 )(

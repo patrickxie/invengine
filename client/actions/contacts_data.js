@@ -1,4 +1,4 @@
-import { get, post, del } from '../utils/api'; 
+import { get, post, del } from '../utils/api'; //eslint-disable-line
 //requestLocalStorageData() from local storage
 //requestAPIData() from api
 //requestImportData() from auth page
@@ -40,23 +40,18 @@ export function requestData() {
   return (dispatch, getState) => {
     // console.log('warrning!!!!!');
     dispatch({
-        type: 'obtain_data'
+      type: 'obtain_data'
     });
     let { data, imported } = getState();
-    // console.log('ok stuck here', data, imported);
 
-    let r = imported.length ? dispatch(mergeData(imported)) :
+    let r = imported.length ? dispatch(mergeData(imported)) ://eslint-disable-line
       data.length? null : dispatch(requestAPIData());
-    // console.log('R should b a function: ', r)
-    // let hasData = data.length? null : dispatch(requestAPIData());
-    // console.log('hasdata: ', hasData)
-
   }
 }
 
 function mergeData(data) {
   // return { type: 'merge_data_from_imported', data }
-  return dispatch => { 
+  return dispatch => {
     dispatch(
       { type: 'merge_data_from_imported', data }
     );
@@ -66,15 +61,7 @@ function mergeData(data) {
   }
 }
 
-
-// function importedData(data) {
-//   return { type: 'obtain_data_import', data }
-// }
-// var k = getState().data.length, imported.map( i => i.sort = k)
-//find highest key and iterate on top of it.
-
 export function changeSort(sorteddata) {
-  // console.log('changeSort called.');
   return dispatch => { dispatch(
     { type: 'data_sort_swap', data: sorteddata }
     )};

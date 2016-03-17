@@ -1,6 +1,4 @@
-// import * as actionTypes from '../actionTypes/kittens';
-
-const DEFAULT_STATE = { url: '', details:[], invengine_id:''};
+const DEFAULT_STATE = { url: '', details:[], invengine_id:'' };
 
 const url = (state, action) => ({
   ...state,

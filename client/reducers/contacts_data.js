@@ -6,15 +6,15 @@ const swap = (state, action) => (
   action.data
 );
 
-const localstorage = (state, action) => ([
-  ...state,
-  ...action.kittens
-]);
+// const localstorage = (state, action) => ([
+//   ...state,
+//   ...action.kittens
+// ]);
 
-const importData = (state, action) => ([
-  ...state,
-  ...action.kittens
-]);
+// const importData = (state, action) => ([
+//   ...state,
+//   ...action.kittens
+// ]);
 
 const api = (state, action) => ([
   ...action.data

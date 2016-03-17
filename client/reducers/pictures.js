@@ -8,7 +8,7 @@ const add = (state, action) => ([
   { large: action.picLarge, medium: action.picMedium }
 ]);
 
-const browse = (state, action) =>{
+const browse = (state, action) =>{ //eslint-disable-line
   return ([
     ...state.slice(1,state.length), state[0]
   ]);

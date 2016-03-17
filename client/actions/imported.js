@@ -1,4 +1,4 @@
-import { get, post, del } from '../utils/api'; 
+import { get, post, del } from '../utils/api'; //eslint-disable-line
 import faker from 'faker';
 
 // console.log(faker.fake('{{name.lastName}}, {{name.firstName}} {{name.suffix}}'));
