@@ -8,21 +8,14 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import FontIcon from 'material-ui/lib/font-icon';
 import Colors from 'material-ui/lib/styles/colors';
 import FlatButton from 'material-ui/lib/flat-button';
-
 import { browserHistory } from 'react-router';
 import Snackbar from 'material-ui/lib/snackbar';
-import ImportContacts from '../components/ImportContacts';
 import ImportSingle from '../components/ImportSingleContact';
-import { addSingleContact, addMultipleContacts, consent,
-  generateContact } from '../actions/imported';
-
+import { addSingleContact, addMultipleContacts, generateContact } from '../actions/imported';
 import { generatePic } from '../actions/pictures';
-
 import FloatingActionButton from 'material-ui/lib/floating-action-button';
-
 import ArrowForward from 'material-ui/lib/svg-icons/navigation/arrow-forward';
 import Forward from 'material-ui/lib/svg-icons/content/forward';
-
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 
@@ -57,8 +50,7 @@ class Authpage extends Component {
   }
 
   render() {
-    const { addSingleContact, addMultipleContacts, consent,
-    generateContact, newFriend, generatePic, pics } = this.props;
+    const { addSingleContact, addMultipleContacts, generateContact, newFriend, generatePic, pics } = this.props;
     return (<Paper style={STYLES.canvas}>
       <Toolbar styles={STYLES.toolbar}>
         <ToolbarGroup firstChild float='left'>
@@ -78,7 +70,6 @@ class Authpage extends Component {
            /></span>
           <span style={STYLES.buttongroup}><ImportSingle
             dispatchMethod={addSingleContact} labelName={'Add New'}
-            onConsent={consent}
             style={STYLES.gg}/></span>
            <span style={STYLES.buttongroup}><RaisedButton label={'Import Contacts...'}
             onTouchTap={()=>cloudsponge.launch()}
@@ -215,5 +206,5 @@ const STYLES = {
 // export default Authpage;
 export default connect(
   state => ({ newFriend: state.imported[state.imported.length-1], pics:state.pictures }),
-  { addSingleContact, addMultipleContacts, consent, generateContact, generatePic }
+  { addSingleContact, addMultipleContacts, generateContact, generatePic }
 )(Authpage );

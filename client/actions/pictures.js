@@ -1,4 +1,4 @@
-import { get, post, del } from '../utils/api'; 
+import { get, post, del } from '../utils/api';
 
 export function generatePic() {
   let num = Math.floor((Math.random() * 1000) + 1);
@@ -28,4 +28,43 @@ export function setPic(key) {
   };
 }
 
+
+
+
+// function Axion(dispatch, contacts) {
+//   console.log('ayyy lmao');
+  
+//   dispatch({ type: 'import_multiple_contacts', contacts:result })
+//   // dispatch({ type: 'DURTYDATA', contacts})
+// }
+
+
+
+    // picture: [{
+    //   large: `https://unsplash.it/600/377?image=${num}`
+    // }
+    // ],
+
+// export function deleteKitten(kittenId) {
+//   return async dispatch => {
+//     dispatch({
+//       type: actionTypes.DELETE_KITTEN,
+//       kittenId
+//     });
+
+//     try {
+//       await get(piclarge);
+
+//       dispatch({
+//         type: actionTypes.DELETE_KITTEN_SUCCESS,
+//         kittenId
+//       });
+//     } catch(e) {
+//       dispatch({
+//         type: actionTypes.DELETE_KITTEN_ERROR,
+//         kittenId
+//       });
+//     }
+//   }
+// }
 
