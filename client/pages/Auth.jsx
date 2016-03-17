@@ -97,7 +97,7 @@ class Authpage extends Component {
           label='Generate Pictures'
           style={STYLES.button}
           labelColor={Colors.indigoA200}
-          onTouchTap={generatePic}
+          onTouchTap={()=>generatePic(0)}
          />
       </div>
     <Divider style={STYLES.divider} />

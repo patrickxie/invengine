@@ -1,14 +1,4 @@
-import { get, post, del } from '../utils/api';
-
-// export function generatePic() {
-//   let num = Math.floor((Math.random() * 1000) + 1);
-//   let picLarge = `https://unsplash.it/600/377?image=${num}`
-//   let picMedium = `https://unsplash.it/200/200?image=${num}`
-//   return dispatch => dispatch({
-//     type:'generate_picture',
-//     picLarge, picMedium
-//   });
-// }
+import { get } from '../utils/api';
 
 export function setPic(key) {
   return (dispatch, getState) =>{
@@ -28,11 +18,8 @@ export function setPic(key) {
   };
 }
 
-
-
-//need to implement a timeout for when the server goes down or when its not 404
-
-export function generatePic() {
+export function generatePic(attempt) {
+  ++attempt;
   let num = Math.floor((Math.random() * 1000) + 1);
   let picLarge = `https://unsplash.it/600/377?image=${num}`
   let picMedium = `https://unsplash.it/200/200?image=${num}`
@@ -42,7 +29,7 @@ export function generatePic() {
     });
 
     try {
-      await get('picLarge');
+      await get(picLarge);
 
       dispatch({
         type: 'request_picture_valid',
@@ -52,31 +39,10 @@ export function generatePic() {
       dispatch({
         type: 'request_picture_not_valid'
       });
-      console.log('caught a BIG FAT TROUT')
-      dispatch(generatePic());
+      if (attempt < 7) {
+        console.log('dispatched agin')
+        dispatch(generatePic(attempt));
+      };
     }
   }
 }
-
-// export function deleteKitten(kittenId) {
-//   return async dispatch => {
-//     dispatch({
-//       type: generate_picture,
-//     });
-
-//     try {
-//       await get(piclarge);
-
-//       dispatch({
-//         type: actionTypes.DELETE_KITTEN_SUCCESS,
-//         kittenId
-//       });
-//     } catch(e) {
-//       dispatch({
-//         type: actionTypes.DELETE_KITTEN_ERROR,
-//         kittenId
-//       });
-//     }
-//   }
-// }
-
