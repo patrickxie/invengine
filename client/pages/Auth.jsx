@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Divider from 'material-ui/lib/divider';
 import Paper from 'material-ui/lib/paper';
@@ -26,87 +26,96 @@ import Forward from 'material-ui/lib/svg-icons/content/forward';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 
-const Authpage = ({ addSingleContact, addMultipleContacts, consent,
-  generateContact, newFriend, generatePic, pics }) => (
-<Paper style={STYLES.canvas}>
-   <Toolbar styles={STYLES.toolbar}>
-    <ToolbarGroup firstChild float='left'>
-      <h4 style={STYLES.stepText}>Step 1: Add or Import your contacts</h4>
-    </ToolbarGroup>
-   </Toolbar>
-   <div>
-     <h5>{`Please add contacts from one of the following sources,
-      I understand that handing over your contact book to a random
-      internet webapp might not be cool, especially for a new app
-      in beta, so I have made an option for you to add randomly generated friends`}</h5>
-     <div style={STYLES.buttonholder}>
-       <span style={STYLES.buttongroup}><RaisedButton
-        label='Generate Contacts'
-        onTouchTap={generateContact}
-        labelColor={Colors.indigoA200}
-       /></span>
-      <span style={STYLES.buttongroup}><ImportSingle
-        dispatchMethod={addSingleContact} labelName={'Add New'}
-        onConsent={consent}
-        style={STYLES.gg}/></span>
-       <span style={STYLES.buttongroup}><ImportContacts labelName={'Import from Gmail'}
-         style={STYLES.gg}/></span>
-     </div>
-   </div>
-<Divider />
-   <Toolbar styles={STYLES.toolbar}>
-    <ToolbarGroup firstChild float='left'>
-      <h5 style={STYLES.stepText}>Step 2: Import your picture albums</h5>
-    </ToolbarGroup>
-   </Toolbar>
-   <div>
-     <p>You may use the generate pictures if you do not have an album in one of the currently listed services below, currently everything but generated pictures are disabled but I have plans to add them soon!</p>
-     <RaisedButton
-      label='flickr'
-      linkButton={true}
-      href='https://flickr.com'
-      style={STYLES.button}
-      disabled
-      labelColor={Colors.indigoA200}
-      icon={<FontIcon className='muidocs-icon-custom-github'/>}
-     /><span>   </span>
-     <RaisedButton
-      label='Generate Pictures'
-      style={STYLES.button}
-      labelColor={Colors.indigoA200}
-      onTouchTap={generatePic}
-     />
-   </div>
-<Divider style={STYLES.divider} />   
-{!!pics.length &&
-  <List subheader='Loaded Pictures'>
-    <ListItem>
-      {pics.map((pic, i) => (
-        <Paper style={{ ...STYLES.circlePics,
-          backgroundImage:`url(${pic.large})` }}
-          zDepth={2} circle key={i}/>
-      ))}
-    </ListItem>
-  </List>
+
+class Authpage extends Component {
+
+
+  render() {
+    const { addSingleContact, addMultipleContacts, consent,
+    generateContact, newFriend, generatePic, pics } = this.props;
+    return (<Paper style={STYLES.canvas}>
+      <Toolbar styles={STYLES.toolbar}>
+        <ToolbarGroup firstChild float='left'>
+          <h4 style={STYLES.stepText}>Step 1: Add or Import your contacts</h4>
+        </ToolbarGroup>
+      </Toolbar>
+      <div>
+         <h5>{`Please add contacts from one of the following sources,
+          I understand that handing over your contact book to a random
+          internet webapp might not be cool, especially for a new app
+          in beta, so I have made an option for you to add randomly generated friends`}</h5>
+         <div style={STYLES.buttonholder}>
+           <span style={STYLES.buttongroup}><RaisedButton
+            label='Generate Contacts'
+            onTouchTap={generateContact}
+            labelColor={Colors.indigoA200}
+           /></span>
+          <span style={STYLES.buttongroup}><ImportSingle
+            dispatchMethod={addSingleContact} labelName={'Add New'}
+            onConsent={consent}
+            style={STYLES.gg}/></span>
+           <span style={STYLES.buttongroup}><ImportContacts labelName={'Import Contacts...'}
+             style={STYLES.gg}/></span>
+         </div>
+      </div>
+    <Divider />
+      <Toolbar styles={STYLES.toolbar}>
+        <ToolbarGroup firstChild float='left'>
+          <h5 style={STYLES.stepText}>Step 2: Import your picture albums</h5>
+        </ToolbarGroup>
+      </Toolbar>
+      <div>
+         <p>You may use the generate pictures if you do not have an
+         album in one of the currently listed services below,
+         currently everything but generated pictures are disabled but I
+         have plans to add them soon!</p>
+         <RaisedButton
+          label='flickr'
+          linkButton
+          href='https://flickr.com'
+          style={STYLES.button}
+          disabled
+          labelColor={Colors.indigoA200}
+          icon={<FontIcon className='muidocs-icon-custom-github'/>}
+         /><span>   </span>
+         <RaisedButton
+          label='Generate Pictures'
+          style={STYLES.button}
+          labelColor={Colors.indigoA200}
+          onTouchTap={generatePic}
+         />
+      </div>
+    <Divider style={STYLES.divider} />
+    {!!pics.length &&
+      <List subheader='Loaded Pictures'>
+        <ListItem>
+          {pics.map((pic, i) => (
+            <Paper style={{ ...STYLES.circlePics,
+              backgroundImage:`url(${pic.large})` }}
+              zDepth={2} circle key={i}/>
+          ))}
+        </ListItem>
+      </List>
+    }
+        <FlatButton
+          label='Next'
+          labelPosition='before'
+          secondary
+          icon={<Forward />}
+          onTouchTap={()=>browserHistory.push('/home')}
+        />
+      <Snackbar
+        open={!!newFriend}
+        message={!!newFriend? `New Friend ${newFriend.first_name} Added.`: 'hello'}
+        autoHideDuration={4000}
+        onRequestClose={()=>{}}
+        bodyStyle={STYLES.snackbar}
+      />
+       <FloatingActionButton mini secondary style={STYLES.inviteButton}
+        onTouchTap={() => browserHistory.push('/home')}><ArrowForward /></FloatingActionButton>
+    </Paper>);
+  }
 }
-    <FlatButton
-      label='Next'
-      labelPosition='before'
-      secondary
-      icon={<Forward />}
-      onTouchTap={()=>browserHistory.push('/home')}
-    />
-  <Snackbar
-    open={!!newFriend}
-    message={!!newFriend? `New Friend ${newFriend.first_name} Added.`: 'hello'}
-    autoHideDuration={4000}
-    onRequestClose={()=>{}}
-    bodyStyle={STYLES.snackbar}
-  />
-   <FloatingActionButton mini secondary style={STYLES.inviteButton}
-    onTouchTap={() => browserHistory.push('/home')}><ArrowForward /></FloatingActionButton>
-</Paper>
-);
 
 const STYLES = {
   stepText : {

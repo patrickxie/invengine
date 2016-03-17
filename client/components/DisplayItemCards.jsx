@@ -23,7 +23,7 @@ class DisplayItemCards extends Component {
 
   render() {
     const { item, set, galleryChildCard, id } = this.props;
-    console.log('what gallerychild is : ', galleryChildCard);
+    // console.log('what gallerychild is : ', galleryChildCard);
     // let placeholder = { large: 'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png' , medium: 'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png' };
     // const galleryWithDefault = [placeholder,...galleryChildCard];
     // console.log('galleryDefault', galleryWithDefault)
@@ -41,15 +41,15 @@ class DisplayItemCards extends Component {
      {!!galleryChildCard.length ? <img src={galleryChildCard[0].large}/>
        : <img src='http://lorempixel.com/600/377/sports/Dummy-Text/'/>}
     </CardMedia>
-    <CardTitle title={`Company: ${item.company}`} subtitle={`title: ${item.title}`}  />
+    <CardTitle title={`Company: ${item.company||''}`} subtitle={`title: ${item.title||''}`}  />
     {this.state.switcher?
       <CardText>
-      {`Address: ${item.address}`}
+      {`Address: ${item.address||''}`}
       </CardText>
       :
       <CardText>
-      <li>Website: {item.website}</li>
-      <li>Phone no: {item.phone}</li>
+      <li>Website: {item.website||''}</li>
+      <li>Phone no: {item.phone||''}</li>
       </CardText>
     }
     <CardActions>
