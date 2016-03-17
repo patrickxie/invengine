@@ -40,6 +40,11 @@ config = update(config, {
         title: 'Invengine',
         filename: '../../templates/index.html',
         template: 'client/views/index.tpl'
+      }),
+      new HtmlWebpackPlugin({
+        inject: true,
+        filename: '../../templates/auth-proxy.html',
+        template: 'client/views/auth-proxy.html'
       })
     ]
   },
