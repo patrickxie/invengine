@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from sqlalchemy.dialects.postgresql import JSON
-from app import db
+# from app import db
 
 class User(db.Model):
     __tablename__ = 'users'
