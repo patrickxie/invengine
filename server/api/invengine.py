@@ -3,6 +3,8 @@ from flask import Blueprint, request, jsonify
 from flask_restful import Api, Resource
 from models import Kitten #import invenine model here
 from models import User, Invite #import invenine model here
+import uuid
+
 
 invengine_api = Api(Blueprint('invengine_api', __name__)) # pylint: disable=invalid-name
 
@@ -40,9 +42,6 @@ class InvitesAPI(Resource):
     def post(invengine_id):
         # databass = { 'invengine_id': 'uuidw12322' }
         # data = request.data
-        # data = request.values
-        # print(data)
-        # print('*****data is: ', data)
         print('*****invengine_id: ', invengine_id)
         print('*****header is: ', request.headers)
         print('*****value is ', request.values)
@@ -52,7 +51,7 @@ class InvitesAPI(Resource):
         # if invengine_id in databass['invengine_id']:
         #     return jsonify(invengine_id)
         # else:
-        #     # new_invengine_id = invengine()
+        #     # new_user = user(str(uuid.uuid4()))
         #     # db.session.add(new_invengine_id)
         #     new_invengine_id = { 'id': 'xxzonidw12322' }
         #     return jsonify(new_invengine_id.id) 
@@ -92,4 +91,7 @@ class InvitesAPI(Resource):
     #         'created': new_kitten.created.isoformat() + 'Z'
     #     }
     # return { uuid }
+
+
+    
 
