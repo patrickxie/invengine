@@ -2,6 +2,7 @@
 from flask import Blueprint, request, jsonify
 from flask_restful import Api, Resource
 from models import Kitten #import invenine model here
+from models import User, Invite #import invenine model here
 
 invengine_api = Api(Blueprint('invengine_api', __name__)) # pylint: disable=invalid-name
 

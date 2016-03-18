@@ -35,11 +35,19 @@ const channel_icon_toggle = (state, action) =>{
 };
 
 const all = (state, action) =>{
+  // let r = state.reduce(item=>state[action.channel]? +1: null)
+  // let compare = r === state.length ? true: false;
   let a = state.map(item=>{
     return {
       ...item,
       [action.channel]:true
     }});
+  // let b = state.map(item=>{
+  //   return {
+  //     ...item,
+  //     [action.channel]:false
+  //   }});
+  // compare? a: b;
   return a;
 };
 

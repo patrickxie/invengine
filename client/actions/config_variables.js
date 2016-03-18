@@ -11,8 +11,9 @@ export function inputUrl(url) {
 export function sendInvites() {
   return async (dispatch, getState) => {
     let { assistvars, configvars } = getState();
-    let data = { url:configvars.url, invites: assistvars };
-    // let id = configvars.invengine_id;
+    let data = { url:configvars.url, owner_info: configvars.details,
+       invites: assistvars };
+    // let id = configvars.invengine_id;  //uncomment this after implmemtning python api endpoint logic
     let id = 'zedshen';
     console.log('id is: ', id)
     console.log(JSON.stringify(data));
@@ -22,7 +23,7 @@ export function sendInvites() {
 
     try {
       const result = await post(`http://localhost:5000/api/invites/${id}`, data);
-      // const result = await post(`/api/invites/${id}`, data);
+      // const result = await post(`/api/invites/${id}`, data); //uncomment this after implmemtning python api endpoint logic
       dispatch({
         type: 'send_invites_success',
         USER_ID: result.id
