@@ -10,8 +10,9 @@ async function request({ url, data, params = {} }) {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        // 'Content-Type': 'application/json',
         // 'Access-Control-Allow-Origin': '*', //added by patrick to handle cors
-        // 'Access-Control-Allow-Credentials': true //added by patrick to handle cors
+        // 'Access-Control-Allow-Credentials': false //added by patrick to handle cors
       },
       body: data ? ((data instanceof FormData) ? data : JSON.stringify(data)) : undefined,
       ...params

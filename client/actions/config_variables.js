@@ -11,17 +11,21 @@ export function inputUrl(url) {
 export function sendInvites() {
   return async (dispatch, getState) => {
     let { assistvars, configvars } = getState();
-    //add USER_ID: configvars.USER_ID here
-    let data = { url:configvars.url, invites: assistvars, owner:'joe' };
+    let data = { url:configvars.url, invites: assistvars };
+    // let id = configvars.invengine_id;
+    let id = 'zedshen';
+    console.log('id is: ', id)
+    console.log(JSON.stringify(data));
     dispatch({
       type: 'send_invites',
     });
 
     try {
-      const result = await post('https://httpbin.org/post', data);
+      const result = await post(`http://localhost:5000/api/invites/${id}`, data);
+      // const result = await post(`/api/invites/${id}`, data);
       dispatch({
         type: 'send_invites_success',
-        USER_ID: result
+        USER_ID: result.id
       });
     } catch(e) {
       dispatch({

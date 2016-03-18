@@ -11,7 +11,7 @@ export function requestAPIData() {
     });
 
     try {
-      console.log('before fetching api called');
+      // console.log('before fetching api called');
       // const result = await get('/api/kittens/sampledata');
       //these are unfiltered results
       const result = await get('https://api.myjson.com/bins/1mnjz');
