@@ -24,8 +24,7 @@
     "NPM_CONFIG_PRODUCTION": {
       "description": "By default heroku is not installing `devDependencies`, so let's do that.",
       "value": "false"
-    },
-    "WEB_CONCURRENCY" : 3
+    }
     }
   },
   "scripts": {
