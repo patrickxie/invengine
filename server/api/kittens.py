@@ -17,8 +17,8 @@ class KittensAPI(Resource):
 
     @staticmethod
     def post():
-        from app import db
-
+        # from app import db
+        from database import db
         count = Kitten.query.count()
 
         if count >= 9:

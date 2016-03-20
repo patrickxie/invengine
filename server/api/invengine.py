@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, request, jsonify
 from flask_restful import Api, Resource
-from models import Kitten #import invenine model here
-from models import User, Invite #import invenine model here
+# from models import User, Invite #import invenine model here
 import uuid
 
 
@@ -20,8 +19,8 @@ class ContactsAPI(Resource):
 
     @staticmethod
     def post():
-        from app import db
-
+        # from app import db
+        from database import db
         count = Kitten.query.count()
 
         if count >= 9:
@@ -93,5 +92,5 @@ class InvitesAPI(Resource):
     # return { uuid }
 
 
-    
+
 

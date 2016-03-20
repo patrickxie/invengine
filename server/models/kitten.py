@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
-from app import db
+# from app import db
+from database import db
 
 class Kitten(db.Model):
     __tablename__ = 'kittens'
