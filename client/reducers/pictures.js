@@ -1,5 +1,5 @@
-const placeholder = { large: 'http://i.imgur.com/6bWhVT3.png?1' ,
- medium: 'http://i.imgur.com/6bWhVT3.png?1' };
+const placeholder = { large: 'http://www.libcrowds.com/static/img/placeholder.project.png' ,
+ medium: 'http://www.libcrowds.com/static/img/placeholder.project.png' };
 
 const DEFAULT_STATE = [ placeholder ]; //what if i just add a buffer pic here
 

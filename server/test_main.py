@@ -3,8 +3,9 @@ from app import create_app
 # from entry import app
 import os
 from database import db
-
+from models.invengine import User, Invite
 TEST_SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+print TEST_SQLALCHEMY_DATABASE_URI
 
 class MyTest(TestCase):
     TESTING = True
@@ -15,12 +16,16 @@ class MyTest(TestCase):
         self.app = create_app()
         return self.app
 
-    def test_setUp(self):
+    def setUp(self):
         # with app.test_request_context():
-        from models.invengine import User
+        db.drop_all()
         db.create_all()
 
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
 
+    def test_model_user(self):
         contacts =[ 
           { "first_name":"Alan",
             "last_name":"Webb", 
@@ -41,6 +46,11 @@ class MyTest(TestCase):
         count = User.query.count()
         assert count == 2
 
-    def test_tearDown(self):
-        db.session.remove()
-        db.drop_all()
+    def test_model_invite(self):
+        # invite_test_1 = Invite()
+
+    def test_model_user_properties(self):
+        pass
+
+    def test_relationship_between_user_invite(self):
+        pass
