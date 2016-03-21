@@ -1,7 +1,7 @@
 const DEFAULT_STATE = [
   {
     EM:false, FB:false, TW:false, GO:false, RE: false, IN: false,
-    PI:false, first_name: 'test', last_name: 'ikle', picture:[
+    PI:false, first_name: 'test', last_name: 'person', picture:[
       {
         large: 'http://api.randomuser.me/portraits/men/31.jpg',
         medium: 'http://api.randomuser.me/portraits/med/men/31.jpg'

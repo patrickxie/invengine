@@ -10,7 +10,7 @@ class ImportContacts extends Component {
   constructor(props) {
     super(props);
 
-    // const { dispatchMethod } = this.props;
+    const { dispatchMethod } = this.props;
         // var address_book;
 // Asynchronously include the widget library.
 // TODO: replace with your widget script
@@ -22,18 +22,18 @@ class ImportContacts extends Component {
     // console.log('dispatch is : ', dispatchMethod);
     console.log('dispatch is : ', this.props.dispatchMethod);
 
-    // window.csPageOptions = {
-    //   // floatbox:{ outsideClickCloses:true },
-    //   // skipSourceMenu:true, 
-    //   // sources: ['gmail', 'yahoo', 'windowslive', 'linkedin', 'icloud', 'outlook', 'addressbook'],
-    //   beforeDisplayContacts (contacts, source, owner) {
-    //     address_book = contacts;
-    //     console.log('gogoogo')
-    //     this.props.dispatchMethod.bind(this, address_book, owner, source);
-    //     console.log('done')
-    //     return false; // the widget will now close..
-    //   }
-    // };
+    window.csPageOptions = {
+      // floatbox:{ outsideClickCloses:true },
+      // skipSourceMenu:true, 
+      // sources: ['gmail', 'yahoo', 'windowslive', 'linkedin', 'icloud', 'outlook', 'addressbook'],
+      beforeDisplayContacts (contacts, source, owner) {
+        // address_book = contacts;
+        console.log('gogoogo')
+        dispatchMethod(contacts, owner, source);
+        console.log('done')
+        return false; // the widget will now close..
+      }
+    };
 
     this.state = {
       open: false,
@@ -42,7 +42,6 @@ class ImportContacts extends Component {
 
   handleOpen = () => {
     this.setState({open: true});
-    // this.props.onConsent('user_consent');
   };
 
   handleClose = () => {
@@ -50,20 +49,7 @@ class ImportContacts extends Component {
   };
 
   render() {
-    const { labelName, dispatchMethod } = this.props;
-    var address_book;
-    window.csPageOptions = {
-      // floatbox:{ outsideClickCloses:true },
-      // skipSourceMenu:true, 
-      // sources: ['gmail', 'yahoo', 'windowslive', 'linkedin', 'icloud', 'outlook', 'addressbook'],
-      beforeDisplayContacts (contacts, source, owner) {
-        address_book = contacts;
-        console.log('gogoogo')
-        dispatchMethod(address_book, owner, source);
-        console.log('done')
-        return false; // the widget will now close..
-      }
-    };
+    const { labelName } = this.props;
     const actions = [
       <FlatButton
         label="Cancel"
