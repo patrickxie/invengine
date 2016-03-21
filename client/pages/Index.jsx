@@ -16,7 +16,8 @@ export default class Index extends Component {
      <div>
         <AppBar style={STYLES.appbar}
         title={ <MediaQuery query='(min-device-width: 475px)'>
-          <span style={STYLES.title}>Invengine</span> 
+          <span onTouchTap={() => browserHistory.push('/')}
+          style={STYLES.title}>Invengine</span> 
           </MediaQuery>}
         iconElementLeft={<IconButton>
                        <div className={sheet.classes.logowrap}> <Logo width={35} height={28}/></div>
@@ -24,17 +25,14 @@ export default class Index extends Component {
         iconElementRight={<span>
             <span style={STYLES.barButton}>
               <FlatButton style={STYLES.barButtonTxt} label= 'Import'
-              onClick={() => browserHistory.push('/')}
               onTouchTap={() => browserHistory.push('/')}/>
             </span>
             <span style={STYLES.barButton}>
               <FlatButton style={STYLES.barButtonTxt} label= 'Home'
-              onClick={() => browserHistory.push('/home')}
               onTouchTap={() => browserHistory.push('/home')}/>
             </span>
             <span style={STYLES.barButton}>
               <FlatButton style={STYLES.barButtonTxt} label= 'Invite'
-              onClick={() => browserHistory.push('/invite')}
               onTouchTap={() => browserHistory.push('/invite')}/>
             </span></span>}
         />
