@@ -8,7 +8,6 @@ import Colors from 'material-ui/lib/styles/colors';
 class ImportContacts extends Component {
   constructor(props) {
     super(props);
-    // const { dispatchMethod } = this.props;
     this.state = {
       open: false,
       submittable: true,

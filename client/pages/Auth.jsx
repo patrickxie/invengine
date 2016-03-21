@@ -19,34 +19,34 @@ import Forward from 'material-ui/lib/svg-icons/content/forward';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 
+import ImportMultiple from '../components/ImportContacts';
 
 class Authpage extends Component {
   constructor(props) {
     super(props);
-    const { addMultipleContacts } = this.props;
+    // const { addMultipleContacts } = this.props;
+//     var address_book;
+// // Asynchronously include the widget library.
+// // TODO: replace with your widget script
+//     (function(u) {
+//       var d=document,s='script',a=d.createElement(s),m=d.getElementsByTagName(s)[0];
+//       a.async=1;a.src=u;m.parentNode.insertBefore(a,m);
+//     })('//api.cloudsponge.com/widget/c49906adec2fb3b50967415690a4082f639911af.js');
+// // extra widget options go here:
 
-    var address_book;
-// Asynchronously include the widget library.
-// TODO: replace with your widget script
-    (function(u) {
-      var d=document,s='script',a=d.createElement(s),m=d.getElementsByTagName(s)[0];
-      a.async=1;a.src=u;m.parentNode.insertBefore(a,m);
-    })('//api.cloudsponge.com/widget/c49906adec2fb3b50967415690a4082f639911af.js');
-// extra widget options go here:
-
-    window.csPageOptions = {
-      floatbox:{ outsideClickCloses:true },
-      sources: ['gmail', 'yahoo', 'windowslive', 'linkedin', 'icloud', 'outlook', 'addressbook'],
-      beforeDisplayContacts (contacts, source, owner) {
-        address_book = contacts;
-        addMultipleContacts(address_book, owner, source);
-        return false; // the widget will now close..
-      }
-    };
+//     window.csPageOptions = {
+//       floatbox:{ outsideClickCloses:true },
+//       sources: ['gmail', 'yahoo', 'windowslive', 'linkedin', 'icloud', 'outlook', 'addressbook'],
+//       beforeDisplayContacts (contacts, source, owner) {
+//         address_book = contacts;
+//         addMultipleContacts(address_book, owner, source);
+//         return false; // the widget will now close..
+//       }
+//     };
   }
 
   render() {
-    const { addSingleContact, generateContact, newFriend, generatePic, pics } = this.props;
+    const { addSingleContact, addMultipleContacts, generateContact, newFriend, generatePic, pics } = this.props;
     return (<Paper style={STYLES.canvas}>
       <Toolbar styles={STYLES.toolbar}>
         <ToolbarGroup firstChild float='left'>
@@ -67,9 +67,8 @@ class Authpage extends Component {
           <span style={STYLES.buttongroup}><ImportSingle
             dispatchMethod={addSingleContact} labelName={'Add New'}
             style={STYLES.gg}/></span>
-           <span style={STYLES.buttongroup}><RaisedButton label={'Import Contacts...'}
-            onTouchTap={()=>cloudsponge.launch()} //eslint-disable-line
-            labelColor={Colors.indigoA200}
+            <span style={STYLES.buttongroup}><ImportMultiple
+            dispatchMethod={addMultipleContacts} labelName={'Import Contacts'}
             style={STYLES.gg}/></span>
          </div>
       </div>
@@ -131,6 +130,11 @@ class Authpage extends Component {
     </Paper>);
   }
 }
+
+           // <span style={STYLES.buttongroup}><RaisedButton label={'Import Contacts...'}
+           //  onTouchTap={()=>cloudsponge.launch()}
+           //  labelColor={Colors.indigoA200}
+           //  style={STYLES.gg}/></span>
 
 const STYLES = {
   stepText : {

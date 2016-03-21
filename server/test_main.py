@@ -4,15 +4,15 @@ from app import create_app
 import os
 from database import db
 from models.invengine import User, Invite
+from testingdata import data
+d = data()
+
 TEST_SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 print TEST_SQLALCHEMY_DATABASE_URI
 
 class MyTest(TestCase):
     TESTING = True
     def create_app(self):
-        # app.config['SQLALCHEMY_DATABASE_URI'] = TEST_SQLALCHEMY_DATABASE_URI
-        # return 
-        #inject db
         self.app = create_app()
         return self.app
 
@@ -26,28 +26,29 @@ class MyTest(TestCase):
         db.drop_all()
 
     def test_model_user(self):
-        contacts =[ 
-          { "first_name":"Alan",
-            "last_name":"Webb", 
-            "email":"alanwalker@yahoo.com"},
-          { "first_name":"Teresa",
-            "last_name":"Parker",
-            "email":"teresa@hotmail.com"}
-            ]
         # uinstance = u(email='testachiotestronaut@gmail.com' )
         user_test_1 = User(email='foo@bar.com',
                               token='aopfwpieaprjoea',
-                              contacts=contacts)
+                              contacts=d.contacts)
         user_test_2 = User(email='ayy@bar.com',
                               token='werweraddzzzzzz',
-                              contacts=contacts)
+                              contacts=d.contacts)
         db.session.add(user_test_1)
         db.session.add(user_test_2)
+        db.session.commit()
         count = User.query.count()
         assert count == 2
 
     def test_model_invite(self):
-        # invite_test_1 = Invite()
+        user_test_1 = User(email='foo@bar.com',
+                              token='aopfwpieaprjoea',
+                              contacts=d.contacts)
+        invite_test_1 = Invite()
+        invite_test_2 = Invite()
+        db.session.add(user_test_1)
+        db.session.add(invite_test_1)
+        db.session.add(invite_test_2)
+        db.session.commit()      
 
     def test_model_user_properties(self):
         pass

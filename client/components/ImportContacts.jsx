@@ -3,10 +3,38 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
 import Colors from 'material-ui/lib/styles/colors';
+import IconButton from 'material-ui/lib/icon-button';
+import { FB, TW, RE, PI, IN, EM, GO } from '../svg/index.js';
 
 class ImportContacts extends Component {
   constructor(props) {
     super(props);
+
+    // const { dispatchMethod } = this.props;
+        // var address_book;
+// Asynchronously include the widget library.
+// TODO: replace with your widget script
+    (function(u) {
+      var d=document,s='script',a=d.createElement(s),m=d.getElementsByTagName(s)[0];
+      a.async=1;a.src=u;m.parentNode.insertBefore(a,m);
+    })('//api.cloudsponge.com/widget/c49906adec2fb3b50967415690a4082f639911af.js');
+// extra widget options go here:
+    // console.log('dispatch is : ', dispatchMethod);
+    console.log('dispatch is : ', this.props.dispatchMethod);
+
+    // window.csPageOptions = {
+    //   // floatbox:{ outsideClickCloses:true },
+    //   // skipSourceMenu:true, 
+    //   // sources: ['gmail', 'yahoo', 'windowslive', 'linkedin', 'icloud', 'outlook', 'addressbook'],
+    //   beforeDisplayContacts (contacts, source, owner) {
+    //     address_book = contacts;
+    //     console.log('gogoogo')
+    //     this.props.dispatchMethod.bind(this, address_book, owner, source);
+    //     console.log('done')
+    //     return false; // the widget will now close..
+    //   }
+    // };
+
     this.state = {
       open: false,
     };
@@ -22,7 +50,20 @@ class ImportContacts extends Component {
   };
 
   render() {
-    const { labelName } = this.props;
+    const { labelName, dispatchMethod } = this.props;
+    var address_book;
+    window.csPageOptions = {
+      // floatbox:{ outsideClickCloses:true },
+      // skipSourceMenu:true, 
+      // sources: ['gmail', 'yahoo', 'windowslive', 'linkedin', 'icloud', 'outlook', 'addressbook'],
+      beforeDisplayContacts (contacts, source, owner) {
+        address_book = contacts;
+        console.log('gogoogo')
+        dispatchMethod(address_book, owner, source);
+        console.log('done')
+        return false; // the widget will now close..
+      }
+    };
     const actions = [
       <FlatButton
         label="Cancel"
@@ -47,7 +88,12 @@ class ImportContacts extends Component {
           modal={true}
           open={this.state.open}
         >
-          Only actions can close this dialog.
+        <IconButton tooltip="Font Icon"  onTouchTap={()=>cloudsponge.launch('gmail')}>
+          <EM />
+        </IconButton> 
+        <IconButton tooltip="Font Icon" onTouchTap={()=>cloudsponge.launch('yahoo')}>
+          <FB />
+        </IconButton>
         </Dialog>
       </div>
     );
