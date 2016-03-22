@@ -18,15 +18,13 @@ import FlatButton from 'material-ui/lib/flat-button';
 
 
 export default class Display extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     const { data, changeSort, toggle, toggleStatus, gallery, 
       setPic, requestData} = this.props;
-    // console.log(this.props.toggle);
     this.state = {
       open: false,
     };
-    // console.log('constructor changeSort', changeSort);
   }
 
   componentDidMount() {
@@ -41,7 +39,7 @@ export default class Display extends Component {
     var targetSort = target.sort;
     var sorteddata = this.props.data;
     sorteddata.forEach(function(item) {
-      if(target.sort > source.sort && (item.sort <= target.sort && item.sort > source.sort)){
+      if(target.sort > source.sort && (item.sort <= target.sort && item.sort > source.sort)) {
         item.sort --;
       }else if(item.sort >= target.sort && item.sort < source.sort) {
         item.sort ++;
@@ -101,9 +99,9 @@ export default class Display extends Component {
     // console.log('toggle 2:', this.props.toggle)
     return (<div>
         <AbsoluteGrid
-        items={this.props.data} 
+        items={this.props.data}
         displayObject={<DisplayItem
-            onToggleItem={this.props.toggle} 
+            onToggleItem={this.props.toggle}
             toggleProp={this.props.toggleStatus}
             onSetPic={this.props.setPic}
             galleryChild={this.props.gallery}/>}
@@ -133,9 +131,9 @@ export default class Display extends Component {
              <Search />
         </FloatingActionButton>
 }
-         <FloatingActionButton mini secondary style={STYLES.inviteButton} 
+        <FloatingActionButton mini secondary style={STYLES.inviteButton}
          onTouchTap={() => browserHistory.push('/invite')}
-         >
+        >
              <PersonAdd />
         </FloatingActionButton>
         </div>);
@@ -172,7 +170,7 @@ const STYLES = {
     fill: '#fab1ce'
   },
   txtField:{
-    width:"60%",
+    width: '60%',
     backgroundColor: 'white',
     zIndex: '8',
   },
@@ -240,7 +238,7 @@ const STYLES = {
 export default connect(
   state => ({ data: state.data, toggleStatus: state.toinvlist,
   gallery: state.pictures }),
-  { requestData, changeSort, toggle, setPic}
+  { requestData, changeSort, toggle, setPic }
 )(
   useSheet(Display, STYLES)
 );
