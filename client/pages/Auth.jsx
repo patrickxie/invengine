@@ -24,29 +24,11 @@ import ImportMultiple from '../components/ImportContacts';
 class Authpage extends Component {
   constructor(props) {
     super(props);
-    // const { addMultipleContacts } = this.props;
-//     var address_book;
-// // Asynchronously include the widget library.
-// // TODO: replace with your widget script
-//     (function(u) {
-//       var d=document,s='script',a=d.createElement(s),m=d.getElementsByTagName(s)[0];
-//       a.async=1;a.src=u;m.parentNode.insertBefore(a,m);
-//     })('//api.cloudsponge.com/widget/c49906adec2fb3b50967415690a4082f639911af.js');
-// // extra widget options go here:
-
-//     window.csPageOptions = {
-//       floatbox:{ outsideClickCloses:true },
-//       sources: ['gmail', 'yahoo', 'windowslive', 'linkedin', 'icloud', 'outlook', 'addressbook'],
-//       beforeDisplayContacts (contacts, source, owner) {
-//         address_book = contacts;
-//         addMultipleContacts(address_book, owner, source);
-//         return false; // the widget will now close..
-//       }
-//     };
   }
 
   render() {
-    const { addSingleContact, addMultipleContacts, generateContact, newFriend, generatePic, pics } = this.props;
+    const { addSingleContact, addMultipleContacts,
+      generateContact, newFriend, generatePic, pics } = this.props;
     return (<Paper style={STYLES.canvas}>
       <Toolbar styles={STYLES.toolbar}>
         <ToolbarGroup firstChild float='left'>
@@ -131,11 +113,6 @@ class Authpage extends Component {
   }
 }
 
-           // <span style={STYLES.buttongroup}><RaisedButton label={'Import Contacts...'}
-           //  onTouchTap={()=>cloudsponge.launch()}
-           //  labelColor={Colors.indigoA200}
-           //  style={STYLES.gg}/></span>
-
 const STYLES = {
   stepText : {
     color: 'grey',
@@ -159,35 +136,24 @@ const STYLES = {
     textAlign:'center'
   },
   button: {
-    // fill: Colors.deepOrange400
     borderRadius:5,
     margin: 'auto'
-    // border: 'solid 1px #e0e0e0',
   },
   buttongroup:{
     display:'inline-block',
-    // backgroundColor: 'blue',
     margin: 5
   },
   buttonholder:{
-    // display:'inline-block',
     width:'100%',
-    // height:'5rem',
-    // backgroundColor: 'pink'
   },
   snackbar: {
     backgroundColor: Colors.grey300,
-    // color: Colors.red500,
-    // fill: Colors.red500
   },
   snackbartext: {
-    // color: Colors.red500,
-    // fill: Colors.red500
   },
   inviteButton: {
     right: '7%',
     bottom: '7%',
-    // backgroundColor: '#fab1ce',
     fill: 'white',
     position: 'fixed',
     cursor: 'pointer'
