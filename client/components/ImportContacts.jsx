@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import RaisedButton from 'material-ui/lib/raised-button';
 import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
+import RaisedButton from 'material-ui/lib/raised-button';
 import Colors from 'material-ui/lib/styles/colors';
 import IconButton from 'material-ui/lib/icon-button';
-import { FB, TW, RE, PI, IN, EM, GO } from '../svg/index.js';
+import List from 'material-ui/lib/lists/list';
+import ListItem from 'material-ui/lib/lists/list-item';
+import { Apple, AddressBook, iCloud, DropBox, Flickr, Gmail, Outlook, Linkedin, Windows, Yahoo } from '../svg/index.js';
 
 class ImportContacts extends Component {
   constructor(props) {
@@ -19,8 +21,6 @@ class ImportContacts extends Component {
       a.async=1;a.src=u;m.parentNode.insertBefore(a,m);
     })('//api.cloudsponge.com/widget/c49906adec2fb3b50967415690a4082f639911af.js');
 // extra widget options go here:
-    // console.log('dispatch is : ', dispatchMethod);
-    console.log('dispatch is : ', this.props.dispatchMethod);
 
     window.csPageOptions = {
       // floatbox:{ outsideClickCloses:true },
@@ -52,12 +52,12 @@ class ImportContacts extends Component {
     const { labelName } = this.props;
     const actions = [
       <FlatButton
-        label="Cancel"
+        label='Cancel'
         secondary={true}
         onTouchTap={this.handleClose}
       />,
       <FlatButton
-        label="Submit"
+        label='Done'
         primary={true}
         onTouchTap={this.handleClose}
       />,
@@ -69,23 +69,143 @@ class ImportContacts extends Component {
             onTouchTap={this.handleOpen.bind(this)}
             labelColor={Colors.indigoA200} />
         <Dialog
-          title="Dialog With Actions"
           actions={actions}
           modal={true}
           open={this.state.open}
+          contentStyle={STYLES.dialog}
+          autoScrollBodyContent
         >
-        <IconButton tooltip="Font Icon"  onTouchTap={()=>cloudsponge.launch('gmail')}>
-          <EM />
-        </IconButton> 
-        <IconButton tooltip="Font Icon" onTouchTap={()=>cloudsponge.launch('yahoo')}>
-          <FB />
-        </IconButton>
+<List style={STYLES.list}>
+  <ListItem>
+    <RaisedButton
+      label="Import from Google Contacts"
+      labelColor={'#536DFE'}
+      style={STYLES.button}
+      backgroundColor={Colors.grey100} 
+      onTouchTap={()=>cloudsponge.launch('gmail')}
+      >
+    <span style={STYLES.svgWrap}><Gmail width={25} height={25}/></span>
+    </RaisedButton>
+  </ListItem>
+  <ListItem>
+    <RaisedButton
+      label="Import from Yahoo Contacts"
+      labelColor={'#536DFE'}
+      style={STYLES.button}
+      backgroundColor={Colors.grey100} 
+      onTouchTap={()=>cloudsponge.launch('yahoo')}
+      >
+    <span style={STYLES.svgWrap}><Yahoo width={25} height={25}/></span>
+    </RaisedButton>
+  </ListItem>
+  <ListItem>
+    <RaisedButton
+      label="Import from Windows Contacts"
+      labelColor={'#536DFE'}
+      style={STYLES.button}
+      backgroundColor={Colors.grey100} 
+      onTouchTap={()=>cloudsponge.launch('windowslive')}
+      >
+    <span style={STYLES.svgWrap}><Windows width={25} height={25}/></span>
+    </RaisedButton>
+  </ListItem>
+  <ListItem>
+    <RaisedButton
+      label="Import from Address Book"
+      labelColor={'#536DFE'}
+      style={STYLES.button}
+      backgroundColor={Colors.grey100} 
+      onTouchTap={()=>cloudsponge.launch('addressbook')}
+      >
+    <span style={STYLES.svgWrap}><AddressBook width={25} height={25}/></span>
+    </RaisedButton>
+  </ListItem>
+  <ListItem>
+    <RaisedButton
+      label="Import from iCloud Contacts"
+      labelColor={'#536DFE'}
+      style={STYLES.button}
+      backgroundColor={Colors.grey100} 
+      onTouchTap={()=>cloudsponge.launch('icloud')}
+      >
+    <span style={STYLES.svgWrap}><Apple width={25} height={25}/></span>
+    </RaisedButton>
+  </ListItem>
+  <ListItem>
+    <RaisedButton
+      label="Import from Outlook Contacts"
+      labelColor={'#536DFE'}
+      style={STYLES.button}
+      backgroundColor={Colors.grey100} 
+      onTouchTap={()=>cloudsponge.launch('Outlook')}
+      >
+    <span style={STYLES.svgWrap}><Outlook width={25} height={25}/></span>
+    </RaisedButton>
+  </ListItem>
+  <ListItem>
+    <RaisedButton
+      label="Import from Linkedin"
+      labelColor={'#536DFE'}
+      style={STYLES.button}
+      backgroundColor={Colors.grey100} 
+      onTouchTap={()=>cloudsponge.launch('linkedin')}
+      >
+    <span style={STYLES.svgWrap}><Linkedin width={25} height={25}/></span>
+    </RaisedButton>
+  </ListItem>
+
+
+
+
+</List>
+
         </Dialog>
       </div>
     );
   }
 }
 
+const STYLES = {
+  // svg: {
+  //   height: '100%',
+  //   width: '100%',
+  //   // fontSize: 15,
+  //   fill: '#536DFE'
+  // }, 
+  // box: {
+  //   height: 25, 
+  //   width: 25,
+  //   fill: 'red',
+  //   fontSize:10
+  // },
+  label: {
+    fill: '#536DFE'
+  },
+  // txt: {
+  //   color: '#536DFE',
+  //   textDecoration: 'underline'
+  // },
+  dialog:{
+    // width: '80%',
+    // maxWidth: 'none',
+  },
+  button: {
+    // margin: 12,
+    color: '#536DFE',
+    height: '2.5rem',
+    width: '100%'
+  },
+  svgWrap: {
+    position: 'relative',
+    // bottom:2,
+    left: 9,
+    top: 7,
+    fill: '#536DFE'
+  },
+  list: {
+    textAlign: 'center'
+  }
+};
 
 export default ImportContacts;
 
@@ -94,7 +214,7 @@ export default ImportContacts;
 //     var d=document,s='script',a=d.createElement(s),m=d.getElementsByTagName(s)[0];
 //     a.async=1;a.src=u;m.parentNode.insertBefore(a,m);
 //   })('//api.cloudsponge.com/widget/c49906adec2fb3b50967415690a4082f639911af.js');
-//   window.csPageOptions = { textarea_id: "contact_list" };
+//   window.csPageOptions = { textarea_id: 'contact_list' };
 // </script>
 
 
