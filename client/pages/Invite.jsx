@@ -6,6 +6,7 @@ import { populateIconTable } from '../actions/assist_variables';
 import URL from '../components/URL';
 import InviteTable from '../components/InviteTable';
 import Divider from 'material-ui/lib/divider';
+import { browserHistory } from 'react-router';
 
 export default class Invitepage extends Component {
   constructor(props) {
@@ -13,13 +14,11 @@ export default class Invitepage extends Component {
   }
 
   componentDidMount() {
-    this.props.populateIconTable(this.props.invitees);
+    this.props.populateIconTable();
   }
 
   render () {
     return (<div>
-             <URL/>
-            <Divider/>
                 <InviteTable/>
         </div>);
   }
@@ -93,7 +92,8 @@ const STYLES = {
 
 
 export default connect(
-    state => ({ invitees: state.data.filter((item)=>state.toinvlist[item.key]===true) }),
+    // state => ({ invitees: state.data.filter((item)=>state.toinvlist[item.key]===true) }),
+    state => ({  }),
   { populateIconTable }
 )(
   useSheet(Invitepage, STYLES)

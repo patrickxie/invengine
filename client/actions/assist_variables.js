@@ -14,10 +14,13 @@ export function toggleIconAll(channel) {
     });
 }
 
-export function populateIconTable(table) {
-  return dispatch=> dispatch(
-    {
-      type:'populate_Icon_Table',
-      table
-    });
+export function populateIconTable() {
+  return (dispatch, getState)=>{
+    let invitees = getState().data.filter((item)=>getState().toinvlist[item.key]===true);
+    dispatch(
+      {
+        type:'populate_Icon_Table_with_existing',
+        table: invitees
+      });
+  }
 }

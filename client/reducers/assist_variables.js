@@ -1,25 +1,29 @@
+import * as _ from 'lodash';
+
 const DEFAULT_STATE = [
-  {
-    EM:false, FB:false, TW:false, GO:false, RE: false, IN: false,
-    PI:false, first_name: 'test', last_name: 'person', picture:[
-      {
-        large: 'http://api.randomuser.me/portraits/men/31.jpg',
-        medium: 'http://api.randomuser.me/portraits/med/men/31.jpg'
-      },
-      {
-        large: 'http://api.randomuser.me/portraits/men/27.jpg',
-        medium: 'http://api.randomuser.me/portraits/med/men/27.jpg'
-      }
-    ]
-  }
+  // {
+  //   EM:false, FB:false, TW:false, GO:false, RE: false, IN: false,
+  //   PI:false, first_name: 'test', last_name: 'person', picture:[
+  //     {
+  //       large: 'http://api.randomuser.me/portraits/men/31.jpg',
+  //       medium: 'http://api.randomuser.me/portraits/med/men/31.jpg'
+  //     },
+  //     {
+  //       large: 'http://api.randomuser.me/portraits/men/27.jpg',
+  //       medium: 'http://api.randomuser.me/portraits/med/men/27.jpg'
+  //     }
+  //   ]
+  // }
 ];
 
-const generate = (state, action)=>
+const existed = (state, action)=>
 {
   let a = action.table.map( item =>({
     EM:false, FB:false, TW:false, GO:false, RE: false, IN: false, PI:false, ...item
   }));
-  return  a;
+  let replace = _.intersectionBy(state, a , 'key');
+  let result = _.unionBy(replace, a, 'key');
+  return  result ;
 }
 
 const channel_icon_toggle = (state, action) =>{
@@ -52,7 +56,7 @@ const all = (state, action) =>{
 
 export default function assist_variables(state = DEFAULT_STATE, action) {
   return ({
-    ['populate_Icon_Table']: generate,
+    ['populate_Icon_Table_with_existing']: existed,
     ['channel_icon_toggle']: channel_icon_toggle,
     ['toggle_icon_all']: all
   }[action.type] || (s => s))(state, action);
