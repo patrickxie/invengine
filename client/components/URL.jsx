@@ -10,7 +10,7 @@ import { inputUrl, sendMessage } from '../actions/config_variables';
 class URL extends Component {
     constructor(props) {
       super(props);
-      const { inputUrl, url } = this.props;
+      const { inputUrl, url, text } = this.props;
       this.state = {
         errTxt: 'This field is required',
         value: null,
@@ -75,6 +75,7 @@ class URL extends Component {
           </h5>
           <TextField
             multiLine={true}
+            value={this.props.text}
             underlineShow={false}
             rows={5}
             style={STYLES.txtField}
@@ -134,7 +135,7 @@ const STYLES = {
 };
 
 export default connect(
-  state => ({ url: state.configvars.url }),
+  state => ({ url: state.configvars.url, text: state.configvars.message }),
   { inputUrl, sendMessage }
 )(
   useSheet(URL, STYLES)

@@ -1,5 +1,8 @@
+const default_message = 'Hey, I am sharing this link to you via invengine.co'
+
 const DEFAULT_STATE = { url: '', details:[], invengine_id:'',
-  token:'', message: '' };
+  token:'', message: default_message };
+
 
 const url = (state, action) => ({
   ...state,
@@ -22,7 +25,7 @@ const userID = (state, action) => ({
   ...state,
   invengine_id: state.invengine_id === action.USER_ID ?
   state.invengine_id:  action.USER_ID,
-  message: '',
+  message: default_message,
   url: ''
 })
 
