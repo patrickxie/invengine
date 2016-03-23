@@ -12,7 +12,6 @@ class DisplayItemCards extends Component {
   constructor(props) {
     super(props);
     this.state = { switcher: false };
-    // const { set, item, galleryChildCard, id } = this.props;
   }
 
     switcherFunc() {
@@ -23,17 +22,13 @@ class DisplayItemCards extends Component {
 
   render() {
     const { item, set, galleryChildCard, id } = this.props;
-    // console.log('what gallerychild is : ', galleryChildCard);
-    // let placeholder = { large: 'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png' , medium: 'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png' };
-    // const galleryWithDefault = [placeholder,...galleryChildCard];
-    // console.log('galleryDefault', galleryWithDefault)
-    // const mismatch = item.picture[0].medium !== galleryChildCard[0].large ? galleryChildCard : item.picture[0] ;
-    // console.log('mismatch is', mismatch);
     return(<Card>
     <CardHeader
       title={item.first_name}
       subtitle={item.last_name}
-      avatar={item.picture[0].medium||'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png'}
+      avatar={
+      item.picture[0].medium||
+      'https://d1fy1ym40biffm.cloudfront.net/images/default-avatar.png'}
     />
     <CardMedia
       overlay={<CardTitle title={item.first_name} subtitle={item.email} />}
@@ -60,8 +55,6 @@ class DisplayItemCards extends Component {
   }
 }
 
-
-// {galleryChildCard[0].large}
 
 const STYLES = {
   off: {
