@@ -17,7 +17,7 @@ import promise from 'redux-promise';
 import { compose } from 'redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistory } from 'react-router-redux';
-import { Auth, Index, Invite, Display } from './pages/export';
+import { Auth, Index, Invite, Display, SendInvites } from './pages/export';
 
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -80,6 +80,7 @@ ReactDOM.render(
           <IndexRoute component={Auth}/>
           <Route path='invite' component={Invite}/>
           <Route path='home' component={Display}/>
+          <Route path='sendconfirm' component={SendInvites}/>
         </Route>
       </Router>
     </div>
