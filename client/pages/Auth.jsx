@@ -75,6 +75,15 @@ class Authpage extends Component {
           icon={<FontIcon className='muidocs-icon-custom-github'/>}
          /><span>   </span>
          <RaisedButton
+          label='instagram'
+          linkButton
+          href='https://flickr.com'
+          style={STYLES.button}
+          disabled
+          labelColor={Colors.indigoA200}
+          icon={<FontIcon className='muidocs-icon-custom-github'/>}
+         /><span>   </span>
+         <RaisedButton
           label='Generate Pictures'
           style={STYLES.button}
           labelColor={Colors.indigoA200}
