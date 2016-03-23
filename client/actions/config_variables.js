@@ -17,9 +17,9 @@ export function sendMessage(message) {
 export function sendInvites() {
   return async (dispatch, getState) => {
     let { assistvars, configvars } = getState();
-    let data = { url:configvars.url, owner_info: configvars.details,
+    let data = { id: configvars.invengine_id, token: configvars.token,
+        url:configvars.url, owner_info: configvars.details,
        invites: assistvars, custom_message: configvars.message };
-    let token = configvars.token;
     // let id = configvars.invengine_id;  //uncomment this after implmemtning python api endpoint logic
     let id = 'zedshen';
     console.log('id is: ', id)
