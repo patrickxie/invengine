@@ -18,7 +18,8 @@ export default class Invitepage extends Component {
   }
 
   render () {
-    return (<div>
+    return (
+        <div>
                 <InviteTable/>
         </div>);
   }
