@@ -36,10 +36,10 @@ class Authpage extends Component {
         </ToolbarGroup>
       </Toolbar>
       <div>
-         <h5>{`Please add contacts from one of the following sources,
+         <p style={STYLES.h5txt}>{`Please add contacts from one of the following sources,
           I understand that handing over your contact book to a random
           internet webapp might not be cool, especially for a new app
-          in beta, so I have made an option for you to add randomly generated friends`}</h5>
+          in beta, so I have made an option for you to add randomly generated friends`}</p>
          <div style={STYLES.buttonholder}>
            <span style={STYLES.buttongroup}><RaisedButton
             label='Generate Contacts'
@@ -57,11 +57,11 @@ class Authpage extends Component {
     <Divider />
       <Toolbar styles={STYLES.toolbar}>
         <ToolbarGroup firstChild float='left'>
-          <h5 style={STYLES.stepText}>Step 2: Import your picture albums</h5>
+          <h4 style={STYLES.stepText}>Step 2: Import your picture albums</h4>
         </ToolbarGroup>
       </Toolbar>
       <div>
-         <p>You may use the generate pictures if you do not have an
+         <p style={STYLES.h5txt}>You may use the generate pictures if you do not have an
          album in one of the currently listed services below,
          currently everything but generated pictures are disabled but I
          have plans to add them soon!</p>
@@ -117,7 +117,12 @@ const STYLES = {
   stepText : {
     color: 'grey',
     // textAlign: 'center',
-    textIndent: '15'
+    textIndent: '15',
+  },
+  h5txt: {
+    lineHeight: '150%',
+    textIndent: '15',
+    fontSize: 'smaller'
   },
   toolbar: {
       // width: '50%',
