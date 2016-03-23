@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import useSheet from 'react-jss';
 import { connect } from 'react-redux';
 import { channelIconToggle, toggleIconAll } from '../actions/assist_variables';
-import { sendInvites } from '../actions/config_variables';
 import InviteItems from '../components/InviteItems';
 import List from 'material-ui/lib/lists/list';
 import Colors from 'material-ui/lib/styles/colors';
 import RaisedButton from 'material-ui/lib/raised-button';
 import { FB, TW, RE, PI, IN, EM, GO } from '../svg/index.js';
 import Popover from 'material-ui/lib/popover/popover';
+import { browserHistory } from 'react-router';
 
 
 export default class InviteTable extends Component {
@@ -36,7 +36,7 @@ export default class InviteTable extends Component {
   render() {
     // console.log('props in render() is: ', this.props);
     // add payload into props
-    const { channels, toggleIconAll, channelIconToggle, sendInvites  } = this.props;
+    const { channels, toggleIconAll, channelIconToggle  } = this.props;
 
     return(<div >
     {!!channels.length &&
@@ -91,14 +91,12 @@ export default class InviteTable extends Component {
         <RaisedButton
           label='Send Invites'
           style={STYLES.sendbutton}
-          onTouchTap={sendInvites}
+          onTouchTap={() => browserHistory.push('/sendconfirm')}
         />
     </div>
   </div>);
   }
 }
-
-// onClick={sendInvites(payload)}
 
 const STYLES = {
   buttonGrouper: {
@@ -150,7 +148,7 @@ const STYLES = {
 
 export default connect(
   state => ({ channels: state.assistvars }),
-  { channelIconToggle, toggleIconAll, sendInvites }
+  { channelIconToggle, toggleIconAll }
 )(
   useSheet(InviteTable, STYLES)
 );

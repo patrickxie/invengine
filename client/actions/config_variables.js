@@ -7,12 +7,19 @@ export function inputUrl(url) {
     });
 }
 
+export function sendMessage(message) {
+  return dispatch => dispatch(
+    { type: 'input_custom_invite_message',
+      message }
+    )
+}
 
 export function sendInvites() {
   return async (dispatch, getState) => {
     let { assistvars, configvars } = getState();
     let data = { url:configvars.url, owner_info: configvars.details,
-       invites: assistvars };
+       invites: assistvars, custom_message: configvars.message };
+    let token = configvars.token;
     // let id = configvars.invengine_id;  //uncomment this after implmemtning python api endpoint logic
     let id = 'zedshen';
     console.log('id is: ', id)
