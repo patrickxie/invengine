@@ -45,6 +45,7 @@ class InvitesAPI(Resource):
         print('*****header is: ', request.headers)
         print('*****value is ', request.values)
         print('*****data is', request.data)
+        print('******json is', request.json)
         # print('*****method is ', request.method),
         # print('invengine id is : ', invengine_id)
         # if invengine_id in databass['invengine_id']:
@@ -59,6 +60,10 @@ class InvitesAPI(Resource):
         # kitten = Kitten.query.get_or_404(invengine_id)
         # db.session.delete(kitten)
         # db.session.commit()
+
+        # if there are no owner data, then make new one
+        # otherwise, if there is owner, then query owner and 
+        # add owner into the invite creation argument field
 
         return jsonify({'id': invengine_id})
 
