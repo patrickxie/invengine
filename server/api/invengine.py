@@ -7,7 +7,7 @@ import uuid
 
 invengine_api = Api(Blueprint('invengine_api', __name__)) # pylint: disable=invalid-name
 
-@invengine_api.resource('/contacts')
+@invengine_api.resource('/contacts/<string:id>')
 class ContactsAPI(Resource):
     @staticmethod
     def get():
@@ -34,6 +34,61 @@ class ContactsAPI(Resource):
             'id': new_kitten.id,
             'created': new_kitten.created.isoformat() + 'Z'
         }
+
+
+
+@invengine_api.resource('/users/<int:id>')
+class UsersAPI(Resource):
+    @staticmethod
+    def get(id):
+        # username = request.json.get('username')
+        token = request.json.get('token')
+        u = User.query.filter_by(id=id).first()
+        if u is None:
+            tok = uuid.uuid4()
+            new_user = User(token=tok)
+            db.session.add(new_user)
+            db.session.commit()
+            return jsonify({'invengine_id': user.id, 'token':tok})
+        return jsonify({'invengine_id': id, 'token': uuid.uuid4})
+        check username, if exists, and has token then give
+        access to resource
+        if no username, create new username & password,
+
+
+
+    @staticmethod
+    def post():
+        #returns token 
+        username = request.json.get('username')
+        token = request.json.get('token')
+
+        if username is None:
+            user = User(uuid, token= 'wawoiera')
+            return username: new user.name, token token
+        if User.query.filter_by(username=username).first():
+            return a token mothafucka with original username back
+
+
+@app.route('/api/users', methods=['POST'])
+def new_user():
+    username = request.json.get('username')
+    password = request.json.get('password')
+    if username is None or password is None:
+        abort(400)    # missing arguments
+    if User.query.filter_by(username=username).first() is not None:
+        abort(400)    # existing user
+    user = User(username=username)
+    user.hash_password(password)
+    db.session.add(user)
+    db.session.commit()
+    return (jsonify({'username': user.username}), 201,
+            {'Location': url_for('get_user', id=user.id, _external=True)})
+
+
+
+
+
 
 @invengine_api.resource('/invites/<string:invengine_id>')
 class InvitesAPI(Resource):

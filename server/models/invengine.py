@@ -18,12 +18,15 @@ class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
+    username = db.Column(db.string(32), index=True)
     token = db.Column(db.String(150))
     created = db.Column(db.DateTime, default=datetime.utcnow)
     email = db.Column(db.String(150), unique=True)
     contacts = db.Column(JSON)
     invites_history = db.relationship('Invite', backref='user',
                                 lazy='dynamic')
+    # user basic infos
+    # username dayum
     # activities = db.Column(JSON)
     # rawJsons = array of allr esponse json objects
 
