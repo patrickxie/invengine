@@ -85,14 +85,14 @@ export function sendInvites() {
 
 
 export function dispatchSendInvites(data) {
-  return dispatch => {
+  return async dispatch => {
     dispatch({
         type: 'send_invites',
         data_to_send: data
       });
 
       try {
-        const result = await post(`http://localhost:5000/api/invites/${id}`, data);
+        const result = await post(`http://localhost:5000/api/invites/${data.id}`, data);
         // const result = await post(`/api/invites/${id}`, data); //uncomment this after implmemtning python api endpoint logic
         dispatch({
           type: 'send_invites_success',
