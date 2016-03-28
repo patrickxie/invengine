@@ -22,20 +22,44 @@ export function sendInvites() {
         url:configvars.url, owner_info: configvars.details,
        invites: assistvars, custom_message: configvars.message };
     // let id = configvars.invengine_id;  //uncomment this after implmemtning python api endpoint logic
-    if ( !data.id && !data.token ){
-      dispatch({type:getting id and token})
-      try{
-          const result = await get(`/api/users/${data.id}`)
-          data.id = result.id
-          data.token = result.token
-
-          dispatch token success
-          dispatch(dispatchSendInvites(data))
+    if ( data.id&&data.token ){
+      dispatch(dispatchSendInvites(data))
+    }
+    else {
+      dispatch({
+        type:'obtaining_id&token_from_server'});
+      try {
+          const result = await get(`http://localhost:5000/api/users/${data.id}`);
+          // const result = await get(`/api/users/${data.id}`);//uncomment this for local web
+          data = { ...data, id: result.id, token:result.token};
+          dispatch({
+            type:'obtaining_id&token_from_server_success'
+          });
+          dispatch(dispatchSendInvites(data));
       }
       catch(e){
-          dispatch token failure
+          dispatch({
+            type:'obtaining_id&token_from_server_failure',
+            e
+          });
       }
     }
+  }
+}
+    // if ( !data.id && !data.token ){
+    //   dispatch({type:getting id and token})
+    //   try{
+    //       const result = await get(`/api/users/${data.id}`)
+    //       data.id = result.id
+    //       data.token = result.token
+
+    //       dispatch token success
+    //       dispatch(dispatchSendInvites(data))
+    //   }
+    //   catch(e){
+    //       dispatch token failure
+    //   }
+    // }
     // let id = 'zedshen';
     // console.log('id is: ', id)
     // console.log(JSON.stringify(data));
@@ -58,13 +82,13 @@ export function sendInvites() {
     //     error: e
     //   });
     // }
-  }
-}
+
 
 export function dispatchSendInvites(data) {
   return dispatch => {
     dispatch({
         type: 'send_invites',
+        data_to_send: data
       });
 
       try {
