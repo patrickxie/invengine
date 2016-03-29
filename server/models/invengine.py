@@ -18,7 +18,7 @@ class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True, unique=True)
-    username = db.Column(db.string(32), index=True)
+    # username = db.Column(db.string(32), index=True)
     token = db.Column(db.String(150))
     created = db.Column(db.DateTime, default=datetime.utcnow)
     email = db.Column(db.String(150), unique=True)

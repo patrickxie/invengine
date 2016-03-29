@@ -21,27 +21,29 @@ export function sendInvites() {
     let data = { id: configvars.invengine_id, token: configvars.token,
         url:configvars.url, owner_info: configvars.details,
        invites: assistvars, custom_message: configvars.message };
-    // let id = configvars.invengine_id;  //uncomment this after implmemtning python api endpoint logic
-    if ( data.id&&data.token ){
+    if ( data.id&&data.token ) {
+      console.log('id & token', data.id&&data.token)
+      console.log(JSON.stringify(data))
       dispatch(dispatchSendInvites(data))
     }
     else {
       dispatch({
-        type:'obtaining_id&token_from_server'});
+        type:'obtaining_id&token_from_server' });
       try {
-          const result = await get(`http://localhost:5000/api/users/${data.id}`);
-          // const result = await get(`/api/users/${data.id}`);//uncomment this for local web
-          data = { ...data, id: result.id, token:result.token};
-          dispatch({
-            type:'obtaining_id&token_from_server_success'
-          });
-          dispatch(dispatchSendInvites(data));
+        const result = await get(`http://localhost:5000/api/users`);
+        // const result = await get(`/api/users/${data.id}`);//uncomment this for local web
+        data = { ...data, id: result.id, token:result.token };
+        dispatch({
+          type:'obtaining_id&token_from_server_success',
+          id: result.id, token: result.token
+        });
+        dispatch(dispatchSendInvites(data));
       }
-      catch(e){
-          dispatch({
-            type:'obtaining_id&token_from_server_failure',
-            e
-          });
+      catch(e) {
+        dispatch({
+          type:'obtaining_id&token_from_server_failure',
+          e
+        });
       }
     }
   }
@@ -87,22 +89,22 @@ export function sendInvites() {
 export function dispatchSendInvites(data) {
   return async dispatch => {
     dispatch({
-        type: 'send_invites',
-        data_to_send: data
-      });
+      type: 'send_invites',
+      data_to_send: data
+    });
 
-      try {
-        const result = await post(`http://localhost:5000/api/invites/${data.id}`, data);
-        // const result = await post(`/api/invites/${id}`, data); //uncomment this after implmemtning python api endpoint logic
-        dispatch({
-          type: 'send_invites_success',
-          USER_ID: result.id
-        });
-      } catch(e) {
-        dispatch({
-          type: 'send_invites_failure',
-          error: e
-        });
-      }
+    try {
+      const result = await post(`http://localhost:5000/api/invites/${data.id}`, data);
+      // const result = await post(`/api/invites/${id}`, data); //uncomment this after implmemtning python api endpoint logic
+      dispatch({
+        type: 'send_invites_success',
+        USER_ID: result.id
+      });
+    } catch(e) {
+      dispatch({
+        type: 'send_invites_failure',
+        error: e
+      });
+    }
   }
 }

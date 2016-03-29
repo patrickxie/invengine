@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, request, jsonify
 from flask_restful import Api, Resource
-# from models import User, Invite #import invenine model here
+from models import User, Invite #import invenine model here
 import uuid
 
 
@@ -37,53 +37,64 @@ class ContactsAPI(Resource):
 
 
 
-@invengine_api.resource('/users/<int:id>')
+@invengine_api.resource('/users')
 class UsersAPI(Resource):
     @staticmethod
-    def get(id):
-        # username = request.json.get('username')
-        token = request.json.get('token')
-        u = User.query.filter_by(id=id).first()
-        if u is None:
-            tok = uuid.uuid4()
-            new_user = User(token=tok)
-            db.session.add(new_user)
-            db.session.commit()
-            return jsonify({'invengine_id': user.id, 'token':tok})
-        return jsonify({'invengine_id': id, 'token': uuid.uuid4})
-        check username, if exists, and has token then give
-        access to resource
-        if no username, create new username & password,
+    def get():
+        from database import db
+        tok = str(uuid.uuid4())
+        new_user = User(token=tok)
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({'invengine_id': new_user.id, 'token': tok})
+
+# @invengine_api.resource('/users/<int:id>')
+# class UsersAPI(Resource):
+#     @staticmethod
+#     def post(id):
+#         from database import db
+#         # username = request.json.get('username')
+#         # YOu cant use post
+#         # token = request.values.get('token')
+#         token = request.json.get('token')
+#         u = User.query.filter_by(id=id).first()
+#         if u is None:
+#             tok = str(uuid.uuid4())
+#             new_user = User(token=tok)
+#             db.session.add(new_user)
+#             db.session.commit()
+#             return jsonify({'invengine_id': new_user.id, 'token':tok})
+#         return jsonify({'invengine_id': id, 'token': str(uuid.uuid4())})
 
 
 
-    @staticmethod
-    def post():
-        #returns token 
-        username = request.json.get('username')
-        token = request.json.get('token')
+#     @staticmethod
+#     def post():
+#         #returns token 
+#         username = request.json.get('username')
+#         token = request.json.get('token')
 
-        if username is None:
-            user = User(uuid, token= 'wawoiera')
-            return username: new user.name, token token
-        if User.query.filter_by(username=username).first():
-            return a token mothafucka with original username back
+#         if username is None:
+#             user = User(uuid, token= 'wawoiera')
+#             return username: new user.name, token token
+#         if User.query.filter_by(username=username).first():
+#             return a token mothafucka with original username back
 
 
-@app.route('/api/users', methods=['POST'])
-def new_user():
-    username = request.json.get('username')
-    password = request.json.get('password')
-    if username is None or password is None:
-        abort(400)    # missing arguments
-    if User.query.filter_by(username=username).first() is not None:
-        abort(400)    # existing user
-    user = User(username=username)
-    user.hash_password(password)
-    db.session.add(user)
-    db.session.commit()
-    return (jsonify({'username': user.username}), 201,
-            {'Location': url_for('get_user', id=user.id, _external=True)})
+# @app.route('/api/users', methods=['POST'])
+# def new_user():
+#     username = request.json.get('username')
+#     password = request.json.get('password')
+#     if username is None or password is None:
+#         abort(400)    # missing arguments
+#     if User.query.filter_by(username=username).first() is not None:
+#         abort(400)    # existing user
+#     user = User(username=username)
+#     user.hash_password(password)
+#     db.session.add(user)
+#     db.session.commit()
+#     return (jsonify({'username': user.username}), 201,
+#             {'Location': url_for('get_user', id=user.id, _external=True)})
 
 
 
@@ -94,6 +105,10 @@ def new_user():
 class InvitesAPI(Resource):
     @staticmethod
     def post(invengine_id):
+        from rq import Queue
+        from .worker import conn
+        from .tasks import helloTest
+
         # databass = { 'invengine_id': 'uuidw12322' }
         # data = request.data
         print('*****invengine_id: ', invengine_id)
