@@ -21,28 +21,24 @@ const details = (state, action) => ({
   details: [ ...state.details, action.owner ]
 })
 
-const userID = (state, action) => ({
+const reset = (state, action) => ({
   ...state,
-  invengine_id: state.invengine_id === action.USER_ID ?
-  state.invengine_id:  action.USER_ID,
   message: default_message,
   url: ''
 })
 
 const addToken = (state, action) => ({
   ...state,
+  invengine_id : action.id,
   token: action.token
 })
 
-//add ['SEND_INVITE_SUCCESS']: userID
 export default function to_invite_list(state = DEFAULT_STATE, action) {
-  // console.log('ayyyy');
   return ({
     ['input_url']: url,
     ['input_custom_invite_message']: message,
     ['add_import_peripheral_details']: details,
-    ['send_invites_success']: userID,
+    ['send_invites_success']: reset,
     ['obtaining_id&token_from_server_success']: addToken
-    // ['untoggled']: untoggle
   }[action.type] || (s => s))(state, action);
 }
