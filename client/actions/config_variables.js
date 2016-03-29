@@ -35,7 +35,7 @@ export function sendInvites() {
         data = { ...data, id: result.id, token:result.token };
         dispatch({
           type:'obtaining_id&token_from_server_success',
-          id: result.id, token: result.token
+          id: result.invengine_id, token: result.token
         });
         dispatch(dispatchSendInvites(data));
       }
@@ -98,7 +98,7 @@ export function dispatchSendInvites(data) {
       // const result = await post(`/api/invites/${id}`, data); //uncomment this after implmemtning python api endpoint logic
       dispatch({
         type: 'send_invites_success',
-        USER_ID: result.id
+        // USER_ID: result.id // get rid of this line
       });
     } catch(e) {
       dispatch({
