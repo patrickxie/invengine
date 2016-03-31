@@ -15,7 +15,7 @@ export function requestAPIData() {
       // const result = await get('/api/kittens/sampledata');
       //these are unfiltered results
       //change this
-      const result = await get('https://api.myjson.com/bins/1mnjz');
+      const result = await get('https://api.myjson.com/bins/4tbzc');
       //these are filtered results
       // const result = await get('https://api.myjson.com/bins/1vjxb');
       // console.log('I got dee results', result);
