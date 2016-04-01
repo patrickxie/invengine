@@ -3,7 +3,9 @@ from flask import Blueprint, request, jsonify
 from flask_restful import Api, Resource
 from models import User, Invite #import invenine model here
 import uuid
-
+from rq import Queue
+from worker import conn
+from tasks import helloTest, parse_invite_data, send_emails
 
 invengine_api = Api(Blueprint('invengine_api', __name__)) # pylint: disable=invalid-name
 
@@ -46,56 +48,8 @@ class UsersAPI(Resource):
         new_user = User(token=tok)
         db.session.add(new_user)
         db.session.commit()
+        print('we adding a new user :', new_user.id)
         return jsonify({'invengine_id': new_user.id, 'token': tok})
-
-# @invengine_api.resource('/users/<int:id>')
-# class UsersAPI(Resource):
-#     @staticmethod
-#     def post(id):
-#         from database import db
-#         # username = request.json.get('username')
-#         # YOu cant use post
-#         # token = request.values.get('token')
-#         token = request.json.get('token')
-#         u = User.query.filter_by(id=id).first()
-#         if u is None:
-#             tok = str(uuid.uuid4())
-#             new_user = User(token=tok)
-#             db.session.add(new_user)
-#             db.session.commit()
-#             return jsonify({'invengine_id': new_user.id, 'token':tok})
-#         return jsonify({'invengine_id': id, 'token': str(uuid.uuid4())})
-
-
-
-#     @staticmethod
-#     def post():
-#         #returns token 
-#         username = request.json.get('username')
-#         token = request.json.get('token')
-
-#         if username is None:
-#             user = User(uuid, token= 'wawoiera')
-#             return username: new user.name, token token
-#         if User.query.filter_by(username=username).first():
-#             return a token mothafucka with original username back
-
-
-# @app.route('/api/users', methods=['POST'])
-# def new_user():
-#     username = request.json.get('username')
-#     password = request.json.get('password')
-#     if username is None or password is None:
-#         abort(400)    # missing arguments
-#     if User.query.filter_by(username=username).first() is not None:
-#         abort(400)    # existing user
-#     user = User(username=username)
-#     user.hash_password(password)
-#     db.session.add(user)
-#     db.session.commit()
-#     return (jsonify({'username': user.username}), 201,
-#             {'Location': url_for('get_user', id=user.id, _external=True)})
-
 
 
 
@@ -105,17 +59,32 @@ class UsersAPI(Resource):
 class InvitesAPI(Resource):
     @staticmethod
     def post(invengine_id):
-        from rq import Queue
-        from .worker import conn
-        from .tasks import helloTest
+
+        # q = Queue('low', connection=conn)
+        q = Queue('low', connection=conn)
+        # j = q.enqueue_call(func=helloTest, args=(3,), timeout=50)
+
+        invites = request.json.get('invites')
+        custom_message = request.json.get('custom_message')
+        url = request.json.get('url')
+        id = request.json.get('id')
+        token = request.json.get('token')
+        owner_info = request.json.get('owner_info')
+        data = request.json
+
 
         # databass = { 'invengine_id': 'uuidw12322' }
         # data = request.data
-        print('*****invengine_id: ', invengine_id)
-        print('*****header is: ', request.headers)
-        print('*****value is ', request.values)
-        print('*****data is', request.data)
+        # print('*****invengine_id: ', invengine_id)
+        # print('*****header is: ', request.headers)
+        # print('*****value is ', request.values)
+        # print('*****data is', request.data)
+        print('xxxxxxxdata is', data['token'])
         print('******json is', request.json)
+        job = q.enqueue_call(
+            func=parse_invite_data, args=(data,), result_ttl=5000
+        )
+
         # print('*****method is ', request.method),
         # print('invengine id is : ', invengine_id)
         # if invengine_id in databass['invengine_id']:
@@ -136,36 +105,6 @@ class InvitesAPI(Resource):
         # add owner into the invite creation argument field
 
         return jsonify({'id': invengine_id})
-
-
-# @invengine_api.resource('/kittens/sampledata')
-# class KittensAPI(Resource):
-#     @staticmethod
-#     def get():
-#         return contacts
-
-
-    # @staticmethod
-    # def post_invite_history():
-    #     from app import db
-
-    #     count = ids.query.count()
-
-    #     if ids not in count
-
-    #     assign new UUID to these invit history
-
-            # if already in count then return the ID back
-    #     db.session.add(nUUID)
-    #     db.session.commit()
-    # outsource the above to a process
-    #
-    #     return {
-    #         'id': new_kitten.id,
-    #         'created': new_kitten.created.isoformat() + 'Z'
-    #     }
-    # return { uuid }
-
 
 
 

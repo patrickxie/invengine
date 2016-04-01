@@ -21,6 +21,8 @@ export function sendInvites() {
     let data = { id: configvars.invengine_id, token: configvars.token,
         url:configvars.url, owner_info: configvars.details,
        invites: assistvars, custom_message: configvars.message };
+       //data value checker, if doesn't work then dispatch a err message
+       // this same err message will display success upon success
     if ( data.id&&data.token ) {
       console.log('id & token', data.id&&data.token)
       console.log(JSON.stringify(data))
@@ -96,6 +98,7 @@ export function dispatchSendInvites(data) {
     try {
       const result = await post(`http://localhost:5000/api/invites/${data.id}`, data);
       // const result = await post(`/api/invites/${id}`, data); //uncomment this after implmemtning python api endpoint logic
+      console.log('result after posting to /api/invite is: ', result)
       dispatch({
         type: 'send_invites_success',
         // USER_ID: result.id // get rid of this line
