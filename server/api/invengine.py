@@ -6,6 +6,8 @@ import uuid
 from rq import Queue
 from worker import conn
 from tasks import helloTest, parse_invite_data, send_emails
+from database import db
+
 
 invengine_api = Api(Blueprint('invengine_api', __name__)) # pylint: disable=invalid-name
 
@@ -43,7 +45,6 @@ class ContactsAPI(Resource):
 class UsersAPI(Resource):
     @staticmethod
     def get():
-        from database import db
         tok = str(uuid.uuid4())
         new_user = User(token=tok)
         db.session.add(new_user)

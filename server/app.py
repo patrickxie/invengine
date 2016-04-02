@@ -18,7 +18,7 @@ def create_app():
     # app.register_blueprint(kittens_api.blueprint, url_prefix='/api')#remove later
     app.register_blueprint(invengine_api.blueprint, url_prefix='/api')
     app.register_blueprint(index_view)
-# db.app=app
+    # db.app=app
     db.init_app(app)  #this was originally here
 
     handler = StreamHandler(stdout)
