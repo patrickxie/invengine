@@ -45,13 +45,15 @@ def send_emails(email_list, url, custom_message, owner_info):
     for i in email_list:
       message = sendgrid.Mail()
       message.add_to(i['email'])
-      message.set_subject('Hey '+ i['first_name'] + 'checkout ' + url)
+      message.set_subject('Hey '+ i['first_name'] + ', checkout ' + url)
       message.set_html(custom_message)
       # message.set_text('Body')
       # the below won't work if there is no owner info
-      # if not owner_info:
-      #     message.set_from('')
-      message.set_from(owner_info[0]['email'][0]['address'])
+      if not owner_info:
+          message.set_from('patrick@invengine.co')
+      else:
+          message.set_from(owner_info[0]['email'][0]['address'])
+      # message.set_from('pat@invengine.co')
       status, msg = sg.send(message)
       print(status, msg, i['email'])
 
