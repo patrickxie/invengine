@@ -43,7 +43,18 @@ def parse_invite_data(data):
                       finished_sending=sent_emails,
                       raw=data)
         with app.app_context():
+            u.email = owner_info[0]['email'][0]['address']
+            # user_invites = u.invites_history.all()
+            # user_invites.append(inv)
+            # u.invites_history
+            u.invites_history.append(inv)
+            print '@@@@@@@@@@@'
+            print u
+            print u.invites_history.all()
+            print '********'
+            print u.invites_history.all()[0].user.token
             db.session.add(inv)
+            db.session.add(u)
             db.session.commit()
 
 

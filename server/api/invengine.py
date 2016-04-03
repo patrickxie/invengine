@@ -73,7 +73,6 @@ class InvitesAPI(Resource):
         owner_info = request.json.get('owner_info')
         data = request.json
 
-
         # databass = { 'invengine_id': 'uuidw12322' }
         # data = request.data
         # print('*****invengine_id: ', invengine_id)
@@ -85,26 +84,6 @@ class InvitesAPI(Resource):
         job = q.enqueue_call(
             func=parse_invite_data, args=(data,), result_ttl=5000
         )
-
-        # print('*****method is ', request.method),
-        # print('invengine id is : ', invengine_id)
-        # if invengine_id in databass['invengine_id']:
-        #     return jsonify(invengine_id)
-        # else:
-        #     # new_user = user(str(uuid.uuid4()))
-        #     # db.session.add(new_invengine_id)
-        #     new_invengine_id = { 'id': 'xxzonidw12322' }
-        #     return jsonify(new_invengine_id.id) 
-
-        # from app import db
-        # kitten = Kitten.query.get_or_404(invengine_id)
-        # db.session.delete(kitten)
-        # db.session.commit()
-
-        # if there are no owner data, then make new one
-        # otherwise, if there is owner, then query owner and 
-        # add owner into the invite creation argument field
-
         return jsonify({'id': invengine_id})
 
 
