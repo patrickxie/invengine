@@ -61,7 +61,7 @@ class Invite(db.Model):
     owner_email = db.Column(db.String(320), unique=True)
     owner_info = db.Column(JSON)
     recipients = db.Column(JSON)
-    finished_sending = db.Column(db.Boolean())
+    finished_sending = db.Column(JSON)
     raw = db.Column(JSON) 
     # invite_history_this_belongs_to = db.relationship('HistoryOfInvites', backref='person',
     #                             lazy='dynamic')
@@ -74,8 +74,8 @@ class Invite(db.Model):
     #     self.recipients = recipients
     #     self.raw = raw
 
-    def finished_sending(self):
-        return true
+    # def finished_sending(self):
+    #     return true
 
     def __repr__(self):
         return '<Invite: %r, owner: %r recipients: %r>' % (self.id, self.owner, self.recipients)

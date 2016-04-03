@@ -80,7 +80,7 @@ class InvitesAPI(Resource):
         # print('*****header is: ', request.headers)
         # print('*****value is ', request.values)
         # print('*****data is', request.data)
-        print('xxxxxxxdata is', data['token'])
+        # print('xxxxxxxdata is', data['token'])
         print('******json is', request.json)
         job = q.enqueue_call(
             func=parse_invite_data, args=(data,), result_ttl=5000

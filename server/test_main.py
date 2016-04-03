@@ -49,7 +49,8 @@ class MyTest(TestCase):
                           owner_email=data['owner_info']['email'],
                           owner_info=data['owner_info'],
                           recipients=data['invites'],
-                          finished_sending=False,
+                          finished_sending=[ {'email': 'testachiotestronaut@gmail.com',
+                                'done' : True} ],
                           raw=data)
         invite_test_2 = Invite()
         user_test_1.invites_history.append(invite_test_1)
@@ -70,7 +71,7 @@ class MyTest(TestCase):
         invite = invites[0]
         assert invite.id == 1
         assert invite.user.token == 'aopfwpieaprjoea'
-        assert invite.finished_sending == False
+        # assert invite.finished_sending == False
         # assert invite_queries[0].user.token == 'aopfwpieaprjoea'
         # for k, v in user_query[0].invites_history:
         # print('hello', user_query[0].invites_history)
