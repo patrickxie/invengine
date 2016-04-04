@@ -13,24 +13,24 @@ class DisplayItem extends Component {
     const { item, index, itemsLength, onToggleItem, toggleProp, onSetPic, galleryChild } = this.props; //eslint-disable-line
     this.state = {
       open: false,
-    };
+    }
 
     this.handleOpen = () => {
       this.setState({ open: true });
-    };
+    }
 
     this.handleClose = () => {
       this.setState({ open: false });
-    };
+    }
 
     this.singleTouch = () => {
       this.props.onToggleItem(this.props.item.key, !this.props.
         toggleProp[this.props.item.key] ? true : false);
-    };
+    }
 
     this.dblClickorLongPress = () => {
       this.handleOpen();
-    };
+    }
 
     this.getClickHandler = (onClick, onDblClick, delay) => {
       var timeoutID = null;

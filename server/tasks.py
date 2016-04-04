@@ -48,11 +48,11 @@ def parse_invite_data(data):
             # user_invites.append(inv)
             # u.invites_history
             u.invites_history.append(inv)
-            print '@@@@@@@@@@@'
-            print u
-            print u.invites_history.all()
-            print '********'
-            print u.invites_history.all()[0].user.token
+            # print '@@@@@@@@@@@'
+            # print u
+            # print u.invites_history.all()
+            # print '********'
+            # print u.invites_history.all()[0].user.token
             db.session.add(inv)
             db.session.add(u)
             db.session.commit()
@@ -86,8 +86,16 @@ def send_emails(email_list, url, custom_message, owner_info):
 
 
 
-def write_to_db(data):
-    pass
+def write_contacts_to_db(contacts, user):
+    # result = []
+    if contacts:
+        if user.contacts:
+            user.contacts = [user.contacts, contacts]
+        else:
+            user.contacts = [contacts]
+    app = create_app()
+    with app.app_context():
+        db.session.add(user)
+        db.session.commit()
 
-def format_and_save_contacts():
-    pass
+
