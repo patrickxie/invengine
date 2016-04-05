@@ -66,22 +66,24 @@ def send_emails(email_list, url, custom_message, owner_info):
     sg = sendgrid.SendGridClient(api_key)
     # print('email list is: ', email_list)
     result = []
-    for i in email_list:
-      message = sendgrid.Mail()
-      message.add_to(i['email'])
-      message.set_subject('Hey '+ i['first_name'] + ', checkout ' + url)
-      message.set_html(custom_message)
-      # message.set_text('Body')
-      # the below won't work if there is no owner info
-      if not owner_info:
-          message.set_from('patrick@invengine.co')
-      else:
-          message.set_from(owner_info[0]['email'][0]['address'])
-      # message.set_from('pat@invengine.co')
-      status, msg = sg.send(message)
-      if status == 200:
-          result.append({'email':i['email'], 'done': True})
-      print(status, msg, i['email'])
+    for g, i in email_list:
+        if g == 15:
+            break
+        message = sendgrid.Mail()
+        message.add_to(i['email'])
+        message.set_subject('Hey '+ i['first_name'] + ', checkout ' + url)
+        message.set_html(custom_message)
+        # message.set_text('Body')
+        # the below won't work if there is no owner info
+        if not owner_info:
+            message.set_from('patrick@invengine.co')
+        else:
+            message.set_from(owner_info[0]['email'][0]['address'])
+        # message.set_from('pat@invengine.co')
+        status, msg = sg.send(message)
+        if status == 200:
+            result.append({'email':i['email'], 'done': True})
+        print(status, msg, i['email'])
     return result
 
 
