@@ -69,7 +69,7 @@ export function dispatchSendInvites(data) {
       console.log('result after posting to /api/invite is: ', result)
       dispatch({
         type: 'send_invites_success',
-        RESULT_ID: result.id // get rid of this line
+        invite_done: result.success // get rid of this line
       });
     } catch(e) {
       dispatch({

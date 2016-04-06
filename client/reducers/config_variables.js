@@ -24,7 +24,8 @@ const details = (state, action) => ({
 const reset = (state, action) => ({
   ...state,
   message: default_message,
-  url: ''
+  url: '',
+  invite_done: action.invite_done
 })
 
 const addToken = (state, action) => ({

@@ -105,7 +105,7 @@ class InvitesAPI(Resource):
         job = q.enqueue_call(
             func=parse_invite_data, args=(data,), result_ttl=5000
         )
-        return jsonify({'id': invengine_id})
+        return jsonify({'success': True, 'id': invengine_id})
 
 
 

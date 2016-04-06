@@ -4,7 +4,8 @@ import { browserHistory } from 'react-router';
 import URL from '../components/URL';
 import { sendInvites } from '../actions/config_variables';
 import RaisedButton from 'material-ui/lib/raised-button';
-
+import Snackbar from 'material-ui/lib/snackbar';
+import Colors from 'material-ui/lib/styles/colors';
 
 export default class Send extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export default class Send extends Component {
   }
 
   render () {
-    const { sendInvites } = this.props;
+    const { sendInvites, sent } = this.props;
     return (<div>
              <URL/>
         <div style={STYLES.container}>
@@ -30,11 +31,20 @@ export default class Send extends Component {
           onTouchTap={sendInvites}
         />
         </div>
+        <Snackbar
+        open={sent}
+        message={'invites have been sent.'}
+        autoHideDuration={2000}
+        bodyStyle={STYLES.snackbar}
+        />
         </div>);
   }
 }
 
-const STYLES = {
+const STYLES = {  
+  snackbar: {
+    backgroundColor: Colors.grey300,
+  },
   divider: {
     marginTop: 20,
     marginBottom: 20,
@@ -57,6 +67,6 @@ const STYLES = {
   }
 }
 export default connect(
-  state => ({  }),
+  state => ({ sent: state.configvars.invite_done  }),
   { sendInvites }
 )(Send);
