@@ -71,6 +71,40 @@ middleware.listenForReplays(store);
   //   });
   // }
 
+// window.onbeforeunload = async function () {
+//   var a = store.getState()
+//   //store.dispatch(callServer)
+//   const result = await post('http://localhost:5000/api/ayy', a)
+//   // return null
+// };
+// window.onbeforeunload = function () {
+//   var a = store.getState()
+//   //store.dispatch(callServer)
+//   post('http://localhost:5000/api/ayy', a)
+//   var x = 'ayy'
+//   setTimeout(function(x){ x = 'deeee' }, 13000);
+//   setTimeout(function(){
+//     console.log('after');
+// },500);
+//   if (x == 'deeee'){
+//       return x
+//     }
+// };
+
+// window.onbeforeunload = function () {
+//   var a = store.getState()
+//   //store.dispatch(callServer)
+//   var url = 'http://localhost:5000/api/ayy';
+//   fetch(url, {
+//       credentials: 'omit',
+//       headers: {
+//         Accept: 'application/json',
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(a)
+//     })
+// };
+
 
 ReactDOM.render(
   <Provider store={store}>
