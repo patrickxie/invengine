@@ -18,6 +18,5 @@ export default function pictures(state = DEFAULT_STATE, action) {
   return ({
     ['request_picture_valid']: add,
     ['browse_next_picture']: browse,
-    // ['set_picture_into_data']: setPic,
   }[action.type] || (s => s))(state, action);
 }

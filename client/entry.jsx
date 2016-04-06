@@ -20,6 +20,8 @@ import { syncHistory } from 'react-router-redux';
 import { Auth, Index, Invite, Display, SendInvites } from './pages/export';
 
 
+// import { get, post, del } from './utils/api';
+
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
@@ -77,6 +79,7 @@ middleware.listenForReplays(store);
 //   const result = await post('http://localhost:5000/api/ayy', a)
 //   // return null
 // };
+
 // window.onbeforeunload = function () {
 //   var a = store.getState()
 //   //store.dispatch(callServer)
