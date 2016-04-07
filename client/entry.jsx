@@ -19,6 +19,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistory } from 'react-router-redux';
 import { Auth, Index, Invite, Display, SendInvites } from './pages/export';
 
+import createDebounce from 'redux-debounced';
 
 // import { get, post, del } from './utils/api';
 
@@ -54,7 +55,8 @@ const createStoreWithMiddleware = applyMiddleware(
   thunk,
   promise,
   createLogger(),
-  middleware
+  middleware,
+  createDebounce()
 )(createStore);
 const store = createStoreWithMiddleware(reducers);
 middleware.listenForReplays(store);
