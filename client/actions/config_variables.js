@@ -1,4 +1,15 @@
 import { get, post, del } from '../utils/api'; //eslint-disable-line
+import { actions as notifActions } from 're-notif';
+const { notifSend, notifClear } = notifActions;
+
+export function invitesSent(){
+  return dispatch => dispatch(
+    notifSend({message: 'invites have been sent',
+    dismissAfter: 2000 })
+  )
+}
+
+
 
 export function inputUrl(url) {
   return dispatch => dispatch(
@@ -71,6 +82,7 @@ export function dispatchSendInvites(data) {
         type: 'send_invites_success',
         invite_done: result.success // get rid of this line
       });
+      dispatch(invitesSent());
     } catch(e) {
       dispatch({
         type: 'send_invites_failure',
