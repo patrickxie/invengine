@@ -52,11 +52,11 @@ const middleware = syncHistory(browserHistory);
 
 
 const createStoreWithMiddleware = applyMiddleware(
+  createDebounce(),
   thunk,
   promise,
   createLogger(),
   middleware,
-  createDebounce()
 )(createStore);
 const store = createStoreWithMiddleware(reducers);
 middleware.listenForReplays(store);
