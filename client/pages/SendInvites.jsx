@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import URL from '../components/URL';
+import CustomNotif from '../components/Notification';
 import { sendInvites } from '../actions/config_variables';
 import RaisedButton from 'material-ui/lib/raised-button';
-import Snackbar from 'material-ui/lib/snackbar';
 import Colors from 'material-ui/lib/styles/colors';
+import * as _ from 'lodash';
+
+import { actions as notifActions, Notifs } from 're-notif';
+const { notifSend, notifClear } = notifActions;
 
 export default class Send extends Component {
   constructor(props) {
@@ -13,7 +17,7 @@ export default class Send extends Component {
   }
 
   render () {
-    const { sendInvites, sent } = this.props;
+    const { sendInvites, notifSend } = this.props;
     return (<div>
              <URL/>
         <div style={STYLES.container}>
@@ -28,20 +32,30 @@ export default class Send extends Component {
         <RaisedButton
           label='Confirm'
           style={STYLES.sendbutton}
-          onTouchTap={sendInvites}
+          onTouchTap={_.debounce(sendInvites, 400)}
         />
         </div>
-        <Snackbar
-        open={sent}
-        message={'invites have been sent.'}
-        autoHideDuration={2000}
-        bodyStyle={STYLES.snackbar}
-        />
+
+        <Notifs CustomComponent={CustomNotif}/>
         </div>);
   }
 }
+    //     <RaisedButton
+    //       label='Test Notification, remove later'
+    //       style={STYLES.sendbutton}
+    //       onTouchTap={notifSend.bind(this,{ message: 'hello world',
+    // dismissAfter: 2000 } )}
 
-const STYLES = {  
+    //     />
+
+        // <Snackbar
+        // open={sent}
+        // message={'invites have been sent.'}
+        // autoHideDuration={2000}
+        // bodyStyle={STYLES.snackbar}
+        // />
+
+const STYLES = {
   snackbar: {
     backgroundColor: Colors.grey300,
   },
@@ -68,5 +82,5 @@ const STYLES = {
 }
 export default connect(
   state => ({ sent: state.configvars.invite_done  }),
-  { sendInvites }
+  { sendInvites, notifSend }
 )(Send);
