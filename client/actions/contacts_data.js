@@ -9,29 +9,22 @@ export function requestAPIData() {
     dispatch({
       type: 'obtain_data_api'
     });
-    // if ( getState().configvars.invengine_id &&
-    //      getState().configvars.token ) {
     let id = getState().configvars.invengine_id
     let token = getState().configvars.token
     try {
       // const result = await get('https://api.myjson.com/bins/2bwgk');
-      const result = await get(`https://localhost:5000/api/contacts/${id}/${token}`);
+      const result = await get(`http://localhost:5000/api/contacts/${id}/${token}`);
       // const result = await get(`/api/contacts/${id}`); //uncomment this later
       dispatch({
         type: 'obtain_data_api_success',
         data: result.data
       });
-      // dispatch(mergeData(result));
     } catch(e) {
-      // console.log('okay error happened here:: ', e);
       dispatch({
         type: 'obtain_data_api_failure',
         e
       });
     }
-    // } else{
-
-    // };
   }
 }
 
