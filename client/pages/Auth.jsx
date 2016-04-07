@@ -161,7 +161,7 @@ const STYLES = {
     width:'100%',
   },
   snackbar: {
-    backgroundColor: Colors.grey300,
+    backgroundColor: Colors.blueGrey300,
   },
   snackbartext: {
   },
