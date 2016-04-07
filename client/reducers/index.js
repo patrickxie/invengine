@@ -6,8 +6,8 @@ import toinvlist from './to_invite_list';
 import configvars from './config_variables';
 import imported from './imported';
 import pictures from './pictures';
-import { routeReducer } from 'react-router-redux'
-// import { routerReducer } from 'react-router-redux';
+import { routeReducer } from 'react-router-redux';
+import { reducer as notifReducer } from 're-notif';
 
 const reducers = combineReducers({
   data: contacts_data,
@@ -16,6 +16,7 @@ const reducers = combineReducers({
   toinvlist,
   configvars,
   pictures,
+  notifs: notifReducer,
   //routing: routeReducer the newest version
   routing: routeReducer
 });
