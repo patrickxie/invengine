@@ -27,9 +27,9 @@ export function sendMessage(message) {
 
 
 export function sendInvites() {
-  return async (dispatch, getState) => {
+  const thunk = async (dispatch, getState) => {
+  // return async (dispatch, getState) => {
     console.log('state.data is: ', JSON.stringify(getState().data))
-
     let { assistvars, configvars } = getState();
     let data = { id: configvars.invengine_id, token: configvars.token,
         url:configvars.url, owner_info: configvars.details,
@@ -64,6 +64,13 @@ export function sendInvites() {
       }
     }
   }
+  thunk.meta = {
+    debounce: {
+      time: 2000,
+      key: 'my-thunk-action'
+    }
+  };
+  return thunk
 }
 
 
