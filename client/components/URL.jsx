@@ -5,15 +5,17 @@ import Paper from 'material-ui/lib/paper';
 import TextField from 'material-ui/lib/text-field';
 import FlatButton from 'material-ui/lib/flat-button';
 import Colors from 'material-ui/lib/styles/colors';
-import { inputUrl, sendMessage } from '../actions/config_variables';
+import { inputUrl, inputMail, sendMessage, validateEmail }
+from '../actions/config_variables';
 
 class URL extends Component {
     constructor(props) {
       super(props);
-      const { inputUrl, url, text } = this.props;
+      const { inputUrl, url, text, ownerMail, inputMail } = this.props;
       this.state = {
         errTxt: 'This field is required',
         value: null,
+        displayEmail: false
         // display: null
       };
     }
@@ -21,13 +23,13 @@ class URL extends Component {
     handleChangeText (event) {
       if (event.target.value.length>0) {
         this.setState({
-            // ...this.state,
+            ...this.state,
           errTxt:null, value:event.target.value
         });
       }
       else {
         this.setState({
-            // ...this.state,
+            ...this.state,
           errTxt: 'This field is required',
           value: null
         });
@@ -45,12 +47,28 @@ class URL extends Component {
       this.props.sendMessage(event.target.value);
     }
 
+    handleMail (event) {
+      this.props.inputMail(event.target.value);
+      this.state.displayEmail = true
+    }
+
     render() {
+      var email;
+      console.log('state display email is : ', this.state.displayEmail)
+      try {
+        email = !this.props.ownerMail[0].email[0].address
+        console.log('email here is: ', email)
+      }
+      catch (e) {
+        email = true
+        console.log('catch exception: ', email)
+      }
+
       return (<div>
         <Paper style={STYLES.container}>
           <div style={STYLES.display}>
               <h5 style={STYLES.displayTxt}>
-              CURRENT URL TO INVITE PEOPLE TO:
+              current url to invite people to:
               <span style={STYLES.txt}> {this.props.url}</span> </h5>
           </div>
           <TextField
@@ -69,12 +87,32 @@ class URL extends Component {
         <div style={STYLES.container}>
           <div style={STYLES.divider}/>
         </div>
+      { this.state.displayEmail || email  ? <Paper style={STYLES.container}>
+          <div style={STYLES.display}>
+              <h5 style={STYLES.displayTxt}>
+              please input your email below:
+              <span style={STYLES.txt}> {this.props.url}</span> </h5>
+          </div>
+          <TextField
+            floatingLabelText='Enter your email here'
+            hintText='example: john.doe@gmail.com'
+            underlineStyle={STYLES.underlineStyle}
+            style={STYLES.button}
+            onChange={this.handleMail.bind(this)}
+          />
+          <br/>
+          <FlatButton onClick={this.handleClick.bind(this)}
+          label='Submit' style={STYLES.submitbutton} />
+        </Paper> : null }
+      { this.state.displayEmail || email ? <div style={STYLES.container}>
+          <div style={STYLES.divider}/>
+        </div> : null }
         <Paper style={STYLES.container}>
           <h5 style={STYLES.displayTxt}>
               Add a custom message below:
           </h5>
           <TextField
-            multiLine={true}
+            multiLine
             value={this.props.text}
             underlineShow={false}
             rows={5}
@@ -135,8 +173,10 @@ const STYLES = {
 };
 
 export default connect(
-  state => ({ url: state.configvars.url, text: state.configvars.message }),
-  { inputUrl, sendMessage }
+  state => ({ url: state.configvars.url,
+    text: state.configvars.message,
+    ownerMail: state.configvars.details }),
+  { inputUrl, inputMail, sendMessage }
 )(
   useSheet(URL, STYLES)
 );
