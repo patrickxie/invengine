@@ -4,11 +4,15 @@ const { notifSend, notifClear } = notifActions;
 
 export function invitesSent(){
   return dispatch => dispatch(
-    notifSend({message: 'invites have been sent',
+    notifSend({ message: 'invites have been sent',
     dismissAfter: 2000 })
   )
 }
 
+export function validateEmail(email) {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
 
 
 export function inputUrl(url) {
@@ -16,6 +20,33 @@ export function inputUrl(url) {
     { type: 'input_url',
       url
     });
+}
+
+function validator (email, url, message) {
+  return dispatch => {
+    if (!validateEmail(email)) {
+        dispatch(
+          notifSend({ message: 'email was invalid, please try again',
+            kind: 'warning', dismissAfter: 2000 })
+    );}
+  }
+}
+
+// export function inputMail(mail) {
+//   return dispatch =>{
+//     validateEmail(mail) ? dispatch(
+//       { type: 'input_email',
+//         mail
+//       }): dispatch(notifSend({ message: 'email was invalid, please try again',
+//     dismissAfter: 2000 }));
+//   }
+// }
+export function inputMail(mail) {
+  return dispatch => dispatch(
+      { type: 'input_email',
+        mail,
+        meta : { none: null }
+      });
 }
 
 export function sendMessage(message) {
@@ -28,6 +59,7 @@ export function sendMessage(message) {
 
 export function sendInvites() {
   const thunk = async (dispatch, getState) => {
+    //NEEED A VALIDATION CHECK HERE FOR URL & EMAIL
   // return async (dispatch, getState) => {
     console.log('state.data is: ', JSON.stringify(getState().data))
     let { assistvars, configvars } = getState();

@@ -6,6 +6,7 @@ import Colors from 'material-ui/lib/styles/colors';
 
 export default class CustomNotif extends Component {
   render() {
+    // const kind = [ 'warning', 'info' ]
     return (<Snackbar
             open={!!this.props.message}
             message={this.props.message}
@@ -19,6 +20,14 @@ export default class CustomNotif extends Component {
 const STYLES = {
   snackbar: {
     backgroundColor: Colors.blueGrey200,
+    textAlign: 'center'
+  },
+  info: {
+    backgroundColor: Colors.blueGrey200,
+    textAlign: 'center'
+  },
+  warning: {
+    backgroundColor: Colors.red500,
     textAlign: 'center'
   }
 }
