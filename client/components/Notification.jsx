@@ -6,12 +6,12 @@ import Colors from 'material-ui/lib/styles/colors';
 
 export default class CustomNotif extends Component {
   render() {
-    // const kind = [ 'warning', 'info' ]
+    const { kind } = this.props;
     return (<Snackbar
             open={!!this.props.message}
             message={this.props.message}
             autoHideDuration={2000}
-            bodyStyle={STYLES.snackbar}
+            bodyStyle={STYLES[kind]}
             onRequestClose={()=>{}}
             />);
   }
