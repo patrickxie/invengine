@@ -35,7 +35,6 @@ export default class Send extends Component {
           onTouchTap={sendInvites}
         />
         </div>
-
         <Notifs CustomComponent={CustomNotif}/>
         </div>);
   }
