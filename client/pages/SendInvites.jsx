@@ -32,7 +32,10 @@ export default class Send extends Component {
         <RaisedButton
           label='Confirm'
           style={STYLES.sendbutton}
-          onTouchTap={sendInvites}
+          onTouchTap={_.debounce(sendInvites, 3000, {
+            'leading': true,
+            'trailing': false
+          })}
         />
         </div>
         <Notifs CustomComponent={CustomNotif}/>
