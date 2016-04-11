@@ -4,22 +4,31 @@ const { notifSend, notifClear } = notifActions;
 
 export function invitesSent(){
   return dispatch => dispatch(
-    notifSend({ message: 'invites have been sent',
+    notifSend({ message: 'invites have been sent', kind: 'info',
     dismissAfter: 2000 })
   )
 }
 
-export function validateEmail(email) {
-    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+function validateEmail(email) {
+  let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
 }
 
+function validateUrl (url) {
+  let re =/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i;
+  return re.test(url)
+}
 
 export function inputUrl(url) {
-  return dispatch => dispatch(
-    { type: 'input_url',
-      url
-    });
+  return dispatch => dispatch({
+    type: 'input_url',
+    url,
+    meta: {
+      debounce: {
+        time: 300
+      }
+    }
+  });
 }
 
 function validator (email, url, message) {
@@ -28,7 +37,14 @@ function validator (email, url, message) {
         dispatch(
           notifSend({ message: 'email was invalid, please try again',
             kind: 'warning', dismissAfter: 2000 })
-    );}
+        );
+    }
+    if (!validateUrl(url)) {
+        dispatch(
+          notifSend({ message: 'url was invalid, please try again',
+            kind: 'warning', dismissAfter: 2000 })
+        );
+    }
   }
 }
 
@@ -42,18 +58,17 @@ function validator (email, url, message) {
 //   }
 // }
 export function inputMail(mail) {
-  return dispatch => dispatch(
-      { type: 'input_email',
-        mail,
-        meta : { none: null }
-      });
+  return dispatch => dispatch({
+    type: 'input_email',
+    mail
+  });
 }
 
 export function sendMessage(message) {
-  return dispatch => dispatch(
-    { type: 'input_custom_invite_message',
-      message }
-    )
+  return dispatch => dispatch({
+    type: 'input_custom_invite_message',
+    message
+  });
 }
 
 
@@ -96,12 +111,12 @@ export function sendInvites() {
       }
     }
   }
-  thunk.meta = {
-    debounce: {
-      time: 2000,
-      key: 'my-thunk-action'
-    }
-  };
+  // thunk.meta = {
+  //   debounce: {
+  //     time: 2000,
+  //     key: 'my-thunk-action'
+  //   }
+  // };
   return thunk
 }
 
