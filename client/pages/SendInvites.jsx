@@ -32,9 +32,9 @@ export default class Send extends Component {
         <RaisedButton
           label='Confirm'
           style={STYLES.sendbutton}
-          onTouchTap={_.debounce(sendInvites, 120000, {
-            'leading': true,
-            'trailing': false
+          onTouchTap={_.debounce(sendInvites, 3000, {
+            leading: true,
+            trailing: false
           })}
         />
         </div>
@@ -83,6 +83,6 @@ const STYLES = {
   }
 }
 export default connect(
-  state => ({ sent: state.configvars.invite_done  }),
+  state => ({   }),
   { sendInvites, notifSend }
 )(Send);
