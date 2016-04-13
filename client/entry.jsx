@@ -21,10 +21,12 @@ import { Auth, Index, Invite, Display, SendInvites } from './pages/export';
 
 import createDebounce from 'redux-debounced';
 import { observer, observe } from 'redux-observers';
-import {saveContactsToServer} from './actions/contacts_data';
+import { saveContactsToServer } from './actions/contacts_data';
 // console.log('saveContactsToServer', saveContactsToServer)
-import * as _ from 'lodash';
 
+
+import createEngine from 'redux-storage-engine-localstorage';
+import * as storage from 'redux-storage'
 // import { get, post, del } from './utils/api';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
