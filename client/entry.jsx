@@ -55,6 +55,11 @@ jss.use(jssCamelCase());
 // const history = syncHistoryWithStore(browserHistory, store)
 const middleware = syncHistory(browserHistory);
 
+
+const engine = createEngine('invengine-store');
+const reducer = storage.reducer(reducers);
+const storager = storage.createMiddleware(engine);
+
 //original
 // const history = createHistory();
 // const middleware = syncHistory(history);
@@ -75,11 +80,16 @@ const createStoreWithMiddleware = applyMiddleware(
   promise,
   createLogger(),
   middleware,
+  storager,
 )(createStore);
 const store = createStoreWithMiddleware(reducers);
 middleware.listenForReplays(store);
 
-// const debounced = _.debounce(saveContactsToServer, 15000)
+const load = storage.createLoader(engine);
+load(store)
+    .then((newState) => console.log('Loaded state:', newState))
+    .catch(() => console.log('Failed to load previous state'));
+
 
 const myObserver = observer(
   state => state.data,
