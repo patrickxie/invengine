@@ -20,6 +20,10 @@ import { syncHistory } from 'react-router-redux';
 import { Auth, Index, Invite, Display, SendInvites } from './pages/export';
 
 import createDebounce from 'redux-debounced';
+import { observer, observe } from 'redux-observers';
+import {saveContactsToServer} from './actions/contacts_data';
+// console.log('saveContactsToServer', saveContactsToServer)
+import * as _ from 'lodash';
 
 // import { get, post, del } from './utils/api';
 
@@ -30,6 +34,18 @@ jss.use(jssVendorPrefixer());
 jss.use(jssPx());
 jss.use(jssNested());
 jss.use(jssCamelCase());
+
+
+// const myObserver = observer(
+//   state => state.slice.of.interest,
+//   (dispatch, current, previous) => {
+//     expect(previous).to.be.ok()
+//     expect(current).to.not.eql(previous)
+//     dispatch({ type: 'SLICE_CHANGE', payload: {...} })
+//   }
+// )
+
+// observe(store, [myObserver, ...myOtherObservers])
 
 
 // import { syncHistoryWithStore } from 'react-router-redux'
@@ -60,6 +76,22 @@ const createStoreWithMiddleware = applyMiddleware(
 )(createStore);
 const store = createStoreWithMiddleware(reducers);
 middleware.listenForReplays(store);
+
+// const debounced = _.debounce(saveContactsToServer, 15000)
+
+const myObserver = observer(
+  state => state.data,
+  (dispatch, current, previous) => {
+    console.log('dispatch: ', dispatch)
+    console.log('current: ', JSON.stringify(current))
+    console.log('previous: ', JSON.stringify(previous))
+    // dispatch(debounced())
+    dispatch(saveContactsToServer())
+  }
+)
+
+observe(store, [myObserver])
+
 
 // const finalCreateStore = compose(
 //   applyMiddleware(middleware),

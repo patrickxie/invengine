@@ -1,5 +1,4 @@
 import { get, post, del } from '../utils/api'; //eslint-disable-line
-// import * as _ from 'lodash';
 import { actions as notifActions } from 're-notif';
 const { notifSend, notifClear } = notifActions;
 

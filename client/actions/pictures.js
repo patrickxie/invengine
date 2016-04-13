@@ -6,8 +6,6 @@ export function setPic(key) {
       type: 'browse_next_picture',
     // pic: getState().pictures
     });
-
-    console.log('current photo is: ', getState().pictures[0].large)
     dispatch(
       {
         type: 'set_picture_into_data',

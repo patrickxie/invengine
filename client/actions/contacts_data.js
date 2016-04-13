@@ -61,14 +61,14 @@ export function saveContactsToServer () {
 
 
 export function dispatchSendContacts(data) {
-  return async dispatch => {
+  const thunk = async dispatch => {
     dispatch({
       type: 'sending_contacts_to_server',
       data_to_send: data
     });
 
     try {
-      const result = await post(`http://localhost:5000/api/contacts/${data.id}`, data);
+      const result = await post(`http://localhost:5000/api/contacts/${data.id}/${data.token}`, data);
       // const result = await post(`/api/contacts/${id}`); //uncomment this after implmemtning python api endpoint logic
       dispatch({
         type: 'sending_contacts_to_server_success',
@@ -80,8 +80,14 @@ export function dispatchSendContacts(data) {
         e
       });
     }
-
   }
+  thunk.meta = {
+    debounce: {
+      time: 30000,
+      key: 'my-thunk-action'
+    }
+  };
+  return thunk;
 }
 
 

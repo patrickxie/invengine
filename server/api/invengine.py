@@ -66,12 +66,12 @@ class UsersAPI(Resource):
         return jsonify({'invengine_id': new_user.id, 'token': tok})
 
 
-@invengine_api.resource('/ayy')
-class AyyApi(Resource):
-    @staticmethod
-    def post():
-        print request.json
-        # return jsonify({'done': 'good jaerb'})
+# @invengine_api.resource('/ayy')
+# class AyyApi(Resource):
+#     @staticmethod
+#     def post():
+#         print request.json
+#         # return jsonify({'done': 'good jaerb'})
 
 
 
