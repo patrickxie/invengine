@@ -1,4 +1,4 @@
-const default_message = 'Hey, I am sharing this link to you via invengine.co'
+const default_message = 'Hey, I am sharing this link to you via invengine.io'
 
 const DEFAULT_STATE = { url: '', details:[], invengine_id:'',
   token:'', message: default_message };

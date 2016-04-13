@@ -1,6 +1,6 @@
 import { get, post, del } from '../utils/api'; //eslint-disable-line
 import { actions as notifActions } from 're-notif';
-const { notifSend, notifClear } = notifActions;
+const { notifSend } = notifActions;
 
 export function invitesSent() {
   return dispatch => dispatch(
@@ -30,31 +30,6 @@ export function inputUrl(url) {
   });
 }
 
-// function validator (email, url, message) {
-//   return dispatch => {
-//     if (!validateEmail(email)) {
-//       dispatch(
-//         notifSend({ message: 'email was invalid, please try again', kind: 'warning', dismissAfter: 2000 })
-//       );
-//     }
-//     if (!validateUrl(url)) {
-//       dispatch(
-//         notifSend({ message: 'url was invalid, please try again', kind: 'warning', dismissAfter: 2000 })
-//       );
-//     }
-//   }
-// }
-
-// export function inputMail(mail) {
-//   return dispatch =>{
-    // validateEmail(mail) ? dispatch(
-    //   { type: 'input_email',
-    //     mail
-    //   }): dispatch(notifSend({ message: 'email was invalid, please try again',
-    // dismissAfter: 2000 }));
-
-//   }
-// }
 export function inputMail(mail) {
   return dispatch => dispatch({
     type: 'input_email',
@@ -69,25 +44,8 @@ export function sendMessage(message) {
   });
 }
 
-
-// function get(obj, key) {
-//   return key.split(".").reduce(function(o, x) {
-//       return (typeof o == "undefined" || o === null) ? o : o[x];
-//   }, obj);
-// }
-
-// gotta turn these statements into ifs, that will stop the function from executing
-//  if there are invalid url or emails
-
-  // validateUrl(data.url) ? null : dispatch(notifSend({ message: 'url was invalid, please try again',
-  //   dismissAfter: 2000 }));
-  // validateEmail(data.owner_info[0].email[0].address) ? null :
-  //  dispatch(notifSend({ message: 'email was invalid, please try again',
-  //   dismissAfter: 2000 }));
 export function sendInvites() {
   const thunk = async (dispatch, getState) => {
-    //NEEED A VALIDATION CHECK HERE FOR URL & EMAIL
-  // return async (dispatch, getState) => {
     console.log('state.data is: ', JSON.stringify(getState().data))
     let { assistvars, configvars } = getState();
     let data = { id: configvars.invengine_id, token: configvars.token,
@@ -110,29 +68,21 @@ export function sendInvites() {
       dismissAfter: 2000 }));
       return
     };
-       //data value checker, if doesn't work then dispatch a err message
-       // this same err message will display success upon success
     if ( data.id&&data.token ) {
-      // console.log('id & token', data.id&&data.token)
-      // console.log(JSON.stringify(data))
       dispatch(dispatchSendInvites(data))
-      // dispatch(throttled(data));
     }
     else {
       dispatch({
         type:'obtaining_id&token_from_server' });
       try {
-        const result = await get(`http://localhost:5000/api/users`);
-        // const result = await get(`/api/users/${data.id}`);//uncomment this for local web
-        // console.log('aResult: ', result)
+        // const result = await get(`http://localhost:5000/api/users`);
+        const result = await get(`/api/users`);
         data = { ...data, id: result.invengine_id, token:result.token };
-        // console.log('newdata: ', data)
         dispatch({
           type:'obtaining_id&token_from_server_success',
           id: result.invengine_id, token: result.token
         });
         dispatch(dispatchSendInvites(data));
-        // dispatch(throttled(data));
       }
       catch(e) {
         dispatch({
@@ -142,17 +92,8 @@ export function sendInvites() {
       }
     }
   }
-  // thunk.meta = {
-  //   debounce: {
-  //     time: 2000,
-  //     key: 'my-thunk-action'
-  //   }
-  // };
   return thunk;
 }
-
-
-// var throttled = _.throttle(dispatchSendInvites, 300000)
 
 export function dispatchSendInvites(data) {
   const thunk = async dispatch => {
@@ -162,12 +103,11 @@ export function dispatchSendInvites(data) {
     });
 
     try {
-      const result = await post(`http://localhost:5000/api/invites/${data.id}`, data);
-      // const result = await post(`/api/invites/${id}`, data); //uncomment this after implmemtning python api endpoint logic
-      console.log('result after posting to /api/invite is: ', result)
+      // const result = await post(`http://localhost:5000/api/invites/${data.id}`, data);
+      const result = await post(`/api/invites/${data.id}`, data);
       dispatch({
         type: 'send_invites_success',
-        // invite_done: result.success // get rid of this line
+        result
       });
       dispatch(invitesSent());
     } catch(e) {

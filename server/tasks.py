@@ -55,7 +55,7 @@ def send_emails(email_list, url, custom_message, owner_info):
         message.set_subject('Hey '+ i['first_name'] + ', checkout ' + url)
         message.set_html(custom_message)
         if not owner_info:
-            message.set_from('patrick@invengine.co')
+            message.set_from('patrick@invengine.io')
         else:
             message.set_from(owner_info[0]['email'][0]['address'])
         status, msg = sg.send(message)

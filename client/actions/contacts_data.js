@@ -1,8 +1,4 @@
 import { get, post, del } from '../utils/api'; //eslint-disable-line
-//requestLocalStorageData() from local storage
-//requestAPIData() from api
-//requestImportData() from auth page
-
 
 export function requestAPIData() {
   return async ( dispatch, getState ) => {
@@ -12,9 +8,9 @@ export function requestAPIData() {
     let id = getState().configvars.invengine_id
     let token = getState().configvars.token
     try {
-      // const result = await get('https://api.myjson.com/bins/2bwgk');
-      const result = await get(`http://localhost:5000/api/contacts/${id}/${token}`);
-      // const result = await get(`/api/contacts/${id}`); //uncomment this later
+      // const result = await get(`http://localhost:5000/api/contacts/${id}/${token}`);
+      const result = await get(`/api/contacts/${id}/${token}`);
+
       dispatch({
         type: 'obtain_data_api_success',
         data: result.data
@@ -40,8 +36,8 @@ export function saveContactsToServer () {
       dispatch({
         type:'obtaining_id&token_from_server' });
       try {
-        const result = await get(`http://localhost:5000/api/users`);
-        // const result = await get(`/api/users/${data.id}`);//uncomment this for local web
+        // const result = await get(`http://localhost:5000/api/users`);
+        const result = await get(`/api/users`);
         data = { ...data, id: result.invengine_id, token: result.token };
         dispatch({
           type:'obtaining_id&token_from_server_success',
@@ -68,8 +64,8 @@ export function dispatchSendContacts(data) {
     });
 
     try {
-      const result = await post(`http://localhost:5000/api/contacts/${data.id}/${data.token}`, data);
-      // const result = await post(`/api/contacts/${id}`); //uncomment this after implmemtning python api endpoint logic
+      // const result = await post(`http://localhost:5000/api/contacts/${data.id}/${data.token}`, data);
+      const result = await post(`/api/contacts/${data.id}/${data.token}`, data);
       dispatch({
         type: 'sending_contacts_to_server_success',
         data: result
@@ -104,7 +100,6 @@ export function requestData() {
 }
 
 function mergeData(data) {
-  // return { type: 'merge_data_from_imported', data }
   return dispatch => {
     dispatch(
       { type: 'merge_data_from_imported', data }

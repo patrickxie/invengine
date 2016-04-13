@@ -60,20 +60,6 @@ const engine = createEngine('invengine-store');
 const reducer = storage.reducer(reducers);
 const storager = storage.createMiddleware(engine);
 
-//original
-// const history = createHistory();
-// const middleware = syncHistory(history);
-
-//original
-// const createStoreWithMiddleware = applyMiddleware(
-//   thunk,
-//   promise,
-//   createLogger()
-// )(createStore);
-// const store = createStoreWithMiddleware(reducers);
-
-
-
 const createStoreWithMiddleware = applyMiddleware(
   createDebounce(),
   thunk,
@@ -82,7 +68,7 @@ const createStoreWithMiddleware = applyMiddleware(
   middleware,
   storager,
 )(createStore);
-const store = createStoreWithMiddleware(reducers);
+const store = createStoreWithMiddleware(reducer);
 middleware.listenForReplays(store);
 
 const load = storage.createLoader(engine);
@@ -103,57 +89,6 @@ const myObserver = observer(
 )
 
 observe(store, [myObserver])
-
-
-// const finalCreateStore = compose(
-//   applyMiddleware(middleware),
-//   DevTools.instrument()
-// )(createStore)
-// const store = finalCreateStore(reducer)
-// middleware.listenForReplays(store)
-
-
-  // if (module.hot) {
-  //   module.hot.accept('../reducers', () => {
-  //     store.replaceReducer(require('./../reducers').default);
-  //   });
-  // }
-
-// window.onbeforeunload = async function () {
-//   var a = store.getState()
-//   //store.dispatch(callServer)
-//   const result = await post('http://localhost:5000/api/ayy', a)
-//   // return null
-// };
-
-// window.onbeforeunload = function () {
-//   var a = store.getState()
-//   //store.dispatch(callServer)
-//   post('http://localhost:5000/api/ayy', a)
-//   var x = 'ayy'
-//   setTimeout(function(x){ x = 'deeee' }, 13000);
-//   setTimeout(function(){
-//     console.log('after');
-// },500);
-//   if (x == 'deeee'){
-//       return x
-//     }
-// };
-
-// window.onbeforeunload = function () {
-//   var a = store.getState()
-//   //store.dispatch(callServer)
-//   var url = 'http://localhost:5000/api/ayy';
-//   fetch(url, {
-//       credentials: 'omit',
-//       headers: {
-//         Accept: 'application/json',
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(a)
-//     })
-// };
-
 
 ReactDOM.render(
   <Provider store={store}>
