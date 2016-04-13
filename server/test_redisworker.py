@@ -4,11 +4,6 @@ from rq import Queue
 from rq import push_connection, pop_connection
 import time
 import random
-
-# def helloTest(variable):
-#     print('der variable is: ', variable)
-#     return variable
-
 from tasks import helloTest
 
 class MyTest(unittest.TestCase):
