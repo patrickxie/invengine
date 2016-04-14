@@ -37,10 +37,18 @@ export default class InviteTable extends Component {
     // console.log('props in render() is: ', this.props);
     // add payload into props
     const { channels, toggleIconAll, channelIconToggle  } = this.props;
-
+    const suggested = [{'EM':false,'FB':false,'TW':false,'GO':false,'RE':false,'IN':false,'PI':false,'first_name':'Hayden','last_name':'Schoen','picture':[{'large':'https://unsplash.it/600/377?image=47','medium':'http://api.randomuser.me/portraits/med/men/47.jpg'}]},{'EM':false,'FB':false,'TW':false,'GO':false,'RE':false,'IN':false,'PI':false,'first_name':'Brody','last_name':'Bogisich','picture':[{'large':'https://unsplash.it/600/377?image=29','medium':'http://api.randomuser.me/portraits/med/men/29.jpg'}],'avatar':'http://api.randomuser.me/portraits/med/men/29.jpg'},{'EM':false,'FB':false,'TW':false,'GO':false,'RE':false,'IN':false,'PI':false,'first_name':'Kathlyn','last_name':'Blanda','picture':[{'large':'https://unsplash.it/600/377?image=30','medium':'http://api.randomuser.me/portraits/med/women/30.jpg'}]}] //eslint-disable-line
     return(<div >
+      <List subheader='Suggested'>
+        {suggested.map((person, i) => (
+          <InviteItems key={i}
+                  id={i}
+                  itemInfo={suggested[i]}
+                  onChannelIconToggle={()=>{}}/>
+        ))}
+      </List>
     {!!channels.length &&
-      <List>
+      <List subheader='Selected'>
         {channels.map((person, i) => (
           <InviteItems key={i}
                   id={i}

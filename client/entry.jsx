@@ -80,10 +80,6 @@ load(store)
 const myObserver = observer(
   state => state.data,
   (dispatch, current, previous) => {
-    console.log('dispatch: ', dispatch)
-    console.log('current: ', JSON.stringify(current))
-    console.log('previous: ', JSON.stringify(previous))
-    // dispatch(debounced())
     dispatch(saveContactsToServer())
   }
 )
