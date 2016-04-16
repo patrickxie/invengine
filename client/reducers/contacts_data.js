@@ -6,16 +6,6 @@ const swap = (state, action) => (
   action.data
 );
 
-// const localstorage = (state, action) => ([
-//   ...state,
-//   ...action.kittens
-// ]);
-
-// const importData = (state, action) => ([
-//   ...state,
-//   ...action.kittens
-// ]);
-
 const api = (state, action) => ([
   ...action.data
 ]);
@@ -62,9 +52,7 @@ const setPic = (state, action) => {
 export default function contacts_data(state = DEFAULT_STATE, action) {
   return ({
     ['merge_data_from_imported']: merge,
-    // ['obtain_data_localstorage_success']: localstorage,
     ['obtain_data_api_success']: api,
-    // ['obtain_data_import_success']: importData,
     ['data_sort_swap']: swap,
     ['set_picture_into_data']: setPic
   }[action.type] || (s => s))(state, action);

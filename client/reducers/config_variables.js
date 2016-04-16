@@ -23,13 +23,6 @@ const details = (state, action) => ({
   details: [ ...state.details, action.owner ]
 })
 
-// const reset = (state, action) => ({
-//   ...state,
-//   message: default_message,
-//   url: '',
-//   invite_done: action.invite_done //remove
-// })
-
 const addToken = (state, action) => ({
   ...state,
   invengine_id : action.id,

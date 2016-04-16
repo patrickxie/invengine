@@ -36,27 +36,8 @@ jss.use(jssPx());
 jss.use(jssNested());
 jss.use(jssCamelCase());
 
-//
-// import { applyMiddleware, createStore, compose } from 'redux';
-// import { reduxReactRouter } from 'redux-router'
-// import createHistory from 'history/lib/createBrowserHistory'
-// import routes from '../routes'
-// import thunk from 'redux-thunk'
-// import api from '../middleware/api'
-// import rootReducer from '../reducers'
 
-const tracker = createTracker();                                   // Create the tracker...
-
-// const finalCreateStore = compose(
-//   applyMiddleware(thunk, api, tracker),                            // and then apply it!
-//   reduxReactRouter({ routes, createHistory })
-// )(createStore)
-
-// export default function configureStore(initialState) {
-//   return finalCreateStore(rootReducer, initialState)
-// }
-//
-
+const tracker = createTracker();
 
 const middleware = syncHistory(browserHistory);
 
