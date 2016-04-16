@@ -15,19 +15,18 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
 import { compose } from 'redux';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory }
+from 'react-router';
 import { syncHistory } from 'react-router-redux';
 import { Auth, Index, Invite, Display, SendInvites } from './pages/export';
-
 import createDebounce from 'redux-debounced';
 import { observer, observe } from 'redux-observers';
 import { saveContactsToServer } from './actions/contacts_data';
-// console.log('saveContactsToServer', saveContactsToServer)
-
-
 import createEngine from 'redux-storage-engine-localstorage';
 import * as storage from 'redux-storage'
-// import { get, post, del } from './utils/api';
+
+import { createTracker } from 'redux-segment';
+
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -37,22 +36,28 @@ jss.use(jssPx());
 jss.use(jssNested());
 jss.use(jssCamelCase());
 
+//
+// import { applyMiddleware, createStore, compose } from 'redux';
+// import { reduxReactRouter } from 'redux-router'
+// import createHistory from 'history/lib/createBrowserHistory'
+// import routes from '../routes'
+// import thunk from 'redux-thunk'
+// import api from '../middleware/api'
+// import rootReducer from '../reducers'
 
-// const myObserver = observer(
-//   state => state.slice.of.interest,
-//   (dispatch, current, previous) => {
-//     expect(previous).to.be.ok()
-//     expect(current).to.not.eql(previous)
-//     dispatch({ type: 'SLICE_CHANGE', payload: {...} })
-//   }
-// )
+const tracker = createTracker();                                   // Create the tracker...
 
-// observe(store, [myObserver, ...myOtherObservers])
+// const finalCreateStore = compose(
+//   applyMiddleware(thunk, api, tracker),                            // and then apply it!
+//   reduxReactRouter({ routes, createHistory })
+// )(createStore)
+
+// export default function configureStore(initialState) {
+//   return finalCreateStore(rootReducer, initialState)
+// }
+//
 
 
-// import { syncHistoryWithStore } from 'react-router-redux'
-// const store = configureStore()
-// const history = syncHistoryWithStore(browserHistory, store)
 const middleware = syncHistory(browserHistory);
 
 
@@ -66,6 +71,7 @@ const createStoreWithMiddleware = applyMiddleware(
   promise,
   createLogger(),
   middleware,
+  tracker,
   storager,
 )(createStore);
 const store = createStoreWithMiddleware(reducer);
