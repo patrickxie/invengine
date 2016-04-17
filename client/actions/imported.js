@@ -1,8 +1,6 @@
 import { get, post, del } from '../utils/api'; //eslint-disable-line
 import faker from 'faker';
 
-// console.log(faker.fake('{{name.lastName}}, {{name.firstName}} {{name.suffix}}'));
-
 export function addSingleContact(contacts) {
   return dispatch => dispatch(
     {
@@ -11,21 +9,7 @@ export function addSingleContact(contacts) {
     });
 }
 
-
-
-// export function consent(source) {
-//   let url = `/begin_import/${source}`;
-//   console.log('url is:', url);
-//   return dispatch => dispatch(
-//     {
-//       type:'contactbook_endpoint_consent',
-//       source
-//     });
-// }
-
 export function generateContact() {
-  // let num = Math.floor((Math.random() * 1000) + 1);
-  //medium image is 150 x 150, large 512 x512
   let num = Math.floor((Math.random()*95)+1);
   let gender = num % 2 ? 'men':'women';
   const contacts = {

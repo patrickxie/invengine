@@ -42,20 +42,6 @@ export default class Send extends Component {
         </div>);
   }
 }
-    //     <RaisedButton
-    //       label='Test Notification, remove later'
-    //       style={STYLES.sendbutton}
-    //       onTouchTap={notifSend.bind(this,{ message: 'hello world',
-    // dismissAfter: 2000 } )}
-
-    //     />
-
-        // <Snackbar
-        // open={sent}
-        // message={'invites have been sent.'}
-        // autoHideDuration={2000}
-        // bodyStyle={STYLES.snackbar}
-        // />
 
 const STYLES = {
   snackbar: {
