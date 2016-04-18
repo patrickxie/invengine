@@ -1,4 +1,5 @@
 import { get, post, del } from '../utils/api'; //eslint-disable-line
+import { EventTypes } from 'redux-segment';
 import faker from 'faker';
 
 export function addSingleContact(contacts) {
@@ -65,7 +66,20 @@ export function addMultipleContacts(contacts, owner, source) {
     dispatch(
       {
         type:'import_multiple_contacts',
-        contacts: result
+        contacts: result,
+        meta: {
+          analytics: {
+            eventType: EventTypes.identify,
+            eventPayload: {
+              userId: faker.random.uuid(),
+              traits: {
+                firstName: (owner && owner.first_name) || '',
+                lastName: (owner && owner.last_name) || '',
+                email: (owner && owner.email && owner.email[0] && owner.email[0].address) || '',
+              },
+            },
+          },
+        }
       });
     dispatch(
       {
