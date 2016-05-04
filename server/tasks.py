@@ -47,21 +47,20 @@ def send_emails(email_list, url, custom_message, owner_info):
     api_key = os.environ['SENDGRID_KEY']
     sg = sendgrid.SendGridClient(api_key)
     result = []
-    for g, i in email_list:
-        if g == 15:
-            break
-        message = sendgrid.Mail()
-        message.add_to(i['email'])
-        message.set_subject('Hey '+ i['first_name'] + ', checkout ' + url)
-        message.set_html(custom_message)
-        if not owner_info:
-            message.set_from('patrick@invengine.io')
-        else:
-            message.set_from(owner_info[0]['email'][0]['address'])
-        status, msg = sg.send(message)
-        if status == 200:
-            result.append({'email':i['email'], 'done': True})
-        print(status, msg, i['email'])
+    if len(email_list) < 17:
+      for i in email_list:
+          message = sendgrid.Mail()
+          message.add_to(i['email'])
+          message.set_subject('Hey '+ i['first_name'] + ', checkout ' + url)
+          message.set_html(custom_message)
+          if not owner_info:
+              message.set_from('patrick@invengine.io')
+          else:
+              message.set_from(owner_info[0]['email'][0]['address'])
+          status, msg = sg.send(message)
+          if status == 200:
+              result.append({'email':i['email'], 'done': True})
+          print(status, msg, i['email'])
     return result
 
 
